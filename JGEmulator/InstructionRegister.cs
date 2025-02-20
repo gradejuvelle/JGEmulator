@@ -44,11 +44,13 @@ namespace JGEmulator
                     0x4 => "STA started",
                     0x5 => "LDI started",
                     0x6 => "JMP started",
+                    0x7 => "JC started",
+                    0x8 => "JZ started",
                     0xE => "OUT started",
                     0xF => "HLT started",
                     _ => "Unknown instruction"
                 };
-                Console.WriteLine($"    !!IR - {instruction}");
+                Console.WriteLine($"!!{instruction}");
             }
         }
     }

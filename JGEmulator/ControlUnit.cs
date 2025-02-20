@@ -30,6 +30,17 @@ namespace JGEmulator
             {
                 _computer.PC.ReadFromBus(_computer.BusInstance);
             }
+            // JC sets the PC to the address in the bus on the tick if the carry flag is set
+            if (_currentMicroInstruction.JC & _computer.StatusRegister.IsCarryFlagSet())
+            {
+                _computer.PC.ReadFromBus(_computer.BusInstance);
+            }
+
+            //JZ sets the PC to the address in the bus on the tick if the zero flag is set
+            if (_currentMicroInstruction.JZ & _computer.StatusRegister.IsZeroFlagSet())
+            {
+                _computer.PC.ReadFromBus(_computer.BusInstance);
+            }
 
             // MAR reads from the bus on the tick if MI (Memory Address Input) is true
             if (_currentMicroInstruction.MI)
@@ -72,7 +83,7 @@ namespace JGEmulator
             // OI reads from the bus on the tick if OI (Output Register Input) is true
             if (_currentMicroInstruction.OI)
             {
-                _computer.OR.ReadFromBus(_computer.BusInstance);
+                _computer.OR.ReadFromBus();
             }
 
             // Increment the instruction counter at the end of the method
@@ -169,13 +180,25 @@ namespace JGEmulator
             }
 
             // Handle PC Tock Signal
-            if ((_currentMicroInstruction.J == true) || (_currentMicroInstruction.CO == true))
+            if (_currentMicroInstruction.J == true | _currentMicroInstruction.CO == true | _currentMicroInstruction.JC==true | _currentMicroInstruction.JZ==true)
             {
+                
                 if (_currentMicroInstruction.J == true)
                 {
                     _computer.PC.State = BusState.Reading;
                     Console.WriteLine($"    CU - PC bus status: {_computer.PC.State}");
                 }
+                else if (_currentMicroInstruction.JC == true & _computer.StatusRegister.CarryFlag==true)
+                {
+                    _computer.PC.State = BusState.Reading;
+                    Console.WriteLine($"    CU - PC bus status: {_computer.PC.State}");
+                }
+                else if (_currentMicroInstruction.JZ == true & _computer.StatusRegister.ZeroFlag==true)
+                {
+                    _computer.PC.State = BusState.Reading;
+                    Console.WriteLine($"    CU - PC bus status: {_computer.PC.State}");
+                }
+
                 else
                 {
                     _computer.PC.State = BusState.Writing;
@@ -252,7 +275,7 @@ namespace JGEmulator
             }
             else
             {
-                _computer.OR.State = BusState.None;
+                _computer.ALUInstance.State = BusState.None;
             }
         }
     }

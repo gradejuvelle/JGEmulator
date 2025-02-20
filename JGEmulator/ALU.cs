@@ -8,7 +8,7 @@ namespace JGEmulator
         public StatusRegister StatusRegister { get; set; }
         public byte Value { get; set; } // ALU's own value
         private Computer _computer;
-
+        private bool carry;
 
         public BusState State { get; set; }
         public ALU(Computer _thiscomputer)
@@ -29,14 +29,22 @@ namespace JGEmulator
         public void Execute()
         {
             int result;
-            bool carry = false;
+
 
             if (Subtract)
             {
                 // Subtract B from ALU value
                 result = _computer.ARegister.Value - _computer.BRegister.Value;
-                carry = result < 0;
+                carry = _computer.BRegister.Value<=_computer.ARegister.Value;
                 result &= 0xFF; // Ensure result fits into 8 bits
+                if (carry)
+                {
+                    StatusRegister.SetCarryFlag();
+                }
+                else
+                {
+                    StatusRegister.ClearCarryFlag();
+                }
                 Console.WriteLine($"        ALU - Executed subtraction: {result}");
             }
             else
@@ -45,6 +53,16 @@ namespace JGEmulator
                 result = _computer.ARegister.Value + _computer.BRegister.Value;
                 carry = result > 0xFF;
                 result &= 0xFF; // Ensure result fits into 8 bits
+                if (carry)
+                {
+                    StatusRegister.SetCarryFlag();
+                }
+                else
+                {
+                    StatusRegister.ClearCarryFlag();
+                }   
+                //StatusRegister.UpdateZeroFlag(Value);
+                //StatusRegister.UpdateCarryFlag(carry);
                 Console.WriteLine($"        ALU - Executed addition: {result}");
             }
 
@@ -52,8 +70,7 @@ namespace JGEmulator
             Value = (byte)result;
 
             // Update status flags based on the result
-            StatusRegister.UpdateZeroFlag(Value);
-            StatusRegister.UpdateCarryFlag(carry);
+
         }
 
         internal void EnableSubtract(bool _state)

@@ -1,4 +1,6 @@
-﻿namespace JGEmulator
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace JGEmulator
 {
     public class MicroInstruction
     {
@@ -19,6 +21,9 @@
         public bool PC { get; set; } // Program Counter
         public bool OI { get; set; } // Output Register Input
         public bool HLT { get; set; } // Halt
+        public bool JC { get; set; } // JC
+        public bool JZ { get; set; } // JC
+
 
         public MicroInstruction(
             bool mi = false,
@@ -37,6 +42,8 @@
             bool j = false,
             bool pc = false,
             bool oi = false,
+            bool jc = false,
+            bool jz = false,
             bool hlt = false)
         {
             MI = mi; // Memory Address Input
@@ -56,6 +63,8 @@
             PC = pc; // Program Counter
             OI = oi; // Output Register Input
             HLT = hlt; // Halt
+            JC = jc; // Jump if Carry
+            JZ = jz; // Jump if Zero
         }
     }
 }

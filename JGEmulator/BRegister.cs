@@ -2,8 +2,7 @@
 
 public class BRegister
 {
-    private byte _value;
-    private  ALU _alu;
+
     private  Computer _computer;
 
     public byte Value { get; set; }
@@ -14,6 +13,7 @@ public class BRegister
         _computer = computer ;
         Value = 0;
         State = BusState.None;
+        Console.WriteLine($"B - B Register initialized.");
     }
 
     public void ReadFromBus()

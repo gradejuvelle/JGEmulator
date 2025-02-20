@@ -4,7 +4,6 @@ namespace JGEmulator
 {
     public class ARegister
     {
-        private byte _value;
         public byte Value { get; set; }
 
         public BusState State { get; set; }
@@ -13,6 +12,7 @@ namespace JGEmulator
         {
             Value = 0;
             State = BusState.None;
+            Console.WriteLine($"A - A Register initialized.");
         }
 
         public void WriteToBus(Bus bus)

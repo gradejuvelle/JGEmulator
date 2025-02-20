@@ -2,55 +2,52 @@
 
 namespace JGEmulator
 {
-    [Flags]
-    public enum StatusFlags
-    {
-        None = 0,
-        Zero = 1,
-        Carry = 2
-    }
-
     public class StatusRegister
     {
-        public StatusFlags Flags { get; set; }
+        public bool ZeroFlag { get;  set; }
+        public bool CarryFlag { get;  set; }
 
         public StatusRegister()
         {
-            Flags = StatusFlags.None;
-            Console.WriteLine("Status Register initialized.");
+            ZeroFlag = false;
+            CarryFlag = false;
+            Console.WriteLine("SR - Status Register initialized.");
         }
 
-        public void SetFlag(StatusFlags flag)
+        public void SetZeroFlag()
         {
-            Flags |= flag;
-            Console.WriteLine($"            Flag set: {flag}");
+            ZeroFlag = true;
+            Console.WriteLine("            Zero flag set.");
         }
 
-        public void ClearFlag(StatusFlags flag)
+        public void ClearZeroFlag()
         {
-            Flags &= ~flag;
-            Console.WriteLine($"            Flag cleared: {flag}");
+            ZeroFlag = false;
+            Console.WriteLine("            Zero flag cleared.");
         }
 
-        public bool IsFlagSet(StatusFlags flag)
+        public void SetCarryFlag()
         {
-            return (Flags & flag) != 0;
+            CarryFlag = true;
+            Console.WriteLine("!!            Carry flag set.");
         }
 
-        public void UpdateZeroFlag(byte value)
+        public void ClearCarryFlag()
         {
-            if (value == 0)
-                SetFlag(StatusFlags.Zero);
-            else
-                ClearFlag(StatusFlags.Zero);
+            CarryFlag = false;
+            Console.WriteLine("!!            Carry flag cleared.");
         }
 
-        public void UpdateCarryFlag(bool carry)
+
+        public bool IsZeroFlagSet()
         {
-            if (carry)
-                SetFlag(StatusFlags.Carry);
-            else
-                ClearFlag(StatusFlags.Carry);
+            return ZeroFlag;
+        }
+
+        public bool IsCarryFlagSet()
+        {
+            return CarryFlag;
         }
     }
 }
+

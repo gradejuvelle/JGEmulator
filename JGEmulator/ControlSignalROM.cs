@@ -60,6 +60,20 @@ namespace JGEmulator
                 { 0b0110011, new MicroInstruction() }, // Step 3: No signals
                 { 0b0110100, new MicroInstruction() }, // Step 4: No signals
 
+                // JC (opcode 0x7)
+                { 0b0111000, new MicroInstruction(co: true, mi: true) }, // Step 0: CO, MI
+                { 0b0111001, new MicroInstruction(ro: true, ii: true, ce: true) }, // Step 1: RO, II, CE
+                { 0b0111010, new MicroInstruction(io: true, jc: true) }, // Step 2: IO, J
+                { 0b0111011, new MicroInstruction() }, // Step 3: No signals
+                { 0b0111100, new MicroInstruction() }, // Step 4: No signals
+
+                // JZ (opcode 0x8)
+                { 0b1000000, new MicroInstruction(co: true, mi: true) }, // Step 0: CO, MI
+                { 0b1000001, new MicroInstruction(ro: true, ii: true, ce: true) }, // Step 1: RO, II, CE
+                { 0b1000010, new MicroInstruction(io: true, jz: true) }, // Step 2: IO, J
+                { 0b1000011, new MicroInstruction() }, // Step 3: No signals
+                { 0b1000100, new MicroInstruction() }, // Step 4: No signals
+
                 // OUT (opcode 0xE)
                 { 0b1110000, new MicroInstruction(co: true, mi: true) }, // Step 0: CO, MI
                 { 0b1110001, new MicroInstruction(ro: true, ii: true, ce: true) }, // Step 1: RO, II, CE
@@ -75,8 +89,7 @@ namespace JGEmulator
                 { 0b1111100, new MicroInstruction() }, // Step 4: No signals
 
                 // Remaining opcodes
-                { 0b0111000, new MicroInstruction() }, // Placeholder for other instructions
-                { 0b1000000, new MicroInstruction() }, // Placeholder for other instructions
+
                 { 0b1001000, new MicroInstruction() }, // Placeholder for other instructions
                 { 0b1010000, new MicroInstruction() }, // Placeholder for other instructions
                 { 0b1011000, new MicroInstruction() }, // Placeholder for other instructions
