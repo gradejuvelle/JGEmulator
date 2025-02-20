@@ -7,9 +7,10 @@ namespace JGEmulator
         private readonly byte[] _memory; // Change to byte array to hold 8-bit words
         public BusState State { get; set; } // Add BusState property
         public byte SelectedAddress { get; set; } // Add SelectedAddress property
-
-        public Memory()
+        private Computer _thiscomputer;
+        public Memory(Computer thiscomputer)
         {
+            _thiscomputer = thiscomputer;
             _memory = new byte[16]; // 16 8-bit words
             State = BusState.None;
             SelectedAddress = 0;
@@ -105,7 +106,8 @@ namespace JGEmulator
             //_memory[5] = 0b00000000; // 2 in binary
             //_memory[6] = 0b00000010; // 2 in binary
 
-            Console.WriteLine("MEM - Memory initialized with initial values for testing.");
+            _thiscomputer.DisplayMessage("MEM - Memory initialized with initial values for testing.");
+            _thiscomputer = thiscomputer;
         }
 
         public void WriteToBus(Bus bus)
@@ -114,7 +116,7 @@ namespace JGEmulator
             {
                 string addressBinary = Convert.ToString(SelectedAddress, 2).PadLeft(4, '0');
                 string valueBinary = Convert.ToString(_memory[SelectedAddress], 2).PadLeft(8, '0');
-                Console.WriteLine($"        MEM - Putting new value on the bus from address {addressBinary}. {valueBinary}");
+                _thiscomputer.DisplayMessage($"        MEM - Putting new value on the bus from address {addressBinary}. {valueBinary}");
                 bus.Write(_memory[SelectedAddress]);
             }
         }
@@ -123,7 +125,7 @@ namespace JGEmulator
         {
             if (State == BusState.Reading) // Use the Memory's state
             {
-                Console.WriteLine($"        MEM - Reading from bus.");
+                _thiscomputer.DisplayMessage($"        MEM - Reading from bus.");
                 _memory[SelectedAddress] = bus.Read();
                 string addressBinary = Convert.ToString(SelectedAddress, 2).PadLeft(4, '0');
                 string valueBinary = Convert.ToString(_memory[SelectedAddress], 2).PadLeft(8, '0');
@@ -135,7 +137,13 @@ namespace JGEmulator
         {
             SelectedAddress = address;
             string addressBinary = Convert.ToString(SelectedAddress, 2).PadLeft(4, '0');
-            Console.WriteLine($"            MEM - Selected address updated to {addressBinary}");
+            _thiscomputer.DisplayMessage($"            MEM - Selected address updated to {addressBinary}");
+        }
+        public void Reset()
+        {
+            SelectedAddress = 0;
+            State = BusState.None;
+            _thiscomputer.DisplayMessage($"        MEM - Address reset.");
         }
     }
 }

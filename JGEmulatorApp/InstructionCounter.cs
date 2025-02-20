@@ -5,13 +5,13 @@ namespace JGEmulator
     public class InstructionCounter
     {
         private byte _value;
-        private Computer _thiscomputer;
-        public InstructionCounter(Computer thiscomputer)
+        private readonly Computer _computer;
+
+        public InstructionCounter(Computer computer)
         {
-            _thiscomputer = thiscomputer;
+            _computer = computer;
             _value = 0;
-            _thiscomputer.DisplayMessage("IC - Instruction Counter initialized with value 000.");
-            _thiscomputer = thiscomputer;
+            _computer.DisplayMessage("IC - Instruction Counter initialized with value 000.");
         }
 
         public byte Value
@@ -26,13 +26,15 @@ namespace JGEmulator
             {
                 _value = 0;
             }
-            _thiscomputer.DisplayMessage($"        IC - Instruction Counter incremented to {Convert.ToString(Value, 2).PadLeft(3, '0')}");
+            _computer.DisplayMessage($"        IC - Instruction Counter incremented to {Convert.ToString(Value, 2).PadLeft(3, '0')}");
         }
 
         public void Reset()
         {
             _value = 0;
-            _thiscomputer.DisplayMessage($"        IC - Counter reset.");
+            _computer.DisplayMessage("         IC - Instruction Counter reset to 000.");
         }
     }
 }
+
+

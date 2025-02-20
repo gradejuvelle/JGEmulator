@@ -7,17 +7,18 @@ namespace JGEmulator
     {
         private readonly System.Timers.Timer _timer;
         private bool _tick;
+        private readonly Computer _computer;
 
         public event Action OnTick;
         public event Action OnTock;
-        private Computer _thiscomputer;
 
-        public Clock(int interval,Computer computer)
+        public Clock(int interval, Computer computer)
         {
-            _thiscomputer = computer;
             _timer = new System.Timers.Timer(interval);
             _timer.Elapsed += OnTimedEvent;
-            _tick = true; // Start with a tick
+            _tick = false; // Start with a tock
+            _computer = computer;
+            _computer.DisplayMessage("CL - Clock created.");
         }
 
         public void Start()
@@ -33,21 +34,23 @@ namespace JGEmulator
         public void SetSpeed(int interval)
         {
             _timer.Interval = interval;
-            _thiscomputer.DisplayMessage($"CL - Clock speed set to {interval} ms.");
+            _computer.DisplayMessage($"CL - Clock speed set to {interval} ms.");
         }
 
         public void Step()
         {
-
-                _thiscomputer.DisplayMessage(Environment.NewLine+$"    CL - Clock Tick (Write Signal)");
+            if (_tick)
+            {
+                _computer.DisplayMessage($"    CL - Clock Tick (Write Signal)");
                 OnTick?.Invoke();
-
-
-                _thiscomputer.DisplayMessage("    CL - Clock Tock (Control Signals)");
-                OnTock?.Invoke();
-
             }
-
+            else
+            {
+                _computer.DisplayMessage($"    CL - Clock Tock (Control Signals)");
+                OnTock?.Invoke();
+            }
+            _tick = !_tick;
+        }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {

@@ -6,36 +6,38 @@ namespace JGEmulator
     {
         public bool ZeroFlag { get;  set; }
         public bool CarryFlag { get;  set; }
-
-        public StatusRegister()
+        private Computer _thiscomputer;
+        public StatusRegister(Computer thiscomputer)
         {
+            _thiscomputer = thiscomputer;
             ZeroFlag = false;
             CarryFlag = false;
-            Console.WriteLine("SR - Status Register initialized.");
+            _thiscomputer.DisplayMessage("STAT - Status Register initialized.");
+            _thiscomputer = thiscomputer;
         }
 
         public void SetZeroFlag()
         {
             ZeroFlag = true;
-            Console.WriteLine("            Zero flag set.");
+            _thiscomputer.DisplayMessage("            STAT - Zero flag set.");
         }
 
         public void ClearZeroFlag()
         {
             ZeroFlag = false;
-            Console.WriteLine("            Zero flag cleared.");
+            _thiscomputer.DisplayMessage("            STAT - Zero flag cleared.");
         }
 
         public void SetCarryFlag()
         {
             CarryFlag = true;
-            Console.WriteLine("!!            Carry flag set.");
+            _thiscomputer.DisplayMessage("            STAT - Carry flag set.");
         }
 
         public void ClearCarryFlag()
         {
             CarryFlag = false;
-            Console.WriteLine("!!            Carry flag cleared.");
+            _thiscomputer.DisplayMessage("             STAT - Carry flag cleared.");
         }
 
 
@@ -47,6 +49,12 @@ namespace JGEmulator
         public bool IsCarryFlagSet()
         {
             return CarryFlag;
+        }
+        public void Reset()
+        {
+            ClearCarryFlag();
+            ClearZeroFlag();
+            _thiscomputer.DisplayMessage($"        STAT - Register reset.");
         }
     }
 }

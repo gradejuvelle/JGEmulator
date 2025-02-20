@@ -19,52 +19,40 @@ namespace JGEmulator
 
         public Computer(int clockSpeed)
         {
-            ClockInstance = new Clock(clockSpeed);
+            ClockInstance = new Clock(clockSpeed,this);
             ClockInstance.OnTick += HandleTick;
             ClockInstance.OnTock += HandleTock;
-            BusInstance = new Bus();
-            StatusRegister = new StatusRegister();
+            BusInstance = new Bus(this);
+            StatusRegister = new StatusRegister(this);
             BRegister = new BRegister(this); // Initialize BRegister first
-            ARegister = new ARegister { Value = 0 };
+            ARegister = new ARegister(this) { Value = 0 };
             ALUInstance = new ALU(this); // Pass Computer to ALU
-            PC = new ProgramCounter { Value = 0 };
-            IR = new InstructionRegister { Value = 0 };
+            PC = new ProgramCounter(this) { Value = 0 };
+            IR = new InstructionRegister(this) { Value = 0 };
             OR = new OutputRegister(this) { Value = 0 };
-            MAR = new MemoryAddressRegister { Value = 0 };
-            MemoryInstance = new Memory();
+            MAR = new MemoryAddressRegister(this) { Value = 0 };
+            MemoryInstance = new Memory(this);
             ControlUnitInstance = new ControlUnit(this);
-            Console.WriteLine("CO - Computer created and instances assigned.");
+            ControlUnitInstance.ProcessControlSignalsTock();
+            DisplayMessage("CO - Computer created and ready.");
         }
 
         public void Reset()
         {
-            ARegister.Value = 0;
-            BRegister.Value = 0;
-            PC.Value = 0;
-            IR.Value = 0;
-            OR.Value = 0;
-            MAR.Value = 0;
-            Console.WriteLine($"[{Utils.GetTimestamp()}] Origin: CO, Message: Registers set to zero.");
+            ARegister.Reset();
+            BRegister.Reset();
+            PC.Reset();
+            IR.Reset();
+            OR.Reset();
+            MAR.Reset();
+            IR.Reset();
 
-            ControlUnitInstance.ProcessControlSignalsTick();
-            Console.WriteLine($"[{Utils.GetTimestamp()}] Origin: CO, Message: Reset executed.");
+
+            ControlUnitInstance.ProcessControlSignalsTock();
+            DisplayMessage($"CO - Reset executed.");
         }
 
-        public void UpdateRegisters()
-        {
-            ARegister.WriteToBus(BusInstance);
-            ARegister.ReadFromBus(BusInstance);
-            BRegister.ReadFromBus();
-            PC.WriteToBus(BusInstance);
-            PC.ReadFromBus(BusInstance);
-            IR.WriteToBus(BusInstance);
-            IR.ReadFromBus(BusInstance);
-            OR.ReadFromBus(); // Ensure OutputRegister reads from the bus
-            MAR.WriteToBus(BusInstance);
-            MAR.ReadFromBus(BusInstance, MemoryInstance); // Pass MemoryInstance to update SelectedAddress
-            MemoryInstance.WriteToBus(BusInstance);
-            MemoryInstance.ReadFromBus(BusInstance);
-        }
+
 
         private void HandleTick()
         {
@@ -74,6 +62,10 @@ namespace JGEmulator
         private void HandleTock()
         {
             ControlUnitInstance.ProcessControlSignalsTock();
+        }
+        public void DisplayMessage(string message)
+        {
+            Console.WriteLine($"{message}");
         }
     }
 }

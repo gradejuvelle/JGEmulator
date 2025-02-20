@@ -4,12 +4,12 @@ public class Bus
 {
     public int Value { get; set; }
     public byte Data { get; set; }
-    private Computer _thiscomputer;
+    private Computer _computer;
 
     public Bus(Computer computer)
     {
-        _thiscomputer = computer;
-        _thiscomputer.DisplayMessage($"BUS - Bus initialized.");
+        _computer = computer;
+        _computer.DisplayMessage("BUS - Bus initialized.");
         Value = 0;
         Data = 0;
     }
@@ -19,13 +19,13 @@ public class Bus
         Data = (byte)value;
         OnValueChanged();
         string dataBinary = Convert.ToString(Data, 2).PadLeft(8, '0');
-        _thiscomputer.DisplayMessage($"            BUS - New value on bus. {dataBinary}");
+        _computer.DisplayMessage($"            BUS - New value on bus. {dataBinary}");
     }
 
     public byte Read()
     {
         string dataBinary = Convert.ToString(Data, 2).PadLeft(8, '0');
-        _thiscomputer.DisplayMessage($"            BUS - Value read from bus. {dataBinary}");
+        _computer.DisplayMessage($"            BUS - Value read from bus. {dataBinary}");
         return Data;
     }
 
@@ -33,7 +33,6 @@ public class Bus
     {
         // Combine the left four bits as 0 and the right four bits from the instruction register value
         string valueBinary = Convert.ToString(instructionRegisterValue, 2).PadLeft(8, '0');
-        //DisplayMessage($"        BUS - Writing {valueBinary} from IR to bus (8-bit value).");
         // Write the combined 8 bits to the bus
         bus.Write(instructionRegisterValue);
     }
@@ -42,13 +41,4 @@ public class Bus
     {
         // Handle value change logic here
     }
-    public void Reset()
-    {
-        Value = 0;
-        _thiscomputer.DisplayMessage($"        Bus reset.");
-    }
 }
-
-
-
-

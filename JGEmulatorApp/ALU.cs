@@ -18,7 +18,7 @@ namespace JGEmulator
             Subtract = false; // Default to addition
             StatusRegister = _thiscomputer.StatusRegister;
             Value = 0; // Initialize ALU value to 0
-            _thiscomputer.DisplayMessage("ALU initialized with Subtract = false.");
+            _computer.DisplayMessage("ALU initialized with Subtract = false.");
         }
         public void WriteToBus()
         {
@@ -31,12 +31,11 @@ namespace JGEmulator
         {
             int result;
 
-
             if (Subtract)
             {
                 // Subtract B from ALU value
                 result = _computer.ARegister.Value - _computer.BRegister.Value;
-                carry = _computer.BRegister.Value<=_computer.ARegister.Value;
+                carry = _computer.BRegister.Value <= _computer.ARegister.Value;
                 zero = _computer.ARegister.Value == _computer.BRegister.Value;
                 result &= 0xFF; // Ensure result fits into 8 bits
                 if (carry)
@@ -95,14 +94,11 @@ namespace JGEmulator
         internal void EnableSubtract(bool _state)
         {
             Subtract = _state;
-            if (_state==true)
+            if (_state == true)
             {
                 Execute();
             }
         }
-
     }
 }
-
-
 

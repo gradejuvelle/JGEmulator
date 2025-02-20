@@ -5,23 +5,22 @@ namespace JGEmulator
     public class InstructionRegister
     {
         public byte Value { get; set; } // 8-bit value
-        private Computer _thiscomputer;
         public BusState State { get; set; }
+        private readonly Computer _computer;
 
-        public InstructionRegister(Computer thiscomputer)
+        public InstructionRegister(Computer computer)
         {
-            _thiscomputer = thiscomputer;
+            _computer = computer;
             Value = 0;
             State = BusState.None;
-            _thiscomputer.DisplayMessage("IR - Instruction Register initialized.");
-            _thiscomputer = thiscomputer;
+            _computer.DisplayMessage("IR - Instruction Register initialized.");
         }
 
         public void WriteToBus(Bus bus)
         {
             if (State == BusState.Writing)
             {
-                _thiscomputer.DisplayMessage($"        IR - Writing to bus.");
+                _computer.DisplayMessage("        IR - Writing to bus.");
                 // Use the Bus.WriteFromIR method to write the combined value to the bus
                 bus.WriteFromIR(bus, Value);
             }
@@ -31,11 +30,11 @@ namespace JGEmulator
         {
             if (State == BusState.Reading)
             {
-                _thiscomputer.DisplayMessage($"        IR - Reading from bus.");
+                _computer.DisplayMessage("        IR - Reading from bus.");
                 // Read the full 8 bits from the bus
                 Value = bus.Read();
 
-                // Decode the value and display a console message with the instruction
+                // Decode the value and display a message with the instruction
                 byte opcode = (byte)(Value >> 4); // Get the left 4 bits
                 string instruction = opcode switch
                 {
@@ -52,18 +51,11 @@ namespace JGEmulator
                     0xF => "HLT started",
                     _ => "Unknown instruction"
                 };
-                _thiscomputer.DisplayMessage($"      !!IR - {instruction}");
+                _computer.DisplayMessage($"!!{instruction}");
             }
-        }
-        public void Reset()
-        {
-            Value = 0;
-            State = BusState.None;
-            _thiscomputer.DisplayMessage($"    IR - Register reset.");
         }
     }
 }
-
 
 
 
