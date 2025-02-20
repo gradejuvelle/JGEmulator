@@ -27,13 +27,9 @@ namespace JGEmulator
             BRegister = new BRegister(this); // Initialize BRegister first
             ARegister = new ARegister { Value = 0 };
             ALUInstance = new ALU(this); // Pass Computer to ALU
-
-
-
-
             PC = new ProgramCounter { Value = 0 };
             IR = new InstructionRegister { Value = 0 };
-            OR = new OutputRegister { Value = 0 };
+            OR = new OutputRegister(this) { Value = 0 };
             MAR = new MemoryAddressRegister { Value = 0 };
             MemoryInstance = new Memory();
             ControlUnitInstance = new ControlUnit(this);
@@ -63,7 +59,7 @@ namespace JGEmulator
             PC.ReadFromBus(BusInstance);
             IR.WriteToBus(BusInstance);
             IR.ReadFromBus(BusInstance);
-            OR.ReadFromBus(BusInstance); // Ensure OutputRegister reads from the bus
+            OR.ReadFromBus(); // Ensure OutputRegister reads from the bus
             MAR.WriteToBus(BusInstance);
             MAR.ReadFromBus(BusInstance, MemoryInstance); // Pass MemoryInstance to update SelectedAddress
             MemoryInstance.WriteToBus(BusInstance);

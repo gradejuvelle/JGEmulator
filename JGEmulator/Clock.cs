@@ -38,13 +38,13 @@ namespace JGEmulator
         {
             if (_tick)
             {
-                Console.WriteLine(Environment.NewLine+$"## CL - Clock Tick (Write Signal) ##");
+                Console.WriteLine(Environment.NewLine+$"    CL - Clock Tick (Write Signal) ##");
                 OnTick?.Invoke();
 
             }
             else
             {
-                Console.WriteLine(Environment.NewLine+$"## CL - Clock Tock (Control Signals) ##");
+                Console.WriteLine(Environment.NewLine+$"    CL - Clock Tock (Control Signals) ##");
                 OnTock?.Invoke();
 
             }

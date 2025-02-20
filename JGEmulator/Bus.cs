@@ -8,6 +8,7 @@ public class Bus
 
     public Bus()
     {
+        Console.WriteLine($"BUS - Bus initialized.");
         Value = 0;
         Data = 0;
 

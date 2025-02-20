@@ -34,32 +34,68 @@ namespace JGEmulator
             //_memory[5] = 0b00000000; // 
             //_memory[6] = 0b10000000; // 128 in binary
 
-            //ADD Test
+            //ADD Test 128 + 1
             //_memory[0] = 0b00010110; // lda 6
             //_memory[1] = 0b00100101; // add 5
-            //_memory[2] = 0b11110000; // hlt
+            //_memory[2] = 0b11100000; // out
+            //_memory[3] = 0b11110000; // hlt
+            //_memory[4] = 0b00000000; // 
+            //_memory[5] = 0b00000001; // 1 in binary
+            //_memory[6] = 0b10000000; // 128 in binary
+
+            //SUB Test 128-5
+            //_memory[0] = 0b00010110; // lda 6
+            //_memory[1] = 0b00110101; // sub 5
+            //_memory[2] = 0b11100000; // out
+            //_memory[3] = 0b11110000; // hlt 
+            //_memory[4] = 0b00000000; // 
+            //_memory[5] = 0b00000101; // 5 in binary
+            //_memory[6] = 0b10000000; // 128 in binary
+
+            ////JMP Test
+            //_memory[0] = 0b00010110; // lda 6
+            //_memory[1] = 0b00100101; // add 5
+            //_memory[2] = 0b01100001; // jmp 1
             //_memory[3] = 0b00000000; // 
             //_memory[4] = 0b00000000; // 
             //_memory[5] = 0b00000001; // 
-            //_memory[6] = 0b10000000; // 128 in binary
+            //_memory[6] = 0b00000000; // 128 in binary
 
-            //SUB Test
-            //_memory[0] = 0b00010110; // lda 6
-            //_memory[1] = 0b00110101; // sub 5
-            //_memory[2] = 0b11110000; // hlt
-            //_memory[3] = 0b00000000; // 
-            //_memory[4] = 0b00000000; // 
-            //_memory[5] = 0b10000001; // 
-            //_memory[6] = 0b10000000; // 128 in binary
+            //JC Test (Multiply)
+            _memory[0] = 0b00011110; // lda 14
+            _memory[1] = 0b00111100; // sub 12
+            _memory[2] = 0b01110110; // jc 6
+            _memory[3] = 0b00011101; // lda 13 
+            _memory[4] = 0b11100000; // out
+            _memory[5] = 0b11110000; // hlt
+            _memory[6] = 0b01001110; // sta 14
+            _memory[7] = 0b00011101; // lda 13
+            _memory[8] = 0b00101111; // add 15
+            _memory[9] = 0b01001101; // sta 13
+            _memory[10] = 0b01100000; // jmp 0
+            _memory[11] = 0b00000000; // 0
+            _memory[12] = 0b00000001; // 1
+            _memory[13] = 0b00000000; // 0
+            _memory[14] = 0b00000011; // 3
+            _memory[15] = 0b00000101; // 5
 
-            //JMP Test
-            _memory[0] = 0b00010110; // lda 6
-            _memory[1] = 0b00100101; // add 5
-            _memory[2] = 0b01100001; // jmp 1
-            _memory[3] = 0b00000000; // 
-            _memory[4] = 0b00000000; // 
-            _memory[5] = 0b00000001; // 
-            _memory[6] = 0b00000000; // 128 in binary
+            // JC Test (fibonacci)
+            //_memory[0] = 0b01010000; // ldi 0
+            //_memory[1] = 0b01001101; // sta 13
+            //_memory[2] = 0b11100000; // out
+            //_memory[3] = 0b01010001; // ldi 1 
+            //_memory[4] = 0b01001110; // sta 14
+            //_memory[5] = 0b11100000; // out
+            //_memory[6] = 0b00101101; // add 13
+            //_memory[7] = 0b01110000; // jc 0
+            //_memory[8] = 0b01001111; // sta 15
+            //_memory[9] = 0b00011110; // lda 14
+            //_memory[10] = 0b01001101; // sta 13
+            //_memory[11] = 0b00011111; // lda 15
+            //_memory[12] = 0b01100100; // jmp 4
+            //_memory[13] = 0b00000000; // 0
+            //_memory[14] = 0b00000000; // 0
+            //_memory[15] = 0b00000000; // 0
 
             //_memory[0] = 0b00010110; // LDA 6
             //_memory[1] = 0b01000100; // STA 5
