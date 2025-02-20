@@ -9,6 +9,7 @@ namespace JGEmulator
         public byte Value { get; set; } // ALU's own value
         private Computer _computer;
         private bool carry;
+        private bool zero;
 
         public BusState State { get; set; }
         public ALU(Computer _thiscomputer)
@@ -36,6 +37,7 @@ namespace JGEmulator
                 // Subtract B from ALU value
                 result = _computer.ARegister.Value - _computer.BRegister.Value;
                 carry = _computer.BRegister.Value<=_computer.ARegister.Value;
+                zero = _computer.ARegister.Value == _computer.BRegister.Value;
                 result &= 0xFF; // Ensure result fits into 8 bits
                 if (carry)
                 {
@@ -44,6 +46,14 @@ namespace JGEmulator
                 else
                 {
                     StatusRegister.ClearCarryFlag();
+                }
+                if (zero)
+                {
+                    StatusRegister.SetZeroFlag();
+                }
+                else
+                {
+                    StatusRegister.ClearZeroFlag();
                 }
                 Console.WriteLine($"        ALU - Executed subtraction: {result}");
             }
@@ -51,7 +61,8 @@ namespace JGEmulator
             {
                 // Add ALU value and B
                 result = _computer.ARegister.Value + _computer.BRegister.Value;
-                carry = result > 0xFF;
+                carry = _computer.ARegister.Value + _computer.BRegister.Value > 255;
+                zero = _computer.ARegister.Value + _computer.BRegister.Value == 255;
                 result &= 0xFF; // Ensure result fits into 8 bits
                 if (carry)
                 {
@@ -60,7 +71,15 @@ namespace JGEmulator
                 else
                 {
                     StatusRegister.ClearCarryFlag();
-                }   
+                }
+                if (zero)
+                {
+                    StatusRegister.SetZeroFlag();
+                }
+                else
+                {
+                    StatusRegister.ClearZeroFlag();
+                }
                 //StatusRegister.UpdateZeroFlag(Value);
                 //StatusRegister.UpdateCarryFlag(carry);
                 Console.WriteLine($"        ALU - Executed addition: {result}");
