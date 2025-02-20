@@ -18,11 +18,11 @@ namespace JGEmulator
         public bool SU { get; set; } // Subtract
         public bool EO { get; set; } // Enable Output
         public bool J { get; set; }  // Jump
-        public bool PC { get; set; } // Program Counter
+        public bool PC { get; set; } // Program CounterXX
         public bool OI { get; set; } // Output Register Input
         public bool HLT { get; set; } // Halt
         public bool JC { get; set; } // JC
-        public bool JZ { get; set; } // JC
+        public bool JZ { get; set; } // JZ
 
 
         public MicroInstruction(
