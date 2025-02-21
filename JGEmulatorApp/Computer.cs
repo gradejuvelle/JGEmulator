@@ -77,22 +77,16 @@ namespace JGEmulator
             switch (message.UIMessageType)
             {
                 case UIMessageType.Log:
-                    //Console.ForegroundColor = ConsoleColor.White;
-                    //Console.WriteLine($"[{message.Source}] {message.Message}");
+
                     break;
                 case UIMessageType.RegisterValue:
                     form.HandleUIMessages(message);
-                    //Console.ForegroundColor = ConsoleColor.Yellow;
-                    //Console.WriteLine($"[{message.Source}] Register value: {message.Message}");
-
                     break;
                 case UIMessageType.RegisterFlag:
-                    //Console.ForegroundColor = ConsoleColor.Red;
-                    //Console.WriteLine($"[{message.Source}] Register flag: {message.Message}");
-                    //break;
+                    form.HandleUIMessages(message);
+                    break;
                 case UIMessageType.BusState:
-                    //Console.ForegroundColor = ConsoleColor.Magenta;
-                    //Console.WriteLine($"[{message.Source}] Bus State: {message.Message}");
+                    form.HandleUIMessages(message);
                     break;
             }
         }
