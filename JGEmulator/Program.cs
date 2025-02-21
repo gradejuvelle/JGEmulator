@@ -2,6 +2,7 @@
 
 public class Program
 {
+
     public static void Main(string[] args)
     {
         Computer myComputer = new Computer(1000); // Initial clock speed is irrelevant as it will be set by user input
@@ -9,40 +10,47 @@ public class Program
         // User input loop
         while (true)
         {
-            myComputer.DisplayMessage("Enter command (s: stop, r: run, t: step, x: reset, q: quit): ");
+            myComputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Enter command (s: stop, r: run, t: step, x: reset, q: quit): ", "USER"));
             var input = Console.ReadKey(true); // Read single key without displaying it
             switch (input.Key)
             {
                 case ConsoleKey.S:
-                    myComputer.ClockInstance.Stop();
-                    myComputer.DisplayMessage("\nClock stopped.");
+                    myComputer.Stop();
+                    myComputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Clock stopped.", "USER"));
                     break;
                 case ConsoleKey.R:
-                    myComputer.DisplayMessage("\nEnter speed (ms) between 100 and 10000: ");
+                    myComputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Enter speed (ms) between 100 and 10000: ", "USER"));
                     if (int.TryParse(Console.ReadLine(), out int newSpeed) && newSpeed >= 100 && newSpeed <= 10000)
                     {
-                        myComputer.ClockInstance.SetSpeed(newSpeed);
-                        myComputer.ClockInstance.Start();
-//                        DisplayMessage($"Clock running at {newSpeed} ms.");
+                        myComputer.SetSpeed(newSpeed);
+                        myComputer.Start();
+                        myComputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Clock running at {newSpeed} ms.", "USER"));
                     }
                     else
                     {
-                        myComputer.DisplayMessage("Invalid speed input.");
+                        myComputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Invalid speed input.", "USER"));
                     }
                     break;
                 case ConsoleKey.T:
-                    myComputer.ClockInstance.Step();
+                    myComputer.Step();
                     break;
                 case ConsoleKey.X:
                     myComputer.Reset();
                     break;
                 case ConsoleKey.Q:
-                    myComputer.DisplayMessage("\nExiting program.");
+                    myComputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Exiting program.", "USER"));
                     return; // Exit the program
                 default:
-                    myComputer.DisplayMessage("Unknown command.");
+                    myComputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Unknown command.", "USER"));
                     break;
             }
         }
+        
     }
 }
+
+
+
+
+
+

@@ -4,39 +4,62 @@ namespace JGEmulator
 {
     public class InstructionRegister
     {
-        public byte Value { get; set; } // 8-bit value
+        private byte _value; // 8-bit value
+        private BusState _state;
         private Computer _thiscomputer;
-        public BusState State { get; set; }
 
         public InstructionRegister(Computer thiscomputer)
         {
             _thiscomputer = thiscomputer;
-            Value = 0;
-            State = BusState.None;
-            _thiscomputer.DisplayMessage("IR - Instruction Register initialized.");
-            _thiscomputer = thiscomputer;
+            //SetValue(0);
+            //_state = BusState.None;
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Instruction Register initialized.", "INS"));
+        }
+
+        public byte GetValue()
+        {
+            return _value;
+        }
+
+        public void SetValue(byte value)
+        {
+            _value = value;
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.RegisterValue, value.ToString(), "INS"));
+        }
+
+        public BusState GetBusState()
+        {
+            return _state;
+        }
+
+        public void SetBusState(BusState state)
+        {
+            _state = state;
+
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.BusState, state.ToString(), "INS"));
         }
 
         public void WriteToBus(Bus bus)
         {
-            if (State == BusState.Writing)
+            if (_state == BusState.Writing)
             {
-                _thiscomputer.DisplayMessage($"        IR - Writing to bus.");
-                // Use the Bus.WriteFromIR method to write the combined value to the bus
-                bus.WriteFromIR(bus, Value);
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Writing to bus.", "INS"));
+                // Combine the left four bits as 0 and the right four bits from the instruction register value
+                byte valueToWrite = (byte)(_value & 0x0F);
+                bus.Write(valueToWrite);
             }
         }
 
         public void ReadFromBus(Bus bus)
         {
-            if (State == BusState.Reading)
+            if (_state == BusState.Reading)
             {
-                _thiscomputer.DisplayMessage($"        IR - Reading from bus.");
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Reading from bus.", "INS"));
                 // Read the full 8 bits from the bus
-                Value = bus.Read();
+                SetValue(bus.Read());
 
                 // Decode the value and display a console message with the instruction
-                byte opcode = (byte)(Value >> 4); // Get the left 4 bits
+                byte opcode = (byte)(_value >> 4); // Get the left 4 bits
                 string instruction = opcode switch
                 {
                     0x0 => "NOP started",
@@ -52,17 +75,24 @@ namespace JGEmulator
                     0xF => "HLT started",
                     _ => "Unknown instruction"
                 };
-                _thiscomputer.DisplayMessage($"      !!IR - {instruction}");
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, instruction, "INS"));
             }
         }
+
         public void Reset()
         {
-            Value = 0;
-            State = BusState.None;
-            _thiscomputer.DisplayMessage($"    IR - Register reset.");
+            SetValue(0);
+            SetBusState(BusState.None);
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Instruction Register reset.", "INS"));
         }
     }
 }
+
+
+
+
+
+
 
 
 

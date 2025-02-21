@@ -17,24 +17,27 @@ namespace JGEmulator
         public ALU ALUInstance { get; set; }
         public ControlUnit ControlUnitInstance { get; set; }
 
+        private Program _program;
+
         public Computer(int clockSpeed)
         {
-            ClockInstance = new Clock(clockSpeed,this);
+   
+            ClockInstance = new Clock(clockSpeed, this);
             ClockInstance.OnTick += HandleTick;
             ClockInstance.OnTock += HandleTock;
             BusInstance = new Bus(this);
             StatusRegister = new StatusRegister(this);
             BRegister = new BRegister(this); // Initialize BRegister first
-            ARegister = new ARegister(this) { Value = 0 };
+            ARegister = new ARegister(this);
             ALUInstance = new ALU(this); // Pass Computer to ALU
             PC = new ProgramCounter(this) { Value = 0 };
-            IR = new InstructionRegister(this) { Value = 0 };
-            OR = new OutputRegister(this) { Value = 0 };
-            MAR = new MemoryAddressRegister(this) { Value = 0 };
+            IR = new InstructionRegister(this) ;
+            OR = new OutputRegister(this);
+            MAR = new MemoryAddressRegister(this);
             MemoryInstance = new Memory(this);
             ControlUnitInstance = new ControlUnit(this);
             ControlUnitInstance.ProcessControlSignalsTock();
-            DisplayMessage("CO - Computer created and ready.");
+            HandleUIMessages(new UIMessage(UIMessageType.Log, "Computer created and ready.", "COM"));
         }
 
         public void Reset()
@@ -47,12 +50,9 @@ namespace JGEmulator
             MAR.Reset();
             IR.Reset();
 
-
             ControlUnitInstance.ProcessControlSignalsTock();
-            DisplayMessage($"CO - Reset executed.");
+            HandleUIMessages(new UIMessage(UIMessageType.Log, "Computer reset and ready.", "COM"));
         }
-
-
 
         private void HandleTick()
         {
@@ -63,12 +63,60 @@ namespace JGEmulator
         {
             ControlUnitInstance.ProcessControlSignalsTock();
         }
+
         public void DisplayMessage(string message)
         {
-            Console.WriteLine($"{message}");
+            // Console.WriteLine($"{message}");
+        }
+
+        public void Step()
+        {
+            ClockInstance.Step();
+        }
+        public void HandleUIMessages(UIMessage message)
+        {
+            switch (message.UIMessageType)
+            {
+                case UIMessageType.Log:
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"[{message.Source}] {message.Message}");
+                    break;
+                case UIMessageType.RegisterValue:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"[{message.Source}] Register value: {message.Message}");
+                    
+                    break;
+                case UIMessageType.RegisterFlag:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"[{message.Source}] Register flag: {message.Message}");
+                    break;
+                case UIMessageType.BusState:
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine($"[{message.Source}] Bus State: {message.Message}");
+                    break;
+            }
+        }
+
+        internal void SetSpeed(int newSpeed)
+        {
+            ClockInstance.SetSpeed(newSpeed);
+        }
+
+        internal void Start()
+        {
+            ClockInstance.Start();
+        }
+
+        internal void Stop()
+        {
+            ClockInstance.Stop();
         }
     }
 }
+
+
+
+
 
 
 

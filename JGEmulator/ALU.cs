@@ -4,22 +4,36 @@ namespace JGEmulator
 {
     public class ALU
     {
-        public bool Subtract { get; set; }
+        private bool Subtract { get; set; }
         public StatusRegister StatusRegister { get; set; }
-        public byte Value { get; set; } // ALU's own value
+        private byte Value { get; set; } // ALU's own value
         private Computer _computer;
         private bool carry;
         private bool zero;
+        private BusState State;
+        public BusState GetBusState()
+        {
+            return State;
+        }
+        public void SetBusState(BusState state)
+        {
+            State = state;
+            _computer.HandleUIMessages(new UIMessage(UIMessageType.BusState, State.ToString(), "ALU"));
 
-        public BusState State { get; set; }
+        }
         public ALU(Computer _thiscomputer)
         {
             _computer = _thiscomputer;
-            Subtract = false; // Default to addition
+            //Subtract = false; // Default to addition
             StatusRegister = _thiscomputer.StatusRegister;
-            Value = 0; // Initialize ALU value to 0
-            _thiscomputer.DisplayMessage("ALU initialized with Subtract = false.");
+            //Value = 0; // Initialize ALU value to 0
+            _computer.HandleUIMessages(new UIMessage(UIMessageType.Log, "ALU initialized.", "ALU"));
         }
+        public void SetValue(byte result)
+        {
+            Value = result;
+        }
+
         public void WriteToBus()
         {
             if (State == BusState.Writing)
@@ -27,17 +41,17 @@ namespace JGEmulator
                 _computer.BusInstance.Write(Value);
             }
         }
+
         public void Execute()
         {
             int result;
 
-
             if (Subtract)
             {
                 // Subtract B from ALU value
-                result = _computer.ARegister.Value - _computer.BRegister.Value;
-                carry = _computer.BRegister.Value<=_computer.ARegister.Value;
-                zero = _computer.ARegister.Value == _computer.BRegister.Value;
+                result = _computer.ARegister.GetValue() - _computer.BRegister.GetValue();
+                carry = _computer.BRegister.GetValue() <= _computer.ARegister.GetValue();
+                zero = _computer.ARegister.GetValue() == _computer.BRegister.GetValue();
                 result &= 0xFF; // Ensure result fits into 8 bits
                 if (carry)
                 {
@@ -55,14 +69,14 @@ namespace JGEmulator
                 {
                     StatusRegister.ClearZeroFlag();
                 }
-                _computer.DisplayMessage($"        ALU - Executed subtraction: {result}");
+                _computer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Executed subtraction: {result}", "ALU"));
             }
             else
             {
                 // Add ALU value and B
-                result = _computer.ARegister.Value + _computer.BRegister.Value;
-                carry = _computer.ARegister.Value + _computer.BRegister.Value > 255;
-                zero = _computer.ARegister.Value + _computer.BRegister.Value == 255;
+                result = _computer.ARegister.GetValue() + _computer.BRegister.GetValue();
+                carry = _computer.ARegister.GetValue() + _computer.BRegister.GetValue() > 255;
+                zero = _computer.ARegister.GetValue() + _computer.BRegister.GetValue() == 255;
                 result &= 0xFF; // Ensure result fits into 8 bits
                 if (carry)
                 {
@@ -80,29 +94,26 @@ namespace JGEmulator
                 {
                     StatusRegister.ClearZeroFlag();
                 }
-                //StatusRegister.UpdateZeroFlag(Value);
-                //StatusRegister.UpdateCarryFlag(carry);
-                _computer.DisplayMessage($"        ALU - Executed addition: {result}");
+                _computer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Executed addition: {result}", "ALU"));
             }
 
             // Update ALU value with the result
-            Value = (byte)result;
+            SetValue( (byte)result);
 
             // Update status flags based on the result
-
         }
 
         internal void EnableSubtract(bool _state)
         {
             Subtract = _state;
-            if (_state==true)
+            _computer.HandleUIMessages(new UIMessage(UIMessageType.RegisterFlag, Subtract.ToString(), "ALUSubract"));
+            if (_state == true)
             {
+
                 Execute();
             }
         }
-
     }
 }
-
 
 

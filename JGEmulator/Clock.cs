@@ -18,6 +18,9 @@ namespace JGEmulator
             _timer = new System.Timers.Timer(interval);
             _timer.Elapsed += OnTimedEvent;
             _tick = true; // Start with a tick
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Clock initialized.", "CLK"));
+
+
         }
 
         public void Start()
@@ -33,18 +36,21 @@ namespace JGEmulator
         public void SetSpeed(int interval)
         {
             _timer.Interval = interval;
-            _thiscomputer.DisplayMessage($"CL - Clock speed set to {interval} ms.");
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Clock speed set to {interval} ms.", "CLK"));
         }
 
         public void Step()
         {
 
-                _thiscomputer.DisplayMessage(Environment.NewLine+$"    CL - Clock Tick (Write Signal)");
-                OnTick?.Invoke();
+
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "***** Clock Tick", "CLK"));
+
+            OnTick?.Invoke();
 
 
-                _thiscomputer.DisplayMessage("    CL - Clock Tock (Control Signals)");
-                OnTock?.Invoke();
+           _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Clock Tock", "CLK"));
+
+            OnTock?.Invoke();
 
             }
 

@@ -4,7 +4,7 @@ namespace JGEmulator
 {
     public class ControlUnit
     {
-        private  Computer _thiscomputer;
+        private Computer _thiscomputer;
         private InstructionCounter _instructionCounter;
         private ControlSignalRom _controlSignalRom;
         private MicroInstruction _currentMicroInstruction;
@@ -14,7 +14,7 @@ namespace JGEmulator
             _thiscomputer = computer;
             _instructionCounter = new InstructionCounter(_thiscomputer);
             _controlSignalRom = new ControlSignalRom();
-            _thiscomputer.DisplayMessage("CU - Control Unit initialized.");
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Control Unit initialized.", "CTR"));
         }
 
         public void ProcessControlSignalsTick()
@@ -36,7 +36,7 @@ namespace JGEmulator
                 _thiscomputer.PC.ReadFromBus(_thiscomputer.BusInstance);
             }
 
-            //JZ sets the PC to the address in the bus on the tick if the zero flag is set
+            // JZ sets the PC to the address in the bus on the tick if the zero flag is set
             if (_currentMicroInstruction.JZ & _thiscomputer.StatusRegister.IsZeroFlagSet())
             {
                 _thiscomputer.PC.ReadFromBus(_thiscomputer.BusInstance);
@@ -66,8 +66,6 @@ namespace JGEmulator
                 _thiscomputer.MemoryInstance.ReadFromBus(_thiscomputer.BusInstance);
             }
 
-
-
             // II reads from the bus on the tick if II (Instruction Register Input) is true
             if (_currentMicroInstruction.II)
             {
@@ -93,10 +91,10 @@ namespace JGEmulator
         public void ProcessControlSignalsTock()
         {
             // Generate the 7-bit control word: 4 bits from IR and 3 bits from instruction counter
-            byte controlWord = (byte)(((_thiscomputer.IR.Value >> 4) & 0x0F) << 3 | (_instructionCounter.Value & 0x07));
+            byte controlWord = (byte)(((_thiscomputer.IR.GetValue() >> 4) & 0x0F) << 3 | (_instructionCounter.Value & 0x07));
             // Display the control word in binary format
             string controlWordBinary = Convert.ToString(controlWord, 2).PadLeft(7, '0');
-            _thiscomputer.DisplayMessage($"        CU - Control Word: {controlWordBinary}");
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Control Word: {controlWordBinary}", "CTR"));
 
             // Get the corresponding microinstruction from the ROM
             _currentMicroInstruction = _controlSignalRom.GetMicroInstruction(controlWord);
@@ -106,12 +104,12 @@ namespace JGEmulator
             // Handle MAR Tock Signal
             if (_currentMicroInstruction.MI == true)
             {
-                _thiscomputer.MAR.State = BusState.Reading;
-                _thiscomputer.DisplayMessage($"        CU - MAR bus status: {_thiscomputer.MAR.State}");
+                _thiscomputer.MAR.SetBusState( BusState.Reading);
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"MAR bus status: {_thiscomputer.MAR.GetBusState()}", "CTR"));
             }
             else
             {
-                _thiscomputer.MAR.State = BusState.None;
+                _thiscomputer.MAR.SetBusState(BusState.None);
             }
 
             // Handle A Register Tock Signal
@@ -119,20 +117,19 @@ namespace JGEmulator
             {
                 if (_currentMicroInstruction.AI == true)
                 {
-                    _thiscomputer.ARegister.State = BusState.Reading;
-                    _thiscomputer.DisplayMessage($"        CU - A Register bus status: {_thiscomputer.ARegister.State}");
+                    _thiscomputer.ARegister.SetBusState ( BusState.Reading);
+                    _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"A Register bus status: {_thiscomputer.ARegister.GetBusState()}", "CTR"));
                 }
                 else
                 {
-                    _thiscomputer.ARegister.State = BusState.Writing;
-                    _thiscomputer.DisplayMessage($"        CU - A Register bus status: {_thiscomputer.ARegister.State}");
+                    _thiscomputer.ARegister.SetBusState(BusState.Writing);
+                    _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"A Register bus status: {_thiscomputer.ARegister.GetBusState()}", "CTR"));
                     _thiscomputer.ARegister.WriteToBus(_thiscomputer.BusInstance);
                 }
-
             }
             else
             {
-                _thiscomputer.ARegister.State = BusState.None;
+                _thiscomputer.ARegister.SetBusState(BusState.None);
             }
 
             // Handle Memory Tock Signal
@@ -140,22 +137,19 @@ namespace JGEmulator
             {
                 if (_currentMicroInstruction.RI == true)
                 {
-
-                    _thiscomputer.MemoryInstance.State = BusState.Reading;
-                    _thiscomputer.DisplayMessage($"        CU - Memory bus status: {_thiscomputer.MemoryInstance.State}");
+                    _thiscomputer.MemoryInstance.SetBusState( BusState.Reading);
+                    _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Memory bus status: {BusState.Reading}", "CTR"));
                 }
                 else
                 {
-
-                    _thiscomputer.MemoryInstance.State = BusState.Writing;
-                    _thiscomputer.DisplayMessage($"        CU - Memory bus status: {_thiscomputer.MemoryInstance.State}");
+                    _thiscomputer.MemoryInstance.SetBusState( BusState.Writing);
+                    _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Memory bus status: {BusState.Writing}", "CTR"));
                     _thiscomputer.MemoryInstance.WriteToBus(_thiscomputer.BusInstance);
                 }
-
             }
             else
             {
-                _thiscomputer.MemoryInstance.State = BusState.None;
+                _thiscomputer.MemoryInstance.SetBusState(BusState.None);
             }
 
             // Handle IR Tock Signal
@@ -163,90 +157,85 @@ namespace JGEmulator
             {
                 if (_currentMicroInstruction.II == true)
                 {
-                    _thiscomputer.IR.State = BusState.Reading;
-                    _thiscomputer.DisplayMessage($"        CU - IR bus status: {_thiscomputer.IR.State}");
+                    _thiscomputer.IR.SetBusState( BusState.Reading);
+                    _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"IR bus status: {_thiscomputer.IR.GetBusState()}", "CTR"));
                 }
                 else
                 {
-                    _thiscomputer.IR.State = BusState.Writing;
-                    _thiscomputer.DisplayMessage($"        CU - IR bus status: {_thiscomputer.IR.State}");
+                    _thiscomputer.IR.SetBusState(BusState.Writing);
+                    _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"IR bus status: {_thiscomputer.IR.GetBusState()}", "CTR"));
                     _thiscomputer.IR.WriteToBus(_thiscomputer.BusInstance);
-
                 }
             }
             else
             {
-                _thiscomputer.IR.State = BusState.None;
+                _thiscomputer.IR.SetBusState(BusState.None);
             }
 
             // Handle PC Tock Signal
-            if (_currentMicroInstruction.J == true | _currentMicroInstruction.CO == true | _currentMicroInstruction.JC==true | _currentMicroInstruction.JZ==true)
+            if (_currentMicroInstruction.J == true | _currentMicroInstruction.CO == true | _currentMicroInstruction.JC == true | _currentMicroInstruction.JZ == true)
             {
-                
                 if (_currentMicroInstruction.J == true)
                 {
-                    _thiscomputer.PC.State = BusState.Reading;
-                    _thiscomputer.DisplayMessage($"        CU - PC bus status: {_thiscomputer.PC.State}");
+                    _thiscomputer.PC.SetBusState(BusState.Reading);
+                    _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"PC bus status: {_thiscomputer.PC.GetBusState()}", "CTR"));
                 }
-                else if (_currentMicroInstruction.JC == true & _thiscomputer.StatusRegister.CarryFlag==true)
+                else if (_currentMicroInstruction.JC == true & _thiscomputer.StatusRegister.IsCarryFlagSet() == true)
                 {
-                    _thiscomputer.PC.State = BusState.Reading;
-                    _thiscomputer.DisplayMessage($"        CU - PC bus status: {_thiscomputer.PC.State}");
+                    _thiscomputer.PC.SetBusState(BusState.Reading);
+                    _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"PC bus status: {_thiscomputer.PC.GetBusState()}", "CTR"));
                 }
-                else if (_currentMicroInstruction.JZ == true & _thiscomputer.StatusRegister.ZeroFlag==true)
+                else if (_currentMicroInstruction.JZ == true & _thiscomputer.StatusRegister.IsZeroFlagSet() == true)
                 {
-                    _thiscomputer.PC.State = BusState.Reading;
-                    _thiscomputer.DisplayMessage($"    CU - PC bus status: {_thiscomputer.PC.State}");
+                    _thiscomputer.PC.SetBusState(BusState.Reading);
+                    _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"PC bus status: {_thiscomputer.PC.GetBusState()}", "CTR"));
                 }
-
                 else
                 {
-                    _thiscomputer.PC.State = BusState.Writing;
-                    _thiscomputer.DisplayMessage($"        CU - PC bus status: {_thiscomputer.PC.State}");
+                    _thiscomputer.PC.SetBusState(BusState.Writing);
+                    _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"PC bus status: {_thiscomputer.PC.GetBusState()}", "CTR"));
                     _thiscomputer.PC.WriteToBus(_thiscomputer.BusInstance);
                 }
-
             }
             else
             {
-                _thiscomputer.PC.State = BusState.None;
+                _thiscomputer.PC.SetBusState(BusState.None);
             }
 
             // Handle CE Tock Signal
             if (_currentMicroInstruction.CE == true)
             {
-                _thiscomputer.PC.CounterEnable = true;
-                _thiscomputer.DisplayMessage($"        CU - PC Counter Enabled");
+                _thiscomputer.PC.SetCounterEnable(true);
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "PC Counter Enabled", "CTR"));
             }
             else
             {
-                _thiscomputer.PC.CounterEnable = false;
+                _thiscomputer.PC.SetCounterEnable( false);
             }
 
             // Handle OR Tock Signal
             if (_currentMicroInstruction.OI == true)
             {
-                _thiscomputer.OR.State = BusState.Reading;
-                _thiscomputer.DisplayMessage($"        CU - OR bus status: {_thiscomputer.OR.State}");
+                _thiscomputer.OR.SetBusState( BusState.Reading);
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"OR bus status: {_thiscomputer.OR.GetBusState()}", "CTR"));
             }
             else
             {
-                _thiscomputer.OR.State = BusState.None;
+                _thiscomputer.OR.SetBusState( BusState.None);
             }
 
             // Handle HLT Tock Signal
             if (_currentMicroInstruction.HLT == true)
             {
                 _thiscomputer.ClockInstance.Stop();
-                _thiscomputer.DisplayMessage("CU - Clock stopped due to HLT signal.");
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Clock stopped due to HLT signal.", "CTR"));
             }
 
             // Handle Subtract Tock Signal
             if (_currentMicroInstruction.SU == true)
             {
-                _thiscomputer.DisplayMessage($"        CU - ALU Subtract Enabled");
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "ALU Subtract Enabled", "CTR"));
                 _thiscomputer.ALUInstance.EnableSubtract(true);
-
             }
             else
             {
@@ -256,36 +245,28 @@ namespace JGEmulator
             // Handle B Register Tock Signal
             if (_currentMicroInstruction.BI == true)
             {
-                _thiscomputer.BRegister.State = BusState.Reading;
-                _thiscomputer.DisplayMessage($"        CU - B Register bus status: {_thiscomputer.BRegister.State}");
-
+                _thiscomputer.BRegister.SetBusState(BusState.Reading);
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"B Register bus status: {_thiscomputer.BRegister.GetValue()}", "CTR"));
             }
             else
             {
-                _thiscomputer.BRegister.State = BusState.None;
+                _thiscomputer.BRegister.SetBusState(BusState.None);
             }
-
 
             // Handle EO Tock Signal
             if (_currentMicroInstruction.EO == true)
             {
-                _thiscomputer.ALUInstance.State = BusState.Writing;
-                _thiscomputer.DisplayMessage($"        CU - ALU bus status: {_thiscomputer.ALUInstance.State}");
+                _thiscomputer.ALUInstance.SetBusState( BusState.Writing);
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"ALU bus status: {_thiscomputer.ALUInstance.GetBusState()}", "CTR"));
                 _thiscomputer.ALUInstance.WriteToBus();
             }
             else
             {
-                _thiscomputer.ALUInstance.State = BusState.None;
+                _thiscomputer.ALUInstance.SetBusState(BusState.None);
             }
         }
     }
 }
-
-
-
-
-
-
 
 
 

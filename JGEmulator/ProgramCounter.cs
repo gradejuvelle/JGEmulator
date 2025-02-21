@@ -5,72 +5,98 @@ namespace JGEmulator
     public class ProgramCounter
     {
         public byte Value { get; set; } // 4-bit value, stored in an 8-bit byte
-        public BusState State { get; set; }
-        public bool CounterEnable { get; set; } // Counter enable property
+        private BusState State { get; set; }
+        private bool CounterEnable; // Counter enable property
         private Computer _thiscomputer;
+
         public ProgramCounter(Computer computer)
         {
             _thiscomputer = computer;
-            Value = 0;
-            State = BusState.None;
-            CounterEnable = false; // Default to false
-            string valueBinary = Convert.ToString(Value, 2).PadLeft(4, '0');
-            _thiscomputer.DisplayMessage($"PC - Program Counter initialized. Value: {valueBinary}");
+            //SetValue(0);
+            //SetBusState( BusState.None);
+            //CounterEnable = false; // Default to false
+            //string valueBinary = Convert.ToString(Value, 2).PadLeft(4, '0');
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Program Counter initialized.", "PRG"));
         }
 
+        public bool IsCounterEnabled()
+        {
+            return CounterEnable;
+        }
+        public void SetCounterEnable(bool enable)
+        {
+            CounterEnable = enable;
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.RegisterFlag, enable.ToString(), "PRGEnable"));
+        }
+        public BusState GetBusState()
+        {
+            return State;
+        }
+
+        public void SetBusState(BusState state)
+        {
+            State = state;
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.BusState, State.ToString(), "PRG"));
+        }
+        public byte GetValue()
+        {
+            return Value;
+        }
+
+        public void SetValue(byte value)
+        {
+            Value = value;
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.RegisterValue, value.ToString(), "PRG"));
+        }
         public void WriteToBus(Bus bus)
         {
-
-                string valueBinary = Convert.ToString(Value & 0x0F, 2).PadLeft(4, '0');
-            _thiscomputer.DisplayMessage($"        PC - Putting value on the bus. {valueBinary}");
-                // Write only the rightmost 4 bits to the bus and zero out the left 4 bits
-                bus.Write(Value & 0x0F); // Ensuring left 4 bits are zeroed out
-
+            string valueBinary = Convert.ToString(Value & 0x0F, 2).PadLeft(4, '0');
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Putting value on the bus. {valueBinary}", "PRG"));
+            // Write only the rightmost 4 bits to the bus and zero out the left 4 bits
+            bus.Write(Value & 0x0F); // Ensuring left 4 bits are zeroed out
         }
 
         public void ReadFromBus(Bus bus)
         {
-
-            _thiscomputer.DisplayMessage($"            PC - Reading from bus.");
-                byte data = bus.Read();
-                string dataBinary = Convert.ToString(data & 0x0F, 2).PadLeft(4, '0');
-                // Read only the rightmost 4 bits from the bus
-                Value = (byte)((Value & 0xF0) | (data & 0x0F));
-
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Reading from bus.", "PRG"));
+            byte data = bus.Read();
+            string dataBinary = Convert.ToString(data & 0x0F, 2).PadLeft(4, '0');
+            // Read only the rightmost 4 bits from the bus
+            Value = (byte)((Value & 0xF0) | (data & 0x0F));
         }
 
         public void Increment()
         {
             if (CounterEnable)
             {
-                Value = (byte)((Value + 1) & 0x0F); // Increment and keep only the rightmost 4 bits
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Incrementing Program Counter.", "PRG"));
+
+                SetValue( (byte)((Value + 1) & 0x0F)); // Increment and keep only the rightmost 4 bits
                 string valueBinary = Convert.ToString(Value, 2).PadLeft(4, '0');
-                _thiscomputer.DisplayMessage($"        PC - Program Counter incremented to {valueBinary}");
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Program Counter incremented to {valueBinary}", "PRG"));
             }
         }
 
         public void EnableCounter()
         {
-            CounterEnable = true;
-            _thiscomputer.DisplayMessage("    PC - Counter enabled.");
+            SetCounterEnable(true);
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Counter enabled.", "PRG"));
         }
 
         public void DisableCounter()
         {
-            CounterEnable = false;
-            _thiscomputer.DisplayMessage("    PC - Counter disabled.");
+            SetCounterEnable(false);
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Counter disabled.", "PRG"));
         }
 
         public void Reset()
         {
-            Value = 0;
-            State = BusState.None;
-            _thiscomputer.DisplayMessage($"    PC - Register reset.");
+            SetValue(0);
+            SetBusState(BusState.None);
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Program Counter reset.", "PRG"));
         }
     }
 }
-
-
 
 
 

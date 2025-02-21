@@ -2,35 +2,52 @@
 
 public class BRegister
 {
+    private Computer _thiscomputer;
 
-    private  Computer _thiscomputer;
-
-    public byte Value { get; set; }
-    public BusState State { get; set; }
-
+    private int Value { get; set; }
+    private byte Data { get; set; }
+    private BusState State { get; set; }
     public BRegister(Computer computer)
     {
-        _thiscomputer = computer ;
-        Value = 0;
-        State = BusState.None;
-        _thiscomputer.DisplayMessage($"B - B Register initialized.");
+        _thiscomputer = computer;
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "B Register initialized.", "BRG"));
     }
-
+    public BusState GetBusState()
+    {
+        return State;
+    }
+    public void SetBusState(BusState state)
+    {
+        State = state;
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.BusState, State.ToString(), "BRG"));
+    }
+    private void SetValue(int value)
+    {
+        Value = value;
+        Data = (byte)value;
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.RegisterValue, Data.ToString(), "BRG"));
+    }
+    internal byte GetValue()
+    {
+        return Data;
+    }
     public void ReadFromBus()
     {
         if (State == BusState.Reading)
         {
-            //_alu = _computer.ALUInstance;
-            _thiscomputer.DisplayMessage($"        B - Reading value from the bus.");
-            Value = _thiscomputer.BusInstance.Read();
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Reading value from the bus.", "BRG"));
+            SetValue( _thiscomputer.BusInstance.Read());
             _thiscomputer.ALUInstance.Execute(); // Call the ALU execute method
-
         }
     }
+ 
     public void Reset()
     {
-        Value = 0;
+        SetValue(0);
         State = BusState.None;
-        _thiscomputer.DisplayMessage($"    B - Register reset.");
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "B Register reset.", "BRG"));
     }
+
+
 }
+

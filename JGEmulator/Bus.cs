@@ -2,50 +2,50 @@
 
 public class Bus
 {
-    public int Value { get; set; }
-    public byte Data { get; set; }
+    private int Value { get; set; }
+    private byte Data { get; set; }
+
     private Computer _thiscomputer;
 
     public Bus(Computer computer)
     {
         _thiscomputer = computer;
-        _thiscomputer.DisplayMessage($"BUS - Bus initialized.");
-        Value = 0;
-        Data = 0;
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Bus initialized.", "BUS"));
     }
 
     public void Write(int value)
     {
+        Value = value;
         Data = (byte)value;
-        OnValueChanged();
         string dataBinary = Convert.ToString(Data, 2).PadLeft(8, '0');
-        _thiscomputer.DisplayMessage($"            BUS - New value on bus. {dataBinary}");
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"New value on bus. {dataBinary}", "BUS"));
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.RegisterValue, Value.ToString(), "BUS"));
+
     }
 
     public byte Read()
     {
         string dataBinary = Convert.ToString(Data, 2).PadLeft(8, '0');
-        _thiscomputer.DisplayMessage($"            BUS - Value read from bus. {dataBinary}");
+
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Value read from bus. {dataBinary}", "BUS"));
         return Data;
     }
 
-    public void WriteFromIR(Bus bus, byte instructionRegisterValue)
+    public void WriteFromIR(byte instructionRegisterValue)
     {
         // Combine the left four bits as 0 and the right four bits from the instruction register value
         string valueBinary = Convert.ToString(instructionRegisterValue, 2).PadLeft(8, '0');
         //DisplayMessage($"        BUS - Writing {valueBinary} from IR to bus (8-bit value).");
         // Write the combined 8 bits to the bus
-        bus.Write(instructionRegisterValue);
+        Write(instructionRegisterValue);
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"New value on bus. {valueBinary}", "BUS"));
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.RegisterValue, instructionRegisterValue.ToString(), "BUS"));
     }
 
-    private void OnValueChanged()
-    {
-        // Handle value change logic here
-    }
     public void Reset()
     {
-        Value = 0;
-        _thiscomputer.DisplayMessage($"        Bus reset.");
+        Write(0);
+        _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Bus reset", "BUS"));
     }
 }
 

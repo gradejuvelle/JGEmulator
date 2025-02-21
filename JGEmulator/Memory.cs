@@ -5,15 +5,16 @@ namespace JGEmulator
     public class Memory
     {
         private readonly byte[] _memory; // Change to byte array to hold 8-bit words
-        public BusState State { get; set; } // Add BusState property
-        public byte SelectedAddress { get; set; } // Add SelectedAddress property
+        private BusState _state; // Add BusState property
+        private byte _selectedAddress; // Add SelectedAddress property
         private Computer _thiscomputer;
+
         public Memory(Computer thiscomputer)
         {
             _thiscomputer = thiscomputer;
             _memory = new byte[16]; // 16 8-bit words
-            State = BusState.None;
-            SelectedAddress = 0;
+            //SetBusState(BusState.None);
+            //SetSelectedAddress(0);
 
             // Initialize the first two words
 
@@ -106,45 +107,70 @@ namespace JGEmulator
             //_memory[5] = 0b00000000; // 2 in binary
             //_memory[6] = 0b00000010; // 2 in binary
 
-            _thiscomputer.DisplayMessage("MEM - Memory initialized with initial values for testing.");
-            _thiscomputer = thiscomputer;
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Memory initialized.", "MEM"));
+        }
+
+        public BusState GetBusState()
+        {
+            return _state;
+        }
+
+        public void SetBusState(BusState state)
+        {
+            _state = state;
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.BusState, state.ToString(), "MEM"));
+        }
+
+        public byte GetSelectedAddress()
+        {
+            return _selectedAddress;
+        }
+
+        public void SetSelectedAddress(byte address)
+        {
+            _selectedAddress = address;
+            string addressBinary = Convert.ToString(_selectedAddress, 2).PadLeft(4, '0');
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Selected address updated to {addressBinary}", "MEM"));
         }
 
         public void WriteToBus(Bus bus)
         {
-            if (State == BusState.Writing) // Use the Memory's state
+            if (_state == BusState.Writing) // Use the Memory's state
             {
-                string addressBinary = Convert.ToString(SelectedAddress, 2).PadLeft(4, '0');
-                string valueBinary = Convert.ToString(_memory[SelectedAddress], 2).PadLeft(8, '0');
-                _thiscomputer.DisplayMessage($"        MEM - Putting new value on the bus from address {addressBinary}. {valueBinary}");
-                bus.Write(_memory[SelectedAddress]);
+                string addressBinary = Convert.ToString(_selectedAddress, 2).PadLeft(4, '0');
+                string valueBinary = Convert.ToString(_memory[_selectedAddress], 2).PadLeft(8, '0');
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Putting new value on the bus from address {addressBinary}. {valueBinary}", "MEM"));
+                bus.Write(_memory[_selectedAddress]);
             }
         }
 
         public void ReadFromBus(Bus bus)
         {
-            if (State == BusState.Reading) // Use the Memory's state
+            if (_state == BusState.Reading) // Use the Memory's state
             {
-                _thiscomputer.DisplayMessage($"        MEM - Reading from bus.");
-                _memory[SelectedAddress] = bus.Read();
-                string addressBinary = Convert.ToString(SelectedAddress, 2).PadLeft(4, '0');
-                string valueBinary = Convert.ToString(_memory[SelectedAddress], 2).PadLeft(8, '0');
-
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Reading from bus.", "MEM"));
+                _memory[_selectedAddress] = bus.Read();
+                string addressBinary = Convert.ToString(_selectedAddress, 2).PadLeft(4, '0');
+                string valueBinary = Convert.ToString(_memory[_selectedAddress], 2).PadLeft(8, '0');
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Value read from bus: {valueBinary}", "MEM"));
             }
         }
 
-        public void SetSelectedAddress(byte address)
-        {
-            SelectedAddress = address;
-            string addressBinary = Convert.ToString(SelectedAddress, 2).PadLeft(4, '0');
-            _thiscomputer.DisplayMessage($"            MEM - Selected address updated to {addressBinary}");
-        }
         public void Reset()
         {
-            SelectedAddress = 0;
-            State = BusState.None;
-            _thiscomputer.DisplayMessage($"        MEM - Address reset.");
+            SetSelectedAddress(0);
+            SetBusState(BusState.None);
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Address reset.", "MEM"));
         }
     }
 }
+
+
+
+
+
+
+
+
+
 
