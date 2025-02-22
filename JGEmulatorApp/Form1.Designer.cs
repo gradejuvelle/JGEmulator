@@ -48,213 +48,401 @@
             lblMEMValueBinary = new Label();
             buttonRun = new Button();
             buttonStep = new Button();
+            lblARGBusState = new Label();
+            lblMARBusState = new Label();
+            lblBRGBusState = new Label();
+            lblINSBusState = new Label();
+            lblOUTBusState = new Label();
+            lblALUBusState = new Label();
+            lblPRGBusState = new Label();
+            lblMEMBusState = new Label();
+            lblINCValueBinary = new Label();
+            lblINCValue = new Label();
+            lblPRGEnable = new Label();
+            lblSTTCarry = new Label();
+            lblSTTZero = new Label();
+            lblALUSubtract = new Label();
             SuspendLayout();
             // 
             // lblARGValue
             // 
             lblARGValue.AutoSize = true;
-            lblARGValue.Location = new Point(613, 148);
+            lblARGValue.Font = new Font("Segoe UI", 14F);
+            lblARGValue.Location = new Point(1079, 305);
             lblARGValue.Name = "lblARGValue";
-            lblARGValue.Size = new Size(72, 15);
+            lblARGValue.Size = new Size(115, 25);
             lblARGValue.TabIndex = 0;
             lblARGValue.Text = "A Register: 0";
             // 
             // lblARGValueBinary
             // 
             lblARGValueBinary.AutoSize = true;
-            lblARGValueBinary.Location = new Point(613, 168);
+            lblARGValueBinary.Font = new Font("Segoe UI", 14F);
+            lblARGValueBinary.Location = new Point(1079, 335);
             lblARGValueBinary.Name = "lblARGValueBinary";
-            lblARGValueBinary.Size = new Size(72, 15);
+            lblARGValueBinary.Size = new Size(92, 25);
             lblARGValueBinary.TabIndex = 1;
             lblARGValueBinary.Text = "00000000";
             // 
             // lblBRGValue
             // 
             lblBRGValue.AutoSize = true;
-            lblBRGValue.Location = new Point(613, 210);
+            lblBRGValue.Font = new Font("Segoe UI", 14F);
+            lblBRGValue.Location = new Point(1079, 615);
             lblBRGValue.Name = "lblBRGValue";
-            lblBRGValue.Size = new Size(71, 15);
-            lblBRGValue.TabIndex = 2;
+            lblBRGValue.Size = new Size(114, 25);
+            lblBRGValue.TabIndex = 3;
             lblBRGValue.Text = "B Register: 0";
             // 
             // lblBRGValueBinary
             // 
             lblBRGValueBinary.AutoSize = true;
-            lblBRGValueBinary.Location = new Point(613, 230);
+            lblBRGValueBinary.Font = new Font("Segoe UI", 14F);
+            lblBRGValueBinary.Location = new Point(1079, 645);
             lblBRGValueBinary.Name = "lblBRGValueBinary";
-            lblBRGValueBinary.Size = new Size(72, 15);
-            lblBRGValueBinary.TabIndex = 3;
+            lblBRGValueBinary.Size = new Size(92, 25);
+            lblBRGValueBinary.TabIndex = 4;
             lblBRGValueBinary.Text = "00000000";
             // 
             // lblINSValue
             // 
             lblINSValue.AutoSize = true;
-            lblINSValue.Location = new Point(72, 354);
+            lblINSValue.Font = new Font("Segoe UI", 14F);
+            lblINSValue.Location = new Point(88, 537);
             lblINSValue.Name = "lblINSValue";
-            lblINSValue.Size = new Size(121, 15);
-            lblINSValue.TabIndex = 4;
+            lblINSValue.Size = new Size(193, 25);
+            lblINSValue.TabIndex = 6;
             lblINSValue.Text = "Instruction Register: 0";
             // 
             // lblINSValueBinary
             // 
             lblINSValueBinary.AutoSize = true;
-            lblINSValueBinary.Location = new Point(72, 374);
+            lblINSValueBinary.Font = new Font("Segoe UI", 14F);
+            lblINSValueBinary.Location = new Point(88, 567);
             lblINSValueBinary.Name = "lblINSValueBinary";
-            lblINSValueBinary.Size = new Size(72, 15);
-            lblINSValueBinary.TabIndex = 5;
+            lblINSValueBinary.Size = new Size(92, 25);
+            lblINSValueBinary.TabIndex = 7;
             lblINSValueBinary.Text = "00000000";
             // 
             // lblOUTValue
             // 
             lblOUTValue.AutoSize = true;
-            lblOUTValue.Location = new Point(613, 354);
+            lblOUTValue.Font = new Font("Segoe UI", 14F);
+            lblOUTValue.Location = new Point(1079, 745);
             lblOUTValue.Name = "lblOUTValue";
-            lblOUTValue.Size = new Size(102, 15);
-            lblOUTValue.TabIndex = 6;
+            lblOUTValue.Size = new Size(162, 25);
+            lblOUTValue.TabIndex = 9;
             lblOUTValue.Text = "Output Register: 0";
             // 
             // lblOUTValueBinary
             // 
             lblOUTValueBinary.AutoSize = true;
-            lblOUTValueBinary.Location = new Point(613, 374);
+            lblOUTValueBinary.Font = new Font("Segoe UI", 14F);
+            lblOUTValueBinary.Location = new Point(1079, 775);
             lblOUTValueBinary.Name = "lblOUTValueBinary";
-            lblOUTValueBinary.Size = new Size(72, 15);
-            lblOUTValueBinary.TabIndex = 7;
+            lblOUTValueBinary.Size = new Size(92, 25);
+            lblOUTValueBinary.TabIndex = 10;
             lblOUTValueBinary.Text = "00000000";
             // 
             // lblBUSValue
             // 
             lblBUSValue.AutoSize = true;
-            lblBUSValue.Location = new Point(372, 180);
+            lblBUSValue.Font = new Font("Segoe UI", 14F);
+            lblBUSValue.Location = new Point(630, 332);
             lblBUSValue.Name = "lblBUSValue";
-            lblBUSValue.Size = new Size(85, 15);
-            lblBUSValue.TabIndex = 8;
-            lblBUSValue.Text = "BUS Register: 0";
+            lblBUSValue.Size = new Size(65, 25);
+            lblBUSValue.TabIndex = 24;
+            lblBUSValue.Text = "BUS: 0";
             // 
             // lblBUSValueBinary
             // 
             lblBUSValueBinary.AutoSize = true;
-            lblBUSValueBinary.Location = new Point(372, 200);
+            lblBUSValueBinary.Font = new Font("Segoe UI", 14F);
+            lblBUSValueBinary.Location = new Point(630, 362);
             lblBUSValueBinary.Name = "lblBUSValueBinary";
-            lblBUSValueBinary.Size = new Size(72, 15);
-            lblBUSValueBinary.TabIndex = 9;
+            lblBUSValueBinary.Size = new Size(92, 25);
+            lblBUSValueBinary.TabIndex = 25;
             lblBUSValueBinary.Text = "00000000";
             // 
             // lblALUValue
             // 
             lblALUValue.AutoSize = true;
-            lblALUValue.Location = new Point(613, 180);
+            lblALUValue.Font = new Font("Segoe UI", 14F);
+            lblALUValue.Location = new Point(1079, 420);
             lblALUValue.Name = "lblALUValue";
-            lblALUValue.Size = new Size(86, 15);
-            lblALUValue.TabIndex = 10;
+            lblALUValue.Size = new Size(137, 25);
+            lblALUValue.TabIndex = 12;
             lblALUValue.Text = "ALU Register: 0";
             // 
             // lblALUValueBinary
             // 
             lblALUValueBinary.AutoSize = true;
-            lblALUValueBinary.Location = new Point(613, 200);
+            lblALUValueBinary.Font = new Font("Segoe UI", 14F);
+            lblALUValueBinary.Location = new Point(1079, 450);
             lblALUValueBinary.Name = "lblALUValueBinary";
-            lblALUValueBinary.Size = new Size(72, 15);
-            lblALUValueBinary.TabIndex = 11;
+            lblALUValueBinary.Size = new Size(92, 25);
+            lblALUValueBinary.TabIndex = 13;
             lblALUValueBinary.Text = "00000000";
             // 
             // lblPRGValue
             // 
             lblPRGValue.AutoSize = true;
-            lblPRGValue.Location = new Point(613, 56);
+            lblPRGValue.Font = new Font("Segoe UI", 14F);
+            lblPRGValue.Location = new Point(1079, 125);
             lblPRGValue.Name = "lblPRGValue";
-            lblPRGValue.Size = new Size(111, 15);
-            lblPRGValue.TabIndex = 12;
+            lblPRGValue.Size = new Size(177, 25);
+            lblPRGValue.TabIndex = 15;
             lblPRGValue.Text = "Program Counter: 0";
             // 
             // lblPRGValueBinary
             // 
             lblPRGValueBinary.AutoSize = true;
-            lblPRGValueBinary.Location = new Point(613, 76);
+            lblPRGValueBinary.Font = new Font("Segoe UI", 14F);
+            lblPRGValueBinary.Location = new Point(1079, 155);
             lblPRGValueBinary.Name = "lblPRGValueBinary";
-            lblPRGValueBinary.Size = new Size(72, 15);
-            lblPRGValueBinary.TabIndex = 13;
+            lblPRGValueBinary.Size = new Size(92, 25);
+            lblPRGValueBinary.TabIndex = 16;
             lblPRGValueBinary.Text = "00000000";
             // 
             // lblMARValue
             // 
             lblMARValue.AutoSize = true;
-            lblMARValue.Location = new Point(72, 122);
+            lblMARValue.Font = new Font("Segoe UI", 14F);
+            lblMARValue.Location = new Point(88, 162);
             lblMARValue.Name = "lblMARValue";
-            lblMARValue.Size = new Size(154, 15);
-            lblMARValue.TabIndex = 14;
+            lblMARValue.Size = new Size(245, 25);
+            lblMARValue.TabIndex = 18;
             lblMARValue.Text = "Memory Address Register: 0";
             // 
             // lblMARValueBinary
             // 
             lblMARValueBinary.AutoSize = true;
-            lblMARValueBinary.Location = new Point(72, 142);
+            lblMARValueBinary.Font = new Font("Segoe UI", 14F);
+            lblMARValueBinary.Location = new Point(88, 192);
             lblMARValueBinary.Name = "lblMARValueBinary";
-            lblMARValueBinary.Size = new Size(72, 15);
-            lblMARValueBinary.TabIndex = 15;
+            lblMARValueBinary.Size = new Size(92, 25);
+            lblMARValueBinary.TabIndex = 19;
             lblMARValueBinary.Text = "00000000";
             // 
             // lblMEMValue
             // 
             lblMEMValue.AutoSize = true;
-            lblMEMValue.Location = new Point(72, 180);
+            lblMEMValue.Font = new Font("Segoe UI", 14F);
+            lblMEMValue.Location = new Point(88, 312);
             lblMEMValue.Name = "lblMEMValue";
-            lblMEMValue.Size = new Size(64, 15);
-            lblMEMValue.TabIndex = 16;
+            lblMEMValue.Size = new Size(101, 25);
+            lblMEMValue.TabIndex = 21;
             lblMEMValue.Text = "Memory: 0";
             // 
             // lblMEMValueBinary
             // 
             lblMEMValueBinary.AutoSize = true;
-            lblMEMValueBinary.Location = new Point(72, 200);
+            lblMEMValueBinary.Font = new Font("Segoe UI", 14F);
+            lblMEMValueBinary.Location = new Point(88, 342);
             lblMEMValueBinary.Name = "lblMEMValueBinary";
-            lblMEMValueBinary.Size = new Size(72, 15);
-            lblMEMValueBinary.TabIndex = 17;
+            lblMEMValueBinary.Size = new Size(92, 25);
+            lblMEMValueBinary.TabIndex = 22;
             lblMEMValueBinary.Text = "00000000";
             // 
             // buttonRun
             // 
-            buttonRun.Location = new Point(372, 354);
+            buttonRun.Font = new Font("Segoe UI", 14F);
+            buttonRun.Location = new Point(550, 500);
             buttonRun.Name = "buttonRun";
-            buttonRun.Size = new Size(75, 23);
-            buttonRun.TabIndex = 18;
+            buttonRun.Size = new Size(100, 40);
+            buttonRun.TabIndex = 26;
             buttonRun.Text = "Run";
             buttonRun.UseVisualStyleBackColor = true;
             buttonRun.Click += buttonRun_Click;
             // 
             // buttonStep
             // 
-            buttonStep.Location = new Point(372, 384);
+            buttonStep.Font = new Font("Segoe UI", 14F);
+            buttonStep.Location = new Point(700, 500);
             buttonStep.Name = "buttonStep";
-            buttonStep.Size = new Size(75, 23);
-            buttonStep.TabIndex = 19;
+            buttonStep.Size = new Size(100, 40);
+            buttonStep.TabIndex = 27;
             buttonStep.Text = "Step";
             buttonStep.UseVisualStyleBackColor = true;
             buttonStep.Click += buttonStep_Click;
+            // 
+            // lblARGBusState
+            // 
+            lblARGBusState.AutoSize = true;
+            lblARGBusState.Font = new Font("Segoe UI", 14F);
+            lblARGBusState.Location = new Point(1079, 365);
+            lblARGBusState.Name = "lblARGBusState";
+            lblARGBusState.Size = new Size(143, 25);
+            lblARGBusState.TabIndex = 2;
+            lblARGBusState.Text = "Bus State: None";
+            // 
+            // lblMARBusState
+            // 
+            lblMARBusState.AutoSize = true;
+            lblMARBusState.Font = new Font("Segoe UI", 14F);
+            lblMARBusState.Location = new Point(88, 222);
+            lblMARBusState.Name = "lblMARBusState";
+            lblMARBusState.Size = new Size(143, 25);
+            lblMARBusState.TabIndex = 20;
+            lblMARBusState.Text = "Bus State: None";
+            // 
+            // lblBRGBusState
+            // 
+            lblBRGBusState.AutoSize = true;
+            lblBRGBusState.Font = new Font("Segoe UI", 14F);
+            lblBRGBusState.Location = new Point(1079, 675);
+            lblBRGBusState.Name = "lblBRGBusState";
+            lblBRGBusState.Size = new Size(143, 25);
+            lblBRGBusState.TabIndex = 5;
+            lblBRGBusState.Text = "Bus State: None";
+            // 
+            // lblINSBusState
+            // 
+            lblINSBusState.AutoSize = true;
+            lblINSBusState.Font = new Font("Segoe UI", 14F);
+            lblINSBusState.Location = new Point(88, 597);
+            lblINSBusState.Name = "lblINSBusState";
+            lblINSBusState.Size = new Size(143, 25);
+            lblINSBusState.TabIndex = 8;
+            lblINSBusState.Text = "Bus State: None";
+            // 
+            // lblOUTBusState
+            // 
+            lblOUTBusState.AutoSize = true;
+            lblOUTBusState.Font = new Font("Segoe UI", 14F);
+            lblOUTBusState.Location = new Point(1079, 805);
+            lblOUTBusState.Name = "lblOUTBusState";
+            lblOUTBusState.Size = new Size(143, 25);
+            lblOUTBusState.TabIndex = 11;
+            lblOUTBusState.Text = "Bus State: None";
+            // 
+            // lblALUBusState
+            // 
+            lblALUBusState.AutoSize = true;
+            lblALUBusState.Font = new Font("Segoe UI", 14F);
+            lblALUBusState.Location = new Point(1079, 480);
+            lblALUBusState.Name = "lblALUBusState";
+            lblALUBusState.Size = new Size(143, 25);
+            lblALUBusState.TabIndex = 14;
+            lblALUBusState.Text = "Bus State: None";
+            // 
+            // lblPRGBusState
+            // 
+            lblPRGBusState.AutoSize = true;
+            lblPRGBusState.Font = new Font("Segoe UI", 14F);
+            lblPRGBusState.Location = new Point(1079, 185);
+            lblPRGBusState.Name = "lblPRGBusState";
+            lblPRGBusState.Size = new Size(143, 25);
+            lblPRGBusState.TabIndex = 17;
+            lblPRGBusState.Text = "Bus State: None";
+            // 
+            // lblMEMBusState
+            // 
+            lblMEMBusState.AutoSize = true;
+            lblMEMBusState.Font = new Font("Segoe UI", 14F);
+            lblMEMBusState.Location = new Point(88, 372);
+            lblMEMBusState.Name = "lblMEMBusState";
+            lblMEMBusState.Size = new Size(143, 25);
+            lblMEMBusState.TabIndex = 23;
+            lblMEMBusState.Text = "Bus State: None";
+            // 
+            // lblINCValueBinary
+            // 
+            lblINCValueBinary.AutoSize = true;
+            lblINCValueBinary.Font = new Font("Segoe UI", 14F);
+            lblINCValueBinary.Location = new Point(88, 717);
+            lblINCValueBinary.Name = "lblINCValueBinary";
+            lblINCValueBinary.Size = new Size(92, 25);
+            lblINCValueBinary.TabIndex = 29;
+            lblINCValueBinary.Text = "00000000";
+            // 
+            // lblINCValue
+            // 
+            lblINCValue.AutoSize = true;
+            lblINCValue.Font = new Font("Segoe UI", 14F);
+            lblINCValue.Location = new Point(88, 687);
+            lblINCValue.Name = "lblINCValue";
+            lblINCValue.Size = new Size(194, 25);
+            lblINCValue.TabIndex = 28;
+            lblINCValue.Text = "Instruction Counter: 0";
+            // 
+            // lblPRGEnable
+            // 
+            lblPRGEnable.AutoSize = true;
+            lblPRGEnable.Font = new Font("Segoe UI", 14F);
+            lblPRGEnable.Location = new Point(1079, 210);
+            lblPRGEnable.Name = "lblPRGEnable";
+            lblPRGEnable.Size = new Size(119, 25);
+            lblPRGEnable.TabIndex = 30;
+            lblPRGEnable.Text = "Enable: False";
+            // 
+            // lblSTTCarry
+            // 
+            lblSTTCarry.AutoSize = true;
+            lblSTTCarry.Font = new Font("Segoe UI", 14F);
+            lblSTTCarry.Location = new Point(1079, 508);
+            lblSTTCarry.Name = "lblSTTCarry";
+            lblSTTCarry.Size = new Size(105, 25);
+            lblSTTCarry.TabIndex = 31;
+            lblSTTCarry.Text = "Carry: false";
+            // 
+            // lblSTTZero
+            // 
+            lblSTTZero.AutoSize = true;
+            lblSTTZero.Font = new Font("Segoe UI", 14F);
+            lblSTTZero.Location = new Point(1079, 537);
+            lblSTTZero.Name = "lblSTTZero";
+            lblSTTZero.Size = new Size(99, 25);
+            lblSTTZero.TabIndex = 32;
+            lblSTTZero.Text = "Zero: false";
+            // 
+            // lblALUSubtract
+            // 
+            lblALUSubtract.AutoSize = true;
+            lblALUSubtract.Font = new Font("Segoe UI", 14F);
+            lblALUSubtract.Location = new Point(1079, 562);
+            lblALUSubtract.Name = "lblALUSubtract";
+            lblALUSubtract.Size = new Size(124, 25);
+            lblALUSubtract.TabIndex = 33;
+            lblALUSubtract.Text = "Subract: false";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1434, 950);
+            Controls.Add(lblALUSubtract);
+            Controls.Add(lblSTTZero);
+            Controls.Add(lblSTTCarry);
+            Controls.Add(lblPRGEnable);
+            Controls.Add(lblINCValueBinary);
+            Controls.Add(lblINCValue);
             Controls.Add(buttonStep);
             Controls.Add(buttonRun);
-            Controls.Add(lblMEMValueBinary);
-            Controls.Add(lblMEMValue);
-            Controls.Add(lblMARValueBinary);
-            Controls.Add(lblMARValue);
-            Controls.Add(lblPRGValueBinary);
-            Controls.Add(lblPRGValue);
-            Controls.Add(lblALUValueBinary);
-            Controls.Add(lblALUValue);
             Controls.Add(lblBUSValueBinary);
             Controls.Add(lblBUSValue);
+            Controls.Add(lblMEMBusState);
+            Controls.Add(lblMEMValueBinary);
+            Controls.Add(lblMEMValue);
+            Controls.Add(lblMARBusState);
+            Controls.Add(lblMARValueBinary);
+            Controls.Add(lblMARValue);
+            Controls.Add(lblPRGBusState);
+            Controls.Add(lblPRGValueBinary);
+            Controls.Add(lblPRGValue);
+            Controls.Add(lblALUBusState);
+            Controls.Add(lblALUValueBinary);
+            Controls.Add(lblALUValue);
+            Controls.Add(lblOUTBusState);
             Controls.Add(lblOUTValueBinary);
             Controls.Add(lblOUTValue);
+            Controls.Add(lblINSBusState);
             Controls.Add(lblINSValueBinary);
             Controls.Add(lblINSValue);
+            Controls.Add(lblBRGBusState);
             Controls.Add(lblBRGValueBinary);
             Controls.Add(lblBRGValue);
+            Controls.Add(lblARGBusState);
             Controls.Add(lblARGValueBinary);
             Controls.Add(lblARGValue);
             Name = "Form1";
@@ -279,11 +467,28 @@
         private Label lblALUValueBinary;
         private Label lblPRGValue;
         private Label lblPRGValueBinary;
+
         private Label lblMARValue;
         private Label lblMARValueBinary;
         private Label lblMEMValue;
         private Label lblMEMValueBinary;
         private Button buttonRun;
         private Button buttonStep;
+        private Label lblARGBusState;
+        private Label lblMARBusState;
+        private Label lblBRGBusState;
+        private Label lblINSBusState;
+        private Label lblOUTBusState;
+        private Label lblALUBusState;
+        private Label lblPRGBusState;
+        private Label lblMEMBusState;
+        private Label lblINCValueBinary;
+        private Label lblINCValue;
+        private Label lblALUSubtract;
+        private Label label2;
+        private Label label3;
+        private Label lblPRGEnable;
+        private Label lblSTTCarry;
+        private Label lblSTTZero;
     }
 }

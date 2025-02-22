@@ -9,7 +9,7 @@ namespace JGEmulatorApp
         public Form1()
         {
             InitializeComponent();
-            Computer = new JGEmulator.Computer(200, this);
+            Computer = new JGEmulator.Computer(100, this);
         }
 
         public void HandleUIMessages(UIMessage message)
@@ -25,6 +25,21 @@ namespace JGEmulatorApp
                 case UIMessageType.Log:
                     break;
                 case UIMessageType.RegisterFlag:
+                    switch (message.Source)
+                    {
+                        case "PRGEnable":
+                            lblPRGEnable.Text = "Program Counter Enable: " + message.Message;
+                            break;
+                        case "STTZero":
+                            lblSTTZero.Text = "Zero: " + message.Message;
+                            break;
+                        case "STTCarry":
+                            lblSTTCarry.Text = "Carry: " + message.Message;
+                            break;
+                        case "ALUSubtract":
+                            lblALUSubtract.Text = "Substract: " + message.Message;
+                            break;
+                    }
                     break;
                 case UIMessageType.RegisterValue:
                     string binaryValue = Convert.ToString(int.Parse(message.Message), 2).PadLeft(8, '0');
@@ -47,14 +62,14 @@ namespace JGEmulatorApp
                             lblINSValueBinary.Text = binaryValue;
                             break;
                         case "BUS":
-                            lblBUSValue.Text = "BUS Register: " + message.Message;
+                            lblBUSValue.Text = "BUS: " + message.Message;
                             lblBUSValueBinary.Text = binaryValue;
                             break;
                         case "ALU":
                             lblALUValue.Text = "ALU Register: " + message.Message;
                             lblALUValueBinary.Text = binaryValue;
                             break;
-                        case "PC":
+                        case "PRG":
                             lblPRGValue.Text = "Program Counter: " + message.Message;
                             lblPRGValueBinary.Text = binaryValue;
                             break;
@@ -66,9 +81,43 @@ namespace JGEmulatorApp
                             lblMEMValue.Text = "Memory: " + message.Message;
                             lblMEMValueBinary.Text = binaryValue;
                             break;
+                        case "INC":
+                            lblINCValue.Text = "Instruction Counter: " + message.Message;
+                            lblINCValueBinary.Text = binaryValue;
+                            break;
                     }
                     break;
                 case UIMessageType.BusState:
+                    switch (message.Source)
+                    {
+                        case "ARG":
+                            lblARGBusState.Text = "Bus State: " + message.Message;
+                            break;
+                        case "BRG":
+                            lblBRGBusState.Text = "Bus State: " + message.Message;
+                            break;
+                        case "OUT":
+                            lblOUTBusState.Text = "Bus State: " + message.Message;
+                            break;
+                        case "INS":
+                            lblINSBusState.Text = "Bus State: " + message.Message;
+                            break;
+                        case "ALU":
+                            lblALUBusState.Text = "Bus State: " + message.Message;
+                            break;
+                        case "PC":
+                            lblPRGBusState.Text = "Bus State: " + message.Message;
+                            break;
+                        case "MAR":
+                            lblMARBusState.Text = "Bus State: " + message.Message;
+                            break;
+                        case "MEM":
+                            lblMEMBusState.Text = "Bus State: " + message.Message;
+                            break;
+                        case "INC":
+                            //lblINCBusState.Text = "Bus State: " + message.Message;
+                            break;
+                    }
                     break;
                 default:
                     break;
@@ -83,6 +132,11 @@ namespace JGEmulatorApp
         private void buttonStep_Click(object sender, EventArgs e)
         {
             Computer.Step();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
