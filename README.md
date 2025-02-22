@@ -22,7 +22,14 @@ For detailed tutorials and explanations, check out Ben Eater's YouTube playlist 
 [Ben Eater's Breadboard Computer Playlist](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU)
 
 ## Progress
+## Progress
 
+- [x] Build core logic
+- [x] Build Console App
+- [ ] Build Win App
+- [ ] Create UI to view memory
+- [ ] Create UI to view logs
+- [ ] 
 Stay tuned for updates as the project progresses!
 
 ## Contributions
