@@ -4,7 +4,7 @@ Welcome to my Breadboard Computer Emulator project! This project is a personal e
 
 ## Overview
 
-This project is a work in progress and aims to replicate the functionality of Ben Eater's breadboard computer. The goal is to gain a deeper understanding of computer architecture and digital electronics by building a computer from scratch.
+This project is a work in progress and aims to replicate the functionality of Ben Eater's breadboard computer in C#. The goal is to have fun and build a virtual computer than is more easily modified than Ben's breadboard version.
 
 ## Why Build a Breadboard Computer?
 
