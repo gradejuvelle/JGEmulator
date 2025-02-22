@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            byteDisplayControlMEM = new ByteDisplayControl();
             lblARGValue = new Label();
             lblARGValueBinary = new Label();
             lblBRGValue = new Label();
@@ -62,13 +63,31 @@
             lblSTTCarry = new Label();
             lblSTTZero = new Label();
             lblALUSubtract = new Label();
+            byteDisplayControlBRG = new ByteDisplayControl();
+            byteDisplayControlARG = new ByteDisplayControl();
+            byteDisplayControlINS = new ByteDisplayControl();
+            byteDisplayControlALU = new ByteDisplayControl();
+            byteDisplayControlOUT = new ByteDisplayControl();
+            byteDisplayControlBUS = new ByteDisplayControl();
+            fourBitByteDisplayControlPRG = new FourBitByteDisplayControl();
+            fourBitByteDisplayControlMAR = new FourBitByteDisplayControl();
+            threeBitByteDisplayControlINC = new ThreeBitByteDisplayControl();
+            controlSignalDisplayControlCON = new ControlSignalDisplayControl();
             SuspendLayout();
+            // 
+            // byteDisplayControlMEM
+            // 
+            byteDisplayControlMEM.Location = new Point(88, 275);
+            byteDisplayControlMEM.Name = "byteDisplayControlMEM";
+            byteDisplayControlMEM.Size = new Size(349, 34);
+            byteDisplayControlMEM.TabIndex = 34;
+            byteDisplayControlMEM.Value = 0;
             // 
             // lblARGValue
             // 
             lblARGValue.AutoSize = true;
             lblARGValue.Font = new Font("Segoe UI", 14F);
-            lblARGValue.Location = new Point(1079, 305);
+            lblARGValue.Location = new Point(1079, 275);
             lblARGValue.Name = "lblARGValue";
             lblARGValue.Size = new Size(115, 25);
             lblARGValue.TabIndex = 0;
@@ -78,7 +97,7 @@
             // 
             lblARGValueBinary.AutoSize = true;
             lblARGValueBinary.Font = new Font("Segoe UI", 14F);
-            lblARGValueBinary.Location = new Point(1079, 335);
+            lblARGValueBinary.Location = new Point(1079, 305);
             lblARGValueBinary.Name = "lblARGValueBinary";
             lblARGValueBinary.Size = new Size(92, 25);
             lblARGValueBinary.TabIndex = 1;
@@ -88,7 +107,7 @@
             // 
             lblBRGValue.AutoSize = true;
             lblBRGValue.Font = new Font("Segoe UI", 14F);
-            lblBRGValue.Location = new Point(1079, 615);
+            lblBRGValue.Location = new Point(1079, 657);
             lblBRGValue.Name = "lblBRGValue";
             lblBRGValue.Size = new Size(114, 25);
             lblBRGValue.TabIndex = 3;
@@ -98,7 +117,7 @@
             // 
             lblBRGValueBinary.AutoSize = true;
             lblBRGValueBinary.Font = new Font("Segoe UI", 14F);
-            lblBRGValueBinary.Location = new Point(1079, 645);
+            lblBRGValueBinary.Location = new Point(1079, 687);
             lblBRGValueBinary.Name = "lblBRGValueBinary";
             lblBRGValueBinary.Size = new Size(92, 25);
             lblBRGValueBinary.TabIndex = 4;
@@ -128,7 +147,7 @@
             // 
             lblOUTValue.AutoSize = true;
             lblOUTValue.Font = new Font("Segoe UI", 14F);
-            lblOUTValue.Location = new Point(1079, 745);
+            lblOUTValue.Location = new Point(1079, 802);
             lblOUTValue.Name = "lblOUTValue";
             lblOUTValue.Size = new Size(162, 25);
             lblOUTValue.TabIndex = 9;
@@ -138,7 +157,7 @@
             // 
             lblOUTValueBinary.AutoSize = true;
             lblOUTValueBinary.Font = new Font("Segoe UI", 14F);
-            lblOUTValueBinary.Location = new Point(1079, 775);
+            lblOUTValueBinary.Location = new Point(1079, 832);
             lblOUTValueBinary.Name = "lblOUTValueBinary";
             lblOUTValueBinary.Size = new Size(92, 25);
             lblOUTValueBinary.TabIndex = 10;
@@ -208,7 +227,7 @@
             // 
             lblMARValue.AutoSize = true;
             lblMARValue.Font = new Font("Segoe UI", 14F);
-            lblMARValue.Location = new Point(88, 162);
+            lblMARValue.Location = new Point(88, 125);
             lblMARValue.Name = "lblMARValue";
             lblMARValue.Size = new Size(245, 25);
             lblMARValue.TabIndex = 18;
@@ -218,7 +237,7 @@
             // 
             lblMARValueBinary.AutoSize = true;
             lblMARValueBinary.Font = new Font("Segoe UI", 14F);
-            lblMARValueBinary.Location = new Point(88, 192);
+            lblMARValueBinary.Location = new Point(88, 155);
             lblMARValueBinary.Name = "lblMARValueBinary";
             lblMARValueBinary.Size = new Size(92, 25);
             lblMARValueBinary.TabIndex = 19;
@@ -270,7 +289,7 @@
             // 
             lblARGBusState.AutoSize = true;
             lblARGBusState.Font = new Font("Segoe UI", 14F);
-            lblARGBusState.Location = new Point(1079, 365);
+            lblARGBusState.Location = new Point(1079, 335);
             lblARGBusState.Name = "lblARGBusState";
             lblARGBusState.Size = new Size(143, 25);
             lblARGBusState.TabIndex = 2;
@@ -280,7 +299,7 @@
             // 
             lblMARBusState.AutoSize = true;
             lblMARBusState.Font = new Font("Segoe UI", 14F);
-            lblMARBusState.Location = new Point(88, 222);
+            lblMARBusState.Location = new Point(88, 185);
             lblMARBusState.Name = "lblMARBusState";
             lblMARBusState.Size = new Size(143, 25);
             lblMARBusState.TabIndex = 20;
@@ -290,7 +309,7 @@
             // 
             lblBRGBusState.AutoSize = true;
             lblBRGBusState.Font = new Font("Segoe UI", 14F);
-            lblBRGBusState.Location = new Point(1079, 675);
+            lblBRGBusState.Location = new Point(1079, 717);
             lblBRGBusState.Name = "lblBRGBusState";
             lblBRGBusState.Size = new Size(143, 25);
             lblBRGBusState.TabIndex = 5;
@@ -310,7 +329,7 @@
             // 
             lblOUTBusState.AutoSize = true;
             lblOUTBusState.Font = new Font("Segoe UI", 14F);
-            lblOUTBusState.Location = new Point(1079, 805);
+            lblOUTBusState.Location = new Point(1079, 862);
             lblOUTBusState.Name = "lblOUTBusState";
             lblOUTBusState.Size = new Size(143, 25);
             lblOUTBusState.TabIndex = 11;
@@ -406,11 +425,121 @@
             lblALUSubtract.TabIndex = 33;
             lblALUSubtract.Text = "Subract: false";
             // 
+            // byteDisplayControlBRG
+            // 
+            byteDisplayControlBRG.Location = new Point(907, 620);
+            byteDisplayControlBRG.Name = "byteDisplayControlBRG";
+            byteDisplayControlBRG.Size = new Size(349, 34);
+            byteDisplayControlBRG.TabIndex = 35;
+            byteDisplayControlBRG.Text = "byteDisplayControl1";
+            byteDisplayControlBRG.Value = 0;
+            // 
+            // byteDisplayControlARG
+            // 
+            byteDisplayControlARG.Location = new Point(907, 238);
+            byteDisplayControlARG.Name = "byteDisplayControlARG";
+            byteDisplayControlARG.Size = new Size(349, 34);
+            byteDisplayControlARG.TabIndex = 36;
+            byteDisplayControlARG.Value = 0;
+            // 
+            // byteDisplayControlINS
+            // 
+            byteDisplayControlINS.Location = new Point(88, 506);
+            byteDisplayControlINS.Name = "byteDisplayControlINS";
+            byteDisplayControlINS.Size = new Size(349, 34);
+            byteDisplayControlINS.TabIndex = 37;
+            byteDisplayControlINS.Value = 0;
+            // 
+            // byteDisplayControlALU
+            // 
+            byteDisplayControlALU.Location = new Point(907, 383);
+            byteDisplayControlALU.Name = "byteDisplayControlALU";
+            byteDisplayControlALU.Size = new Size(349, 34);
+            byteDisplayControlALU.TabIndex = 38;
+            byteDisplayControlALU.Value = 0;
+            // 
+            // byteDisplayControlOUT
+            // 
+            byteDisplayControlOUT.Location = new Point(907, 765);
+            byteDisplayControlOUT.Name = "byteDisplayControlOUT";
+            byteDisplayControlOUT.Size = new Size(349, 34);
+            byteDisplayControlOUT.TabIndex = 39;
+            byteDisplayControlOUT.Value = 0;
+            // 
+            // byteDisplayControlBUS
+            // 
+            byteDisplayControlBUS.Location = new Point(521, 275);
+            byteDisplayControlBUS.Name = "byteDisplayControlBUS";
+            byteDisplayControlBUS.Size = new Size(349, 34);
+            byteDisplayControlBUS.TabIndex = 40;
+            byteDisplayControlBUS.Value = 0;
+            // 
+            // fourBitByteDisplayControlPRG
+            // 
+            fourBitByteDisplayControlPRG.Location = new Point(1065, 88);
+            fourBitByteDisplayControlPRG.Name = "fourBitByteDisplayControlPRG";
+            fourBitByteDisplayControlPRG.Size = new Size(176, 34);
+            fourBitByteDisplayControlPRG.TabIndex = 41;
+            fourBitByteDisplayControlPRG.Text = "fourBitByteDisplayControlPRG";
+            fourBitByteDisplayControlPRG.Value = 0;
+            // 
+            // fourBitByteDisplayControlMAR
+            // 
+            fourBitByteDisplayControlMAR.Location = new Point(88, 88);
+            fourBitByteDisplayControlMAR.Name = "fourBitByteDisplayControlMAR";
+            fourBitByteDisplayControlMAR.Size = new Size(176, 34);
+            fourBitByteDisplayControlMAR.TabIndex = 42;
+            fourBitByteDisplayControlMAR.Text = "fourBitByteDisplayControlMAR";
+            fourBitByteDisplayControlMAR.Value = 0;
+            // 
+            // threeBitByteDisplayControlINC
+            // 
+            threeBitByteDisplayControlINC.Location = new Point(88, 650);
+            threeBitByteDisplayControlINC.Name = "threeBitByteDisplayControlINC";
+            threeBitByteDisplayControlINC.Size = new Size(198, 34);
+            threeBitByteDisplayControlINC.TabIndex = 43;
+            threeBitByteDisplayControlINC.Text = "threeBitByteDisplayControl1";
+            threeBitByteDisplayControlINC.Value = 0;
+            // 
+            // controlSignalDisplayControlCON
+            // 
+            controlSignalDisplayControlCON.AI = false;
+            controlSignalDisplayControlCON.AO = false;
+            controlSignalDisplayControlCON.BI = false;
+            controlSignalDisplayControlCON.CE = false;
+            controlSignalDisplayControlCON.CO = false;
+            controlSignalDisplayControlCON.EO = false;
+            controlSignalDisplayControlCON.FI = false;
+            controlSignalDisplayControlCON.HLT = false;
+            controlSignalDisplayControlCON.II = false;
+            controlSignalDisplayControlCON.IO = false;
+            controlSignalDisplayControlCON.J = false;
+            controlSignalDisplayControlCON.Location = new Point(88, 832);
+            controlSignalDisplayControlCON.MI = false;
+            controlSignalDisplayControlCON.Name = "controlSignalDisplayControlCON";
+            controlSignalDisplayControlCON.OI = false;
+            controlSignalDisplayControlCON.RI = false;
+            controlSignalDisplayControlCON.RO = false;
+            controlSignalDisplayControlCON.Size = new Size(791, 74);
+            controlSignalDisplayControlCON.SU = false;
+            controlSignalDisplayControlCON.TabIndex = 44;
+            controlSignalDisplayControlCON.Text = "controlSignalDisplayControl1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1434, 950);
+            Controls.Add(controlSignalDisplayControlCON);
+            Controls.Add(threeBitByteDisplayControlINC);
+            Controls.Add(fourBitByteDisplayControlMAR);
+            Controls.Add(fourBitByteDisplayControlPRG);
+            Controls.Add(byteDisplayControlBUS);
+            Controls.Add(byteDisplayControlOUT);
+            Controls.Add(byteDisplayControlALU);
+            Controls.Add(byteDisplayControlINS);
+            Controls.Add(byteDisplayControlARG);
+            Controls.Add(byteDisplayControlBRG);
             Controls.Add(lblALUSubtract);
             Controls.Add(lblSTTZero);
             Controls.Add(lblSTTCarry);
@@ -445,6 +574,7 @@
             Controls.Add(lblARGBusState);
             Controls.Add(lblARGValueBinary);
             Controls.Add(lblARGValue);
+            Controls.Add(byteDisplayControlMEM);
             Name = "Form1";
             Text = "BENIAC";
             ResumeLayout(false);
@@ -490,5 +620,16 @@
         private Label lblPRGEnable;
         private Label lblSTTCarry;
         private Label lblSTTZero;
+        private ByteDisplayControl byteDisplayControlMEM;
+        private ByteDisplayControl byteDisplayControlBRG;
+        private ByteDisplayControl byteDisplayControlARG;
+        private ByteDisplayControl byteDisplayControlINS;
+        private ByteDisplayControl byteDisplayControlALU;
+        private ByteDisplayControl byteDisplayControlOUT;
+        private ByteDisplayControl byteDisplayControlBUS;
+        private FourBitByteDisplayControl fourBitByteDisplayControlPRG;
+        private FourBitByteDisplayControl fourBitByteDisplayControlMAR;
+        private ThreeBitByteDisplayControl threeBitByteDisplayControlINC;
+        private ControlSignalDisplayControl controlSignalDisplayControlCON;
     }
 }

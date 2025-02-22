@@ -108,7 +108,7 @@ namespace JGEmulator
         internal void EnableSubtract(bool _state)
         {
             Subtract = _state;
-            _computer.HandleUIMessages(new UIMessage(UIMessageType.RegisterFlag, Subtract.ToString(), "ALUSubract"));
+            _computer.HandleUIMessages(new UIMessage(UIMessageType.RegisterFlag, Subtract.ToString(), "ALUSubtract"));
             if (_state == true)
             {
 
