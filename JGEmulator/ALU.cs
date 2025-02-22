@@ -109,11 +109,11 @@ namespace JGEmulator
         {
             Subtract = _state;
             _computer.HandleUIMessages(new UIMessage(UIMessageType.RegisterFlag, Subtract.ToString(), "ALUSubtract"));
-            if (_state == true)
-            {
+            //if (_state == true)
+            //{
 
                 Execute();
-            }
+            //}
         }
     }
 }

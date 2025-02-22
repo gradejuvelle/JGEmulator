@@ -49,7 +49,8 @@ namespace JGEmulator
             if (State == BusState.Reading)
             {
                 _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Reading value from the bus.", "ARG"));
-                SetValue(bus.Read());
+                SetValue(bus.Read()); 
+                _thiscomputer.ALUInstance.Execute(); // Call the ALU execute method
             }
         }
 

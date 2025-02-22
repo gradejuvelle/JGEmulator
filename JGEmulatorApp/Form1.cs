@@ -34,10 +34,12 @@ namespace JGEmulatorApp
                             lblPRGEnable.Text = "Program Counter Enable: " + message.Message;
                             break;
                         case "STTZero":
-                            lblSTTZero.Text = "Zero: " + message.Message;
+                             flagsDisplayControlSTT.ZF=Convert.ToBoolean( message.Message);
+                            //lblSTTZero.Text = "Zero: " + message.Message;
                             break;
                         case "STTCarry":
-                            lblSTTCarry.Text = "Carry: " + message.Message;
+                            flagsDisplayControlSTT.CF = Convert.ToBoolean(message.Message);
+                            //lblSTTCarry.Text = "Carry: " + message.Message;
                             break;
                         case "ALUSubtract":
                             lblALUSubtract.Text = "Substract: " + message.Message;

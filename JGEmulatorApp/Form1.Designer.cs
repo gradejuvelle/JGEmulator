@@ -40,8 +40,6 @@
             lblPRGBusState = new Label();
             lblMEMBusState = new Label();
             lblPRGEnable = new Label();
-            lblSTTCarry = new Label();
-            lblSTTZero = new Label();
             lblALUSubtract = new Label();
             byteDisplayControlBRG = new ByteDisplayControl();
             byteDisplayControlARG = new ByteDisplayControl();
@@ -65,6 +63,7 @@
             label10 = new Label();
             label11 = new Label();
             label12 = new Label();
+            flagsDisplayControlSTT = new FlagsDisplayControl();
             SuspendLayout();
             // 
             // byteDisplayControlMEM
@@ -188,31 +187,11 @@
             lblPRGEnable.TabIndex = 30;
             lblPRGEnable.Text = "Enable: False";
             // 
-            // lblSTTCarry
-            // 
-            lblSTTCarry.AutoSize = true;
-            lblSTTCarry.Font = new Font("Segoe UI", 14F);
-            lblSTTCarry.Location = new Point(1003, 499);
-            lblSTTCarry.Name = "lblSTTCarry";
-            lblSTTCarry.Size = new Size(105, 25);
-            lblSTTCarry.TabIndex = 31;
-            lblSTTCarry.Text = "Carry: false";
-            // 
-            // lblSTTZero
-            // 
-            lblSTTZero.AutoSize = true;
-            lblSTTZero.Font = new Font("Segoe UI", 14F);
-            lblSTTZero.Location = new Point(1003, 523);
-            lblSTTZero.Name = "lblSTTZero";
-            lblSTTZero.Size = new Size(99, 25);
-            lblSTTZero.TabIndex = 32;
-            lblSTTZero.Text = "Zero: false";
-            // 
             // lblALUSubtract
             // 
             lblALUSubtract.AutoSize = true;
             lblALUSubtract.Font = new Font("Segoe UI", 14F);
-            lblALUSubtract.Location = new Point(1003, 548);
+            lblALUSubtract.Location = new Point(1164, 508);
             lblALUSubtract.Name = "lblALUSubtract";
             lblALUSubtract.Size = new Size(124, 25);
             lblALUSubtract.TabIndex = 33;
@@ -439,11 +418,22 @@
             label12.TabIndex = 56;
             label12.Text = "BENIAC";
             // 
+            // flagsDisplayControlSTT
+            // 
+            flagsDisplayControlSTT.CF = false;
+            flagsDisplayControlSTT.Location = new Point(1006, 499);
+            flagsDisplayControlSTT.Name = "flagsDisplayControlSTT";
+            flagsDisplayControlSTT.Size = new Size(101, 82);
+            flagsDisplayControlSTT.TabIndex = 57;
+            flagsDisplayControlSTT.Text = "flagsDisplayControl1";
+            flagsDisplayControlSTT.ZF = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1434, 950);
+            Controls.Add(flagsDisplayControlSTT);
             Controls.Add(label12);
             Controls.Add(label11);
             Controls.Add(label10);
@@ -467,8 +457,6 @@
             Controls.Add(byteDisplayControlARG);
             Controls.Add(byteDisplayControlBRG);
             Controls.Add(lblALUSubtract);
-            Controls.Add(lblSTTZero);
-            Controls.Add(lblSTTCarry);
             Controls.Add(lblPRGEnable);
             Controls.Add(buttonStep);
             Controls.Add(buttonRun);
@@ -501,8 +489,6 @@
         private Label lblALUSubtract;
         private Label label2;
         private Label lblPRGEnable;
-        private Label lblSTTCarry;
-        private Label lblSTTZero;
         private ByteDisplayControl byteDisplayControlMEM;
         private ByteDisplayControl byteDisplayControlBRG;
         private ByteDisplayControl byteDisplayControlARG;
@@ -525,5 +511,6 @@
         private Label label10;
         private Label label11;
         private Label label12;
+        private FlagsDisplayControl flagsDisplayControlSTT;
     }
 }
