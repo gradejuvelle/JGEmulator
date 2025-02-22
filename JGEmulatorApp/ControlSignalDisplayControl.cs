@@ -317,7 +317,7 @@ namespace JGEmulatorApp
 
         private void DrawLights(Graphics g)
         {
-            int lightDiameter = Math.Min(Width / 16, Height / 2);
+            const int lightDiameter = 30;
             int spacing = lightDiameter / 4;
             int x = spacing;
             int y = (Height - lightDiameter) / 2 - 20; // Adjusted to leave space for labels
@@ -334,7 +334,9 @@ namespace JGEmulatorApp
                 g.DrawImage(lightImage, x, y, lightDiameter, lightDiameter);
 
                 // Draw the label
-                g.DrawString(labels[i], Font, Brushes.Black, x, y + lightDiameter + 5);
+                SizeF labelSize = g.MeasureString(labels[i], Font);
+                float labelX = x + (lightDiameter - labelSize.Width) / 2;
+                g.DrawString(labels[i], Font, Brushes.Black, labelX, y + lightDiameter + 5);
 
                 x += lightDiameter + spacing;
             }
@@ -347,3 +349,5 @@ namespace JGEmulatorApp
         }
     }
 }
+
+

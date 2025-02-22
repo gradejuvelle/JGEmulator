@@ -49,54 +49,54 @@ namespace JGEmulatorApp
                     switch (message.Source)
                     {
                         case "ARG":
-                            lblARGValue.Text = "A Register: " + message.Message;
-                            lblARGValueBinary.Text = binaryValue;
+                            //lblARGValue.Text = "A Register: " + message.Message;
+                            //lblARGValueBinary.Text = binaryValue;
                             this.byteDisplayControlARG.Value = Convert.ToByte(message.Message);
 
                             break;
                         case "BRG":
-                            lblBRGValue.Text = "B Register: " + message.Message;
-                            lblBRGValueBinary.Text = binaryValue;
+                            //lblBRGValue.Text = "B Register: " + message.Message;
+                            //lblBRGValueBinary.Text = binaryValue;
                             this.byteDisplayControlBRG.Value = Convert.ToByte(message.Message);
                             break;
                         case "OUT":
-                            lblOUTValue.Text = "Output Register: " + message.Message;
-                            lblOUTValueBinary.Text = binaryValue;
+                            //lblOUTValue.Text = "Output Register: " + message.Message;
+                            //lblOUTValueBinary.Text = binaryValue;
                             this.byteDisplayControlOUT.Value = Convert.ToByte(message.Message);
                             break;
                         case "INS":
-                            lblINSValue.Text = "Instruction Register: " + message.Message;
-                            lblINSValueBinary.Text = binaryValue;
+                            //lblINSValue.Text = "Instruction Register: " + message.Message;
+                            //lblINSValueBinary.Text = binaryValue;
                             this.byteDisplayControlINS.Value = Convert.ToByte(message.Message);
                             break;
                         case "BUS":
-                            lblBUSValue.Text = "BUS: " + message.Message;
-                            lblBUSValueBinary.Text = binaryValue;
+                            //lblBUSValue.Text = "BUS: " + message.Message;
+                            ////lblBUSValueBinary.Text = binaryValue;
                             this.byteDisplayControlBUS.Value = Convert.ToByte(message.Message);
                             break;
                         case "ALU":
-                            lblALUValue.Text = "ALU Register: " + message.Message;
-                            lblALUValueBinary.Text = binaryValue;
+                            //lblALUValue.Text = "ALU Register: " + message.Message;
+                            //lblALUValueBinary.Text = binaryValue;
                             this.byteDisplayControlALU.Value = Convert.ToByte(message.Message);
                             break;
                         case "PRG":
-                            lblPRGValue.Text = "Program Counter: " + message.Message;
-                            lblPRGValueBinary.Text = binaryValue;
+                            //lblPRGValue.Text = "Program Counter: " + message.Message;
+                            //lblPRGValueBinary.Text = binaryValue;
                             this.fourBitByteDisplayControlPRG.Value = Convert.ToByte(message.Message);
                             break;
                         case "MAR":
-                            lblMARValue.Text = "Memory Address Register: " + message.Message;
-                            lblMARValueBinary.Text = binaryValue;
+                            //lblMARValue.Text = "Memory Address Register: " + message.Message;
+                            //lblMARValueBinary.Text = binaryValue;
                             this.fourBitByteDisplayControlMAR.Value = Convert.ToByte(message.Message);
                             break;
                         case "MEM":
-                            lblMEMValue.Text = "Memory: " + message.Message;
-                            lblMEMValueBinary.Text = binaryValue;
+                            //lblMEMValue.Text = "Memory: " + message.Message;
+                            //lblMEMValueBinary.Text = binaryValue;
                             this.byteDisplayControlMEM.Value = Convert.ToByte(message.Message);
                             break;
                         case "INC":
-                            lblINCValue.Text = "Instruction Counter: " + message.Message;
-                            lblINCValueBinary.Text = binaryValue;
+                            //lblINCValue.Text = "Instruction Counter: " + message.Message;
+                            //lblINCValueBinary.Text = binaryValue;
                             this.threeBitByteDisplayControlINC.Value = Convert.ToByte(message.Message);
                             break;
                     }
@@ -187,8 +187,8 @@ namespace JGEmulatorApp
                             switch (message.Message)
                             {
                                 case "None":
-                                    this.controlSignalDisplayControlCON.CO=false;
-                                    this.controlSignalDisplayControlCON.J=false;
+                                    this.controlSignalDisplayControlCON.CO = false;
+                                    this.controlSignalDisplayControlCON.J = false;
                                     break;
                                 case "Reading":
                                     this.controlSignalDisplayControlCON.J = true;
@@ -251,6 +251,16 @@ namespace JGEmulatorApp
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblINSBusState_Click(object sender, EventArgs e)
         {
 
         }

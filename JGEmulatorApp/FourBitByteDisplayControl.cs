@@ -13,13 +13,22 @@ namespace JGEmulatorApp
         private byte _value;
         private Image blueLight;
         private Image grayLight;
-        private TextBox textBox;
+        private Label valueLabel;
 
         public FourBitByteDisplayControl()
         {
             // Load the images from embedded resources
             blueLight = LoadImageFromResource("JGEmulatorApp.Resources.blue.png");
             grayLight = LoadImageFromResource("JGEmulatorApp.Resources.gray.png");
+
+            // Initialize the Label
+            valueLabel = new Label
+            {
+                Font = new Font("Segoe UI", 15),
+                TextAlign = ContentAlignment.MiddleCenter,
+                AutoSize = true
+            };
+            this.Controls.Add(valueLabel);
         }
 
         private Image LoadImageFromResource(string resourceName)
@@ -47,6 +56,7 @@ namespace JGEmulatorApp
             set
             {
                 _value = value;
+                valueLabel.Text = $"({_value})";
                 Invalidate(); // Redraw the control when the value changes
             }
         }
@@ -59,7 +69,7 @@ namespace JGEmulatorApp
 
         private void DrawLights(Graphics g)
         {
-            int lightDiameter = Math.Min(Width / 4, Height);
+            int lightDiameter = 30;
             int spacing = lightDiameter / 4;
             int x = spacing;
             int y = (Height - lightDiameter) / 2;
@@ -74,8 +84,11 @@ namespace JGEmulatorApp
 
                 x += lightDiameter + spacing;
             }
-        }
 
+            // Adjust the Label location and size
+            valueLabel.Location = new Point(x + spacing, (Height - valueLabel.Height) / 2);
+            valueLabel.Size = new Size(65, lightDiameter);
+        }
 
         protected override void OnResize(EventArgs e)
         {
@@ -84,3 +97,4 @@ namespace JGEmulatorApp
         }
     }
 }
+

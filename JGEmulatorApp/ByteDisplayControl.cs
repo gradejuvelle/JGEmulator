@@ -13,14 +13,22 @@ namespace JGEmulatorApp
         private byte _value;
         private Image redLight;
         private Image grayLight;
-        private TextBox textBox;
+        private Label valueLabel;
 
         public ByteDisplayControl()
         {
-
             // Load the images from embedded resources
             redLight = LoadImageFromResource("JGEmulatorApp.Resources.red.png");
             grayLight = LoadImageFromResource("JGEmulatorApp.Resources.gray.png");
+
+            // Initialize the Label
+            valueLabel = new Label
+            {
+                Font = new Font("Segoe UI", 15),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Location = new Point(0, 0)
+            };
+            this.Controls.Add(valueLabel);
         }
 
         private Image LoadImageFromResource(string resourceName)
@@ -48,6 +56,7 @@ namespace JGEmulatorApp
             set
             {
                 _value = value;
+                valueLabel.Text = $"({_value})";
                 Invalidate(); // Redraw the control when the value changes
             }
         }
@@ -60,10 +69,10 @@ namespace JGEmulatorApp
 
         private void DrawLights(Graphics g)
         {
-            int lightDiameter = Math.Min(Width / 8, Height);
+            int lightDiameter = 30;
             int spacing = lightDiameter / 4;
             int x = spacing;
-            int y =  (Height  - lightDiameter) / 2;
+            int y = (Height - lightDiameter) / 2;
 
             for (int i = 0; i < 8; i++)
             {
@@ -75,6 +84,10 @@ namespace JGEmulatorApp
 
                 x += lightDiameter + spacing;
             }
+
+            // Adjust the Label location and size
+            valueLabel.Location = new Point(x + spacing, (Height - valueLabel.Height) / 2);
+            valueLabel.Size = new Size(65, lightDiameter);
         }
 
         protected override void OnResize(EventArgs e)
