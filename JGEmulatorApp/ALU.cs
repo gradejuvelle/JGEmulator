@@ -82,19 +82,19 @@ namespace JGEmulator
                 result &= 0xFF; // Ensure result fits into 8 bits
                 if (carry)
                 {
-                    StatusRegister.SetCarryFlag();
+                    //StatusRegister.SetCarryFlag();
                 }
                 else
                 {
-                    StatusRegister.ClearCarryFlag();
+                    //StatusRegister.ClearCarryFlag();
                 }
                 if (zero)
                 {
-                    StatusRegister.SetZeroFlag();
+                    //StatusRegister.SetZeroFlag();
                 }
                 else
                 {
-                    StatusRegister.ClearZeroFlag();
+                    //StatusRegister.ClearZeroFlag();
                 }
                 _computer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Executed addition: {result}", "ALU"));
             }

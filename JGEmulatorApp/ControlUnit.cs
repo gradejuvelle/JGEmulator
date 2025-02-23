@@ -126,7 +126,7 @@ namespace JGEmulator
                         _thiscomputer.StatusRegister.ClearCarryFlag();
                     }
                     //Set Zero
-                    if (_thiscomputer.BRegister.GetValue() == this._thiscomputer.ARegister.GetValue())
+                    if (_thiscomputer.BRegister.GetValue() + this._thiscomputer.ARegister.GetValue() == 255)
                     {
                         _thiscomputer.StatusRegister.SetZeroFlag();
                     }
