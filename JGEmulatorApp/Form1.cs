@@ -12,7 +12,7 @@ namespace JGEmulatorApp
         {
             InitializeComponent();
             Computer = new JGEmulator.Computer(100, this);
-            this.memoryDisplayControl1.Memory = Computer.MemoryInstance.GetMemory();
+            //this.memoryDisplayControl1.Memory = Computer.MemoryInstance.GetMemory();
         }
 
         public void HandleUIMessages(UIMessage message)
@@ -58,7 +58,8 @@ namespace JGEmulatorApp
                             this.byteDisplayControlOUT.Value = Convert.ToByte(message.Message);
                             break;
                         case "INS":
-                            this.byteDisplayControlINS.Value = Convert.ToByte(message.Message);
+                            //this.byteDisplayControlINS.Value = Convert.ToByte(message.Message);
+                            this.instructionRegisterDisplayControlINS.Value = Convert.ToByte(message.Message);
                             break;
                         case "BUS":
                             this.byteDisplayControlBUS.Value = Convert.ToByte(message.Message);

@@ -43,7 +43,6 @@
             lblALUSubtract = new Label();
             byteDisplayControlBRG = new ByteDisplayControl();
             byteDisplayControlARG = new ByteDisplayControl();
-            byteDisplayControlINS = new ByteDisplayControl();
             byteDisplayControlALU = new ByteDisplayControl();
             byteDisplayControlOUT = new ByteDisplayControl();
             byteDisplayControlBUS = new ByteDisplayControl();
@@ -66,7 +65,7 @@
             flagsDisplayControlSTT = new FlagsDisplayControl();
             buttonReset = new Button();
             buttonStop = new Button();
-            memoryDisplayControl1 = new MemoryDisplayControl();
+            instructionRegisterDisplayControlINS = new InstructionRegisterDisplayControl();
             SuspendLayout();
             // 
             // byteDisplayControlMEM
@@ -216,14 +215,6 @@
             byteDisplayControlARG.Size = new Size(389, 30);
             byteDisplayControlARG.TabIndex = 36;
             byteDisplayControlARG.Value = 0;
-            // 
-            // byteDisplayControlINS
-            // 
-            byteDisplayControlINS.Location = new Point(84, 499);
-            byteDisplayControlINS.Name = "byteDisplayControlINS";
-            byteDisplayControlINS.Size = new Size(389, 30);
-            byteDisplayControlINS.TabIndex = 37;
-            byteDisplayControlINS.Value = 0;
             // 
             // byteDisplayControlALU
             // 
@@ -454,21 +445,21 @@
             buttonStop.UseVisualStyleBackColor = true;
             buttonStop.Click += buttonStop_Click;
             // 
-            // memoryDisplayControl1
+            // instructionRegisterDisplayControlINS
             // 
-            memoryDisplayControl1.Location = new Point(645, 78);
-            memoryDisplayControl1.Memory = null;
-            memoryDisplayControl1.Name = "memoryDisplayControl1";
-            memoryDisplayControl1.Size = new Size(164, 149);
-            memoryDisplayControl1.TabIndex = 60;
-            memoryDisplayControl1.Text = "memoryDisplayControl1";
+            instructionRegisterDisplayControlINS.Location = new Point(88, 500);
+            instructionRegisterDisplayControlINS.Name = "instructionRegisterDisplayControlINS";
+            instructionRegisterDisplayControlINS.Size = new Size(389, 30);
+            instructionRegisterDisplayControlINS.TabIndex = 60;
+            instructionRegisterDisplayControlINS.Text = "instructionRegisterDisplayControl1";
+            instructionRegisterDisplayControlINS.Value = 0;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1434, 950);
-            Controls.Add(memoryDisplayControl1);
+            Controls.Add(instructionRegisterDisplayControlINS);
             Controls.Add(buttonStop);
             Controls.Add(buttonReset);
             Controls.Add(flagsDisplayControlSTT);
@@ -491,7 +482,6 @@
             Controls.Add(byteDisplayControlBUS);
             Controls.Add(byteDisplayControlOUT);
             Controls.Add(byteDisplayControlALU);
-            Controls.Add(byteDisplayControlINS);
             Controls.Add(byteDisplayControlARG);
             Controls.Add(byteDisplayControlBRG);
             Controls.Add(lblALUSubtract);
@@ -530,7 +520,6 @@
         private ByteDisplayControl byteDisplayControlMEM;
         private ByteDisplayControl byteDisplayControlBRG;
         private ByteDisplayControl byteDisplayControlARG;
-        private ByteDisplayControl byteDisplayControlINS;
         private ByteDisplayControl byteDisplayControlALU;
         private ByteDisplayControl byteDisplayControlOUT;
         private ByteDisplayControl byteDisplayControlBUS;
@@ -552,6 +541,6 @@
         private FlagsDisplayControl flagsDisplayControlSTT;
         private Button buttonReset;
         private Button buttonStop;
-        private MemoryDisplayControl memoryDisplayControl1;
+        private InstructionRegisterDisplayControl instructionRegisterDisplayControlINS;
     }
 }
