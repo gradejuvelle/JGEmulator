@@ -440,6 +440,7 @@
             buttonReset.TabIndex = 58;
             buttonReset.Text = "Reset";
             buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.Visible = false;
             buttonReset.Click += buttonReset_Click;
             // 
             // buttonStop
@@ -461,6 +462,7 @@
             memoryDisplayControl1.Size = new Size(164, 149);
             memoryDisplayControl1.TabIndex = 60;
             memoryDisplayControl1.Text = "memoryDisplayControl1";
+            memoryDisplayControl1.Visible = false;
             // 
             // Form1
             // 

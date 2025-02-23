@@ -23,7 +23,56 @@ namespace JGEmulator
             // Execute actions based on the current control signals
 
             // Handle STT Tick Signal
-
+            // Handle Flags
+            if (_currentMicroInstruction.FI)
+            {
+                // If subtract is enabled
+                if (_currentMicroInstruction.SU)
+                {
+                    // Set Carry
+                    if (_thiscomputer.BRegister.GetValue() <= this._thiscomputer.ARegister.GetValue())
+                    {
+                        _thiscomputer.StatusRegister.SetCarryFlag();
+                    }
+                    else
+                    {
+                        _thiscomputer.StatusRegister.ClearCarryFlag();
+                    }
+                    //Set Zero
+                    if (_thiscomputer.BRegister.GetValue() == this._thiscomputer.ARegister.GetValue())
+                    {
+                        _thiscomputer.StatusRegister.SetZeroFlag();
+                    }
+                    else
+                    {
+                        _thiscomputer.StatusRegister.ClearZeroFlag();
+                    }
+                }
+                // if addition
+                else
+                {
+                    // Set Carry
+                    if (_thiscomputer.ARegister.GetValue() + _thiscomputer.BRegister.GetValue() > 255)
+                    {
+                        _thiscomputer.StatusRegister.SetCarryFlag();
+                    }
+                    else
+                    {
+                        _thiscomputer.StatusRegister.ClearCarryFlag();
+                    }
+                    //Set Zero
+                    if (_thiscomputer.BRegister.GetValue() + this._thiscomputer.ARegister.GetValue() == 255)
+                    {
+                        _thiscomputer.StatusRegister.SetZeroFlag();
+                    }
+                    else
+                    {
+                        _thiscomputer.StatusRegister.ClearZeroFlag();
+                    }
+                    //this._thiscomputer.StatusRegister.SetCarryFlag();
+                    //this._thiscomputer.StatusRegister.SetZeroFlag();
+                }
+            }
 
             if (_currentMicroInstruction.CE)
             {
@@ -88,56 +137,7 @@ namespace JGEmulator
             {
                 _thiscomputer.OR.ReadFromBus();
             }
-            // Handle Flags
-            if (_currentMicroInstruction.FI) 
-            {
-                // If subtract is enabled
-                if (_currentMicroInstruction.SU)
-                {
-                    // Set Carry
-                    if (_thiscomputer.BRegister.GetValue() <= this._thiscomputer.ARegister.GetValue())
-                    {
-                        _thiscomputer.StatusRegister.SetCarryFlag();
-                    }
-                    else
-                    {
-                        _thiscomputer.StatusRegister.ClearCarryFlag();
-                    }
-                    //Set Zero
-                    if (_thiscomputer.BRegister.GetValue() == this._thiscomputer.ARegister.GetValue())
-                    {
-                        _thiscomputer.StatusRegister.SetZeroFlag();
-                    }
-                    else
-                    {
-                        _thiscomputer.StatusRegister.ClearZeroFlag();
-                    }
-                }
-                // if addition
-                else
-                {
-                    // Set Carry
-                    if (_thiscomputer.ARegister.GetValue() + _thiscomputer.BRegister.GetValue() > 255)
-                    {
-                        _thiscomputer.StatusRegister.SetCarryFlag();
-                    }
-                    else
-                    {
-                        _thiscomputer.StatusRegister.ClearCarryFlag();
-                    }
-                    //Set Zero
-                    if (_thiscomputer.BRegister.GetValue() + this._thiscomputer.ARegister.GetValue() == 255)
-                    {
-                        _thiscomputer.StatusRegister.SetZeroFlag();
-                    }
-                    else
-                    {
-                        _thiscomputer.StatusRegister.ClearZeroFlag();
-                    }
-                    //this._thiscomputer.StatusRegister.SetCarryFlag();
-                    //this._thiscomputer.StatusRegister.SetZeroFlag();
-                }
-            }
+            
 
             // Increment the instruction counter at the end of the method
             _instructionCounter.Increment();
