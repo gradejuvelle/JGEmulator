@@ -7,7 +7,7 @@ namespace JGEmulatorApp
     public partial class Form1 : Form
     {
         private JGEmulator.Computer Computer;
-
+        private bool halted = false;
         public Form1()
         {
             InitializeComponent();
@@ -232,6 +232,13 @@ namespace JGEmulatorApp
                         case "Reset":
                             this.memoryDisplayControl01.Memory = Computer.MemoryInstance;
                             break;
+                        case "STOP":
+                            this.halted = true;
+                            this.buttonStop.Enabled = false ;
+                            this.buttonReset.Enabled = true;
+                            halted = false ;
+                            
+                            break;
                     }
                     break;
             }
@@ -239,6 +246,11 @@ namespace JGEmulatorApp
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
+            halted = false;
+            buttonStop.Enabled = true;
+            buttonRun.Enabled = false;
+            buttonStep.Enabled = false;
+            buttonReset.Enabled = false;
             Computer.Start();
         }
 
@@ -247,32 +259,26 @@ namespace JGEmulatorApp
             Computer.Step();
         }
 
-
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblINSBusState_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonStop_Click(object sender, EventArgs e)
         {
+
+            buttonStop.Enabled = false;
+            if (!halted)
+            {
+                buttonRun.Enabled = true;
+                buttonStep.Enabled = true;
+                buttonReset.Enabled = true;
+            }
+            buttonReset.Enabled = true;
             Computer.Stop();
         }
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
             Computer.Reset();
+            buttonRun.Enabled = true;
+            buttonStep.Enabled = true;
         }
-
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-    }
+ }
 }
 

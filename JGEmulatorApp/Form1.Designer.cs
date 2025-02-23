@@ -139,7 +139,7 @@
             lblINSBusState.Size = new Size(143, 25);
             lblINSBusState.TabIndex = 8;
             lblINSBusState.Text = "Bus State: None";
-            lblINSBusState.Click += lblINSBusState_Click;
+            //lblINSBusState.Click += lblINSBusState_Click;
             // 
             // lblOUTBusState
             // 
@@ -312,7 +312,7 @@
             label2.Size = new Size(319, 37);
             label2.TabIndex = 46;
             label2.Text = "Memory Address Register";
-            label2.Click += label2_Click;
+            //label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -473,7 +473,7 @@
             label13.Size = new Size(229, 37);
             label13.TabIndex = 62;
             label13.Text = "Memory Contents";
-            label13.Click += label13_Click;
+            //label13.Click += label13_Click;
             // 
             // Form1
             // 
