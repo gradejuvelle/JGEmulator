@@ -9,15 +9,16 @@ namespace JGEmulatorApp
     [Designer("System.Windows.Forms.Design.ControlDesigner, System.Design", typeof(System.ComponentModel.Design.IDesigner))]
     public class MemoryDisplayControl : Control
     {
-        private Memory _memory;
+       private byte[] _memory;
 
         public MemoryDisplayControl()
         {
             this.DoubleBuffered = true;
+
         }
 
         [Browsable(false)]
-        public Memory Memory
+        public byte[] Memory
         {
             get => _memory;
             set
@@ -31,7 +32,7 @@ namespace JGEmulatorApp
         {
      //       if (_memory != null && address >= 0 && address < _memory.GetMemory().Length)
      //       {
-                _memory.GetMemory()[address] = value;
+               // _memory =.GetMemory()[address] = value;
                 Invalidate(); // Redraw the control when the memory value is changed
      //       }
         }
@@ -44,16 +45,16 @@ namespace JGEmulatorApp
 
         private void DrawMemory(Graphics g)
         {
-            if (_memory == null)
-                return;
+         //   if (_memory == null)
+          //      return;
 
-            byte[] memory = _memory.GetMemory();
+         //   byte[] _memory = .GetMemory();
             int lineHeight = Font.Height + 5;
             int y = 0;
 
-            for (int i = 0; i < memory.Length; i++)
+            for (int i = 0; i < _memory.Length; i++)
             {
-                string binaryString = Convert.ToString(memory[i], 2).PadLeft(8, '0');
+                string binaryString = Convert.ToString(_memory[i], 2).PadLeft(8, '0');
                 g.DrawString(binaryString, Font, Brushes.Black, new PointF(0, y));
                 y += lineHeight;
             }

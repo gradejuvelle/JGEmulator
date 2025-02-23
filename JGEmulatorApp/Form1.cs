@@ -12,7 +12,7 @@ namespace JGEmulatorApp
         {
             InitializeComponent();
             Computer = new JGEmulator.Computer(100, this);
-            this.memoryDisplayControl1.Memory = Computer.MemoryInstance;
+            this.memoryDisplayControl1.Memory = Computer.MemoryInstance.GetMemory();
         }
 
         public void HandleUIMessages(UIMessage message)
@@ -209,7 +209,7 @@ namespace JGEmulatorApp
                     var parts = message.Message.Split(':');
                  //   if (parts.Length == 2 && byte.TryParse(parts[0], out byte address) && byte.TryParse(parts[1], out byte value))
                     //{
-                        memoryDisplayControl1.SetAddressValue(Convert.ToByte( parts[0]), Convert.ToByte(parts[1]));
+                        //memoryDisplayControl1.SetAddressValue(Convert.ToByte( parts[0]), Convert.ToByte(parts[1]));
                     //}
                     break;
             }
