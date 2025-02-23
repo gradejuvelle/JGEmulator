@@ -55,22 +55,22 @@ namespace JGEmulator
                 carry = _computer.BRegister.GetValue() <= _computer.ARegister.GetValue();
                 zero = _computer.ARegister.GetValue() == _computer.BRegister.GetValue();
                 result &= 0xFF; // Ensure result fits into 8 bits
-                if (carry)
-                {
-                    StatusRegister.SetCarryFlag();
-                }
-                else
-                {
-                    StatusRegister.ClearCarryFlag();
-                }
-                if (zero)
-                {
-                    StatusRegister.SetZeroFlag();
-                }
-                else
-                {
-                    StatusRegister.ClearZeroFlag();
-                }
+                //if (carry)
+                //{
+                //    StatusRegister.SetCarryFlag();
+                //}
+                //else
+                //{
+                //    StatusRegister.ClearCarryFlag();
+                //}
+                //if (zero)
+                //{
+                //    StatusRegister.SetZeroFlag();
+                //}
+                //else
+                //{
+                //    StatusRegister.ClearZeroFlag();
+                //}
                 _computer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Executed subtraction: {result}", "ALU"));
             }
             else
@@ -82,19 +82,19 @@ namespace JGEmulator
                 result &= 0xFF; // Ensure result fits into 8 bits
                 if (carry)
                 {
-                    StatusRegister.SetCarryFlag();
+                    //StatusRegister.SetCarryFlag();
                 }
                 else
                 {
-                    StatusRegister.ClearCarryFlag();
+                    //StatusRegister.ClearCarryFlag();
                 }
                 if (zero)
                 {
-                    StatusRegister.SetZeroFlag();
+                    //StatusRegister.SetZeroFlag();
                 }
                 else
                 {
-                    StatusRegister.ClearZeroFlag();
+                    //StatusRegister.ClearZeroFlag();
                 }
                 _computer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Executed addition: {result}", "ALU"));
             }

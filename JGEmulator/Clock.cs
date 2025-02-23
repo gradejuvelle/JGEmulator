@@ -19,8 +19,6 @@ namespace JGEmulator
             _timer.Elapsed += OnTimedEvent;
             _tick = true; // Start with a tick
             _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Clock initialized.", "CLK"));
-
-
         }
 
         public void Start()

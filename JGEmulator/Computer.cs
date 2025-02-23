@@ -94,6 +94,10 @@ namespace JGEmulator
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine($"[{message.Source}] Bus State: {message.Message}");
                     break;
+                case UIMessageType.Memory:
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine($"[{message.Source}] Bus State: {message.Message}");
+                    break;
             }
         }
 

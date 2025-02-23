@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Devices;
+using System;
 
 namespace JGEmulator
 {
     public class ControlUnit
     {
         private Computer _thiscomputer;
-        private InstructionCounter _instructionCounter;
+        public InstructionCounter _instructionCounter;
         private ControlSignalRom _controlSignalRom;
         private MicroInstruction _currentMicroInstruction;
 
@@ -20,6 +21,59 @@ namespace JGEmulator
         public void ProcessControlSignalsTick()
         {
             // Execute actions based on the current control signals
+
+            // Handle STT Tick Signal
+            // Handle Flags
+            if (_currentMicroInstruction.FI)
+            {
+                // If subtract is enabled
+                if (_currentMicroInstruction.SU)
+                {
+                    // Set Carry
+                    if (_thiscomputer.BRegister.GetValue() <= this._thiscomputer.ARegister.GetValue())
+                    {
+                        _thiscomputer.StatusRegister.SetCarryFlag();
+                    }
+                    else
+                    {
+                        _thiscomputer.StatusRegister.ClearCarryFlag();
+                    }
+                    //Set Zero
+                    if (_thiscomputer.BRegister.GetValue() == this._thiscomputer.ARegister.GetValue())
+                    {
+                        _thiscomputer.StatusRegister.SetZeroFlag();
+                    }
+                    else
+                    {
+                        _thiscomputer.StatusRegister.ClearZeroFlag();
+                    }
+                }
+                // if addition
+                else
+                {
+                    // Set Carry
+                    if (_thiscomputer.ARegister.GetValue() + _thiscomputer.BRegister.GetValue() > 255)
+                    {
+                        _thiscomputer.StatusRegister.SetCarryFlag();
+                    }
+                    else
+                    {
+                        _thiscomputer.StatusRegister.ClearCarryFlag();
+                    }
+                    //Set Zero
+                    if (_thiscomputer.BRegister.GetValue() + this._thiscomputer.ARegister.GetValue() == 255)
+                    {
+                        _thiscomputer.StatusRegister.SetZeroFlag();
+                    }
+                    else
+                    {
+                        _thiscomputer.StatusRegister.ClearZeroFlag();
+                    }
+                    //this._thiscomputer.StatusRegister.SetCarryFlag();
+                    //this._thiscomputer.StatusRegister.SetZeroFlag();
+                }
+            }
+
             if (_currentMicroInstruction.CE)
             {
                 _thiscomputer.PC.Increment(); // Increment PC if CE is true
@@ -83,6 +137,7 @@ namespace JGEmulator
             {
                 _thiscomputer.OR.ReadFromBus();
             }
+            
 
             // Increment the instruction counter at the end of the method
             _instructionCounter.Increment();
@@ -100,6 +155,13 @@ namespace JGEmulator
             _currentMicroInstruction = _controlSignalRom.GetMicroInstruction(controlWord);
 
             // Set control signals based on the micro-instruction for the tock phase
+
+            // Handle STT Tock Signal
+            if (_currentMicroInstruction.FI == true)
+            {
+                _thiscomputer.StatusRegister.SetBusState(BusState.Reading);
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "STT input status: ", "STT"));
+            }
 
             // Handle MAR Tock Signal
             if (_currentMicroInstruction.MI == true)

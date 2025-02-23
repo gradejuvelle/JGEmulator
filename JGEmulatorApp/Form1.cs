@@ -1,4 +1,5 @@
 using JGEmulator;
+using System;
 using System.Windows.Forms;
 
 namespace JGEmulatorApp
@@ -11,9 +12,8 @@ namespace JGEmulatorApp
         {
             InitializeComponent();
             Computer = new JGEmulator.Computer(100, this);
+            this.memoryDisplayControl1.Memory = Computer.MemoryInstance;
         }
-
-
 
         public void HandleUIMessages(UIMessage message)
         {
@@ -34,13 +34,13 @@ namespace JGEmulatorApp
                             lblPRGEnable.Text = "Program Counter Enable: " + message.Message;
                             break;
                         case "STTZero":
-                            lblSTTZero.Text = "Zero: " + message.Message;
+                            flagsDisplayControlSTT.ZF = Convert.ToBoolean(message.Message);
                             break;
                         case "STTCarry":
-                            lblSTTCarry.Text = "Carry: " + message.Message;
+                            flagsDisplayControlSTT.CF = Convert.ToBoolean(message.Message);
                             break;
                         case "ALUSubtract":
-                            lblALUSubtract.Text = "Substract: " + message.Message;
+                            lblALUSubtract.Text = "Subtract: " + message.Message;
                             break;
                     }
                     break;
@@ -49,54 +49,33 @@ namespace JGEmulatorApp
                     switch (message.Source)
                     {
                         case "ARG":
-                            //lblARGValue.Text = "A Register: " + message.Message;
-                            //lblARGValueBinary.Text = binaryValue;
                             this.byteDisplayControlARG.Value = Convert.ToByte(message.Message);
-
                             break;
                         case "BRG":
-                            //lblBRGValue.Text = "B Register: " + message.Message;
-                            //lblBRGValueBinary.Text = binaryValue;
                             this.byteDisplayControlBRG.Value = Convert.ToByte(message.Message);
                             break;
                         case "OUT":
-                            //lblOUTValue.Text = "Output Register: " + message.Message;
-                            //lblOUTValueBinary.Text = binaryValue;
                             this.byteDisplayControlOUT.Value = Convert.ToByte(message.Message);
                             break;
                         case "INS":
-                            //lblINSValue.Text = "Instruction Register: " + message.Message;
-                            //lblINSValueBinary.Text = binaryValue;
                             this.byteDisplayControlINS.Value = Convert.ToByte(message.Message);
                             break;
                         case "BUS":
-                            //lblBUSValue.Text = "BUS: " + message.Message;
-                            ////lblBUSValueBinary.Text = binaryValue;
                             this.byteDisplayControlBUS.Value = Convert.ToByte(message.Message);
                             break;
                         case "ALU":
-                            //lblALUValue.Text = "ALU Register: " + message.Message;
-                            //lblALUValueBinary.Text = binaryValue;
                             this.byteDisplayControlALU.Value = Convert.ToByte(message.Message);
                             break;
                         case "PRG":
-                            //lblPRGValue.Text = "Program Counter: " + message.Message;
-                            //lblPRGValueBinary.Text = binaryValue;
                             this.fourBitByteDisplayControlPRG.Value = Convert.ToByte(message.Message);
                             break;
                         case "MAR":
-                            //lblMARValue.Text = "Memory Address Register: " + message.Message;
-                            //lblMARValueBinary.Text = binaryValue;
                             this.fourBitByteDisplayControlMAR.Value = Convert.ToByte(message.Message);
                             break;
                         case "MEM":
-                            //lblMEMValue.Text = "Memory: " + message.Message;
-                            //lblMEMValueBinary.Text = binaryValue;
                             this.byteDisplayControlMEM.Value = Convert.ToByte(message.Message);
                             break;
                         case "INC":
-                            //lblINCValue.Text = "Instruction Counter: " + message.Message;
-                            //lblINCValueBinary.Text = binaryValue;
                             this.threeBitByteDisplayControlINC.Value = Convert.ToByte(message.Message);
                             break;
                     }
@@ -119,7 +98,6 @@ namespace JGEmulatorApp
                                 case "Writing":
                                     this.controlSignalDisplayControlCON.AI = false;
                                     this.controlSignalDisplayControlCON.AO = true;
-
                                     break;
                             }
                             break;
@@ -129,7 +107,6 @@ namespace JGEmulatorApp
                             {
                                 case "None":
                                     this.controlSignalDisplayControlCON.BI = false;
-
                                     break;
                                 case "Reading":
                                     this.controlSignalDisplayControlCON.BI = true;
@@ -163,11 +140,9 @@ namespace JGEmulatorApp
                                 case "Writing":
                                     this.controlSignalDisplayControlCON.II = false;
                                     this.controlSignalDisplayControlCON.IO = true;
-
                                     break;
                             }
                             break;
-
                         case "ALU":
                             lblALUBusState.Text = "Bus State: " + message.Message;
                             switch (message.Message)
@@ -177,11 +152,9 @@ namespace JGEmulatorApp
                                     break;
                                 case "Writing":
                                     this.controlSignalDisplayControlCON.EO = true;
-
                                     break;
                             }
                             break;
-
                         case "PRG":
                             lblPRGBusState.Text = "Bus State: " + message.Message;
                             switch (message.Message)
@@ -197,7 +170,6 @@ namespace JGEmulatorApp
                                 case "Writing":
                                     this.controlSignalDisplayControlCON.J = false;
                                     this.controlSignalDisplayControlCON.CO = true;
-
                                     break;
                             }
                             break;
@@ -228,14 +200,17 @@ namespace JGEmulatorApp
                                 case "Writing":
                                     this.controlSignalDisplayControlCON.RI = false;
                                     this.controlSignalDisplayControlCON.RO = true;
-
                                     break;
                             }
                             break;
-
                     }
                     break;
-                default:
+                case UIMessageType.Memory:
+                    var parts = message.Message.Split(':');
+                 //   if (parts.Length == 2 && byte.TryParse(parts[0], out byte address) && byte.TryParse(parts[1], out byte value))
+                    //{
+                        memoryDisplayControl1.SetAddressValue(Convert.ToByte( parts[0]), Convert.ToByte(parts[1]));
+                    //}
                     break;
             }
         }
@@ -250,10 +225,7 @@ namespace JGEmulatorApp
             Computer.Step();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
-        }
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -264,5 +236,16 @@ namespace JGEmulatorApp
         {
 
         }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            Computer.Stop();
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            Computer.Reset();
+        }
     }
 }
+

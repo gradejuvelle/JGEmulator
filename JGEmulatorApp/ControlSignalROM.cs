@@ -30,14 +30,14 @@ namespace JGEmulator
                 { 0b0010001, new MicroInstruction(ro: true, ii: true, ce: true) }, // Step 1: RO, II, CE
                 { 0b0010010, new MicroInstruction(io: true, mi: true) }, // Step 2: IO, MI
                 { 0b0010011, new MicroInstruction(ro: true, bi: true) }, // Step 3: RO, BI
-                { 0b0010100, new MicroInstruction(eo: true, ai: true) }, // Step 4: EO, AI
+                { 0b0010100, new MicroInstruction(eo: true, ai: true,fi:true) }, // Step 4: EO, AI
 
                 // SUB (opcode 0x3)
                 { 0b0011000, new MicroInstruction(co: true, mi: true) }, // Step 0: CO, MI
                 { 0b0011001, new MicroInstruction(ro: true, ii: true, ce: true) }, // Step 1: RO, II, CE
                 { 0b0011010, new MicroInstruction(io: true, mi: true) }, // Step 2: IO, MI
                 { 0b0011011, new MicroInstruction(ro: true, bi: true) }, // Step 3: RO, BI
-                { 0b0011100, new MicroInstruction(eo: true, ai: true, su: true) }, // Step 4: EO, AI, SU
+                { 0b0011100, new MicroInstruction(eo: true, ai: true, su: true,fi:true) }, // Step 4: EO, AI, SU
 
                 // STA (opcode 0x4)
                 { 0b0100000, new MicroInstruction(co: true, mi: true) }, // Step 0: CO, MI

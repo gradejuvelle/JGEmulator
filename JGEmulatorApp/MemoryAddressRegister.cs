@@ -67,6 +67,7 @@ namespace JGEmulator
         public void Reset()
         {
             SetValue(0);
+            _thiscomputer.MemoryInstance.SetSelectedAddress(0);
             _state = BusState.None;
             _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Memory Address Register reset.", "MAR"));
         }

@@ -23,7 +23,7 @@ namespace JGEmulator
         public bool HLT { get; set; } // Halt
         public bool JC { get; set; } // JC
         public bool JZ { get; set; } // JZ
-
+        public bool FI { get; set; } // FI
 
         public MicroInstruction(
             bool mi = false,
@@ -44,7 +44,8 @@ namespace JGEmulator
             bool oi = false,
             bool jc = false,
             bool jz = false,
-            bool hlt = false)
+            bool hlt = false,
+            bool fi=false)
         {
             MI = mi; // Memory Address Input
             RI = ri; // Memory Input
@@ -65,6 +66,7 @@ namespace JGEmulator
             HLT = hlt; // Halt
             JC = jc; // Jump if Carry
             JZ = jz; // Jump if Zero
+            FI = fi; // Flag in
         }
     }
 }

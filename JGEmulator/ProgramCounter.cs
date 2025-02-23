@@ -92,6 +92,7 @@ namespace JGEmulator
         public void Reset()
         {
             SetValue(0);
+            WriteToBus(_thiscomputer.BusInstance);
             SetBusState(BusState.None);
             _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Program Counter reset.", "PRG"));
         }

@@ -47,7 +47,7 @@ namespace JGEmulator
             IR.Reset();
             OR.Reset();
             MAR.Reset();
-            IR.Reset();
+            this.ControlUnitInstance._instructionCounter.Reset();
 
             ControlUnitInstance.ProcessControlSignalsTock();
             HandleUIMessages(new UIMessage(UIMessageType.Log, "Computer reset and ready.", "COM"));
@@ -86,6 +86,9 @@ namespace JGEmulator
                     form.HandleUIMessages(message);
                     break;
                 case UIMessageType.BusState:
+                    form.HandleUIMessages(message);
+                    break;
+                case UIMessageType.Memory:
                     form.HandleUIMessages(message);
                     break;
             }
