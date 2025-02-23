@@ -17,11 +17,10 @@ namespace JGEmulator
         public ALU ALUInstance { get; set; }
         public ControlUnit ControlUnitInstance { get; set; }
 
-        private Program _program;
-
+        //public JGEmulatorApp.Form1 form;
         public Computer(int clockSpeed)
         {
-   
+            //form = _form;
             ClockInstance = new Clock(clockSpeed, this);
             ClockInstance.OnTick += HandleTick;
             ClockInstance.OnTock += HandleTock;
@@ -48,7 +47,9 @@ namespace JGEmulator
             IR.Reset();
             OR.Reset();
             MAR.Reset();
-            IR.Reset();
+            StatusRegister.Reset();
+            ALUInstance.Reset();
+            this.ControlUnitInstance._instructionCounter.Reset();
 
             ControlUnitInstance.ProcessControlSignalsTock();
             HandleUIMessages(new UIMessage(UIMessageType.Log, "Computer reset and ready.", "COM"));
@@ -75,6 +76,27 @@ namespace JGEmulator
         }
         public void HandleUIMessages(UIMessage message)
         {
+            // WinApp Code
+            //switch (message.UIMessageType)
+            //{
+            //    case UIMessageType.Log:
+
+            //        break;
+            //    case UIMessageType.RegisterValue:
+            //        form.HandleUIMessages(message);
+            //        break;
+            //    case UIMessageType.RegisterFlag:
+            //        form.HandleUIMessages(message);
+            //        break;
+            //    case UIMessageType.BusState:
+            //        form.HandleUIMessages(message);
+            //        break;
+            //    case UIMessageType.Memory:
+            //        form.HandleUIMessages(message);
+            //        break;
+            //}
+
+            //Console Code
             switch (message.UIMessageType)
             {
                 case UIMessageType.Log:
@@ -84,7 +106,7 @@ namespace JGEmulator
                 case UIMessageType.RegisterValue:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"[{message.Source}] Register value: {message.Message}");
-                    
+
                     break;
                 case UIMessageType.RegisterFlag:
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -99,6 +121,7 @@ namespace JGEmulator
                     Console.WriteLine($"[{message.Source}] Bus State: {message.Message}");
                     break;
             }
+
         }
 
         internal void SetSpeed(int newSpeed)

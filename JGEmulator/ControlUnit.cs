@@ -1,4 +1,4 @@
-﻿//using Microsoft.VisualBasic.Devices;
+﻿using Microsoft.VisualBasic.Devices;
 using System;
 
 namespace JGEmulator
@@ -161,6 +161,10 @@ namespace JGEmulator
             {
                 _thiscomputer.StatusRegister.SetBusState(BusState.Reading);
                 _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "STT input status: ", "STT"));
+            }
+            else
+            {
+                _thiscomputer.StatusRegister.SetBusState(BusState.None);
             }
 
             // Handle MAR Tock Signal

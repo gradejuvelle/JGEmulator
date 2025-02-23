@@ -115,6 +115,10 @@ namespace JGEmulator
                 Execute();
             }
         }
+        public void Reset()
+        {
+            SetValue(0);
+        }
     }
 }
 

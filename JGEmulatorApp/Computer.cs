@@ -47,6 +47,8 @@ namespace JGEmulator
             IR.Reset();
             OR.Reset();
             MAR.Reset();
+            StatusRegister.Reset();
+            ALUInstance.Reset();
             this.ControlUnitInstance._instructionCounter.Reset();
 
             ControlUnitInstance.ProcessControlSignalsTock();
@@ -74,6 +76,7 @@ namespace JGEmulator
         }
         public void HandleUIMessages(UIMessage message)
         {
+            // WinApp Code
             switch (message.UIMessageType)
             {
                 case UIMessageType.Log:
@@ -92,6 +95,33 @@ namespace JGEmulator
                     form.HandleUIMessages(message);
                     break;
             }
+
+            //Console Code
+            //switch (message.UIMessageType)
+            //{
+            //    case UIMessageType.Log:
+            //        Console.ForegroundColor = ConsoleColor.White;
+            //        Console.WriteLine($"[{message.Source}] {message.Message}");
+            //        break;
+            //    case UIMessageType.RegisterValue:
+            //        Console.ForegroundColor = ConsoleColor.Yellow;
+            //        Console.WriteLine($"[{message.Source}] Register value: {message.Message}");
+
+            //        break;
+            //    case UIMessageType.RegisterFlag:
+            //        Console.ForegroundColor = ConsoleColor.Red;
+            //        Console.WriteLine($"[{message.Source}] Register flag: {message.Message}");
+            //        break;
+            //    case UIMessageType.BusState:
+            //        Console.ForegroundColor = ConsoleColor.Magenta;
+            //        Console.WriteLine($"[{message.Source}] Bus State: {message.Message}");
+            //        break;
+            //    case UIMessageType.Memory:
+            //        Console.ForegroundColor = ConsoleColor.Blue;
+            //        Console.WriteLine($"[{message.Source}] Bus State: {message.Message}");
+            //        break;
+            //}
+
         }
 
         internal void SetSpeed(int newSpeed)

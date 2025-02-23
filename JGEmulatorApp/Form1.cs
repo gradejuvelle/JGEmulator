@@ -12,7 +12,7 @@ namespace JGEmulatorApp
         {
             InitializeComponent();
             Computer = new JGEmulator.Computer(100, this);
-            //this.memoryDisplayControl1.Memory = Computer.MemoryInstance.GetMemory();
+            this.memoryDisplayControl01.Memory = Computer.MemoryInstance;
         }
 
         public void HandleUIMessages(UIMessage message)
@@ -204,13 +204,26 @@ namespace JGEmulatorApp
                                     break;
                             }
                             break;
+
+                        case "STT":
+                            switch (message.Message)
+                            {
+                                case "None":
+                                    controlSignalDisplayControlCON.FI = false;
+                                    break;
+                                case "Reading":
+                                    this.controlSignalDisplayControlCON.FI = true;
+                                    break;
+                            }
+
+                            break;
                     }
                     break;
                 case UIMessageType.Memory:
                     var parts = message.Message.Split(':');
-                 //   if (parts.Length == 2 && byte.TryParse(parts[0], out byte address) && byte.TryParse(parts[1], out byte value))
+                    //   if (parts.Length == 2 && byte.TryParse(parts[0], out byte address) && byte.TryParse(parts[1], out byte value))
                     //{
-                        //memoryDisplayControl1.SetAddressValue(Convert.ToByte( parts[0]), Convert.ToByte(parts[1]));
+                    //memoryDisplayControl1.SetAddressValue(Convert.ToByte( parts[0]), Convert.ToByte(parts[1]));
                     //}
                     break;
             }
@@ -246,6 +259,11 @@ namespace JGEmulatorApp
         private void buttonReset_Click(object sender, EventArgs e)
         {
             Computer.Reset();
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

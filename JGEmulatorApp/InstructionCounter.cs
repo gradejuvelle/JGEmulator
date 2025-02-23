@@ -35,6 +35,7 @@ namespace JGEmulator
         {
             _value = 0;
             _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Instruction Counter reset.", "INC"));
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.RegisterValue, _value.ToString(), "INC"));
         }
     }
 }

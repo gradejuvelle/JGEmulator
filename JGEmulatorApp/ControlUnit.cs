@@ -162,6 +162,10 @@ namespace JGEmulator
                 _thiscomputer.StatusRegister.SetBusState(BusState.Reading);
                 _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "STT input status: ", "STT"));
             }
+            else
+            {
+                _thiscomputer.StatusRegister.SetBusState(BusState.None);
+            }
 
             // Handle MAR Tock Signal
             if (_currentMicroInstruction.MI == true)
