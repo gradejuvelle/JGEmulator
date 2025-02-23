@@ -4,6 +4,8 @@ Welcome to my Breadboard Computer Emulator project! This project is a personal e
 
 ## Overview
 
+![BENIAC](./images/BENIAC01.png)
+
 This project is a work in progress and aims to replicate the functionality of Ben Eater's breadboard computer in C#. The goal is to have fun and build a virtual computer than is more easily modified than Ben's breadboard version.
 
 ## Why Build a Breadboard Computer?
