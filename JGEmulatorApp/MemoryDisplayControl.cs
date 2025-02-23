@@ -27,13 +27,13 @@ namespace JGEmulatorApp
             }
         }
 
-        public void SetAddressValue(byte address, byte value)
+        public void SetAddressValue(int address, byte value)
         {
-     //       if (_memory != null && address >= 0 && address < _memory.GetMemory().Length)
-     //       {
+            if (_memory != null && address >= 0 && address < _memory.GetMemory().Length)
+            {
                 _memory.GetMemory()[address] = value;
                 Invalidate(); // Redraw the control when the memory value is changed
-     //       }
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -48,14 +48,18 @@ namespace JGEmulatorApp
                 return;
 
             byte[] memory = _memory.GetMemory();
-            int lineHeight = Font.Height + 5;
+            int lineHeight = 30; // Adjusted to add more spacing between rows
             int y = 0;
 
-            for (int i = 0; i < memory.Length; i++)
+            using (Font font = new Font("Segoe UI", 14))
             {
-                string binaryString = Convert.ToString(memory[i], 2).PadLeft(8, '0');
-                g.DrawString(binaryString, Font, Brushes.Black, new PointF(0, y));
-                y += lineHeight;
+                for (int i = 0; i < memory.Length; i++)
+                {
+                    string indexString = i.ToString().PadLeft(2, '0');
+                    string binaryString = Convert.ToString(memory[i], 2).PadLeft(8, '0');
+                    g.DrawString($"{indexString}: {binaryString}", font, Brushes.Black, new PointF(0, y));
+                    y += lineHeight;
+                }
             }
         }
 

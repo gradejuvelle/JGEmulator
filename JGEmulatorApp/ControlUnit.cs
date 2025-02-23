@@ -162,6 +162,10 @@ namespace JGEmulator
                 _thiscomputer.StatusRegister.SetBusState(BusState.Reading);
                 _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "STT input status: ", "STT"));
             }
+            else
+            {
+                _thiscomputer.StatusRegister.SetBusState(BusState.None);
+            }
 
             // Handle MAR Tock Signal
             if (_currentMicroInstruction.MI == true)
@@ -289,8 +293,11 @@ namespace JGEmulator
             // Handle HLT Tock Signal
             if (_currentMicroInstruction.HLT == true)
             {
+
                 _thiscomputer.ClockInstance.Stop();
                 _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Clock stopped due to HLT signal.", "CTR"));
+
+                _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Computer, "STOP", "CON"));
             }
 
             // Handle Subtract Tock Signal

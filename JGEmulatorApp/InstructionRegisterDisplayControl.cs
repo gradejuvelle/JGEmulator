@@ -8,16 +8,18 @@ using System.Windows.Forms;
 namespace JGEmulatorApp
 {
     [Designer("System.Windows.Forms.Design.ControlDesigner, System.Design", typeof(System.ComponentModel.Design.IDesigner))]
-    public class ByteDisplayControl : Control
+    public class InstructionRegisterDisplayControl : Control
     {
         private byte _value;
+        private Image yellowLight;
         private Image redLight;
         private Image grayLight;
         private Label valueLabel;
 
-        public ByteDisplayControl()
+        public InstructionRegisterDisplayControl()
         {
             // Load the images from embedded resources
+            yellowLight = LoadImageFromResource("JGEmulatorApp.Resources.yellow.png");
             redLight = LoadImageFromResource("JGEmulatorApp.Resources.red.png");
             grayLight = LoadImageFromResource("JGEmulatorApp.Resources.gray.png");
 
@@ -77,7 +79,12 @@ namespace JGEmulatorApp
             for (int i = 0; i < 8; i++)
             {
                 bool isOn = (_value & (1 << (7 - i))) != 0;
-                Image lightImage = isOn ? redLight : grayLight;
+                Image lightImage = grayLight;
+
+                if (isOn)
+                {
+                    lightImage = i < 4 ? yellowLight : redLight;
+                }
 
                 // Draw the light image
                 g.DrawImage(lightImage, x, y, lightDiameter, lightDiameter);
@@ -97,3 +104,5 @@ namespace JGEmulatorApp
         }
     }
 }
+
+

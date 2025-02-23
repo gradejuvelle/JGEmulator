@@ -7,12 +7,12 @@ namespace JGEmulatorApp
     public partial class Form1 : Form
     {
         private JGEmulator.Computer Computer;
-
+        private bool halted = false;
         public Form1()
         {
             InitializeComponent();
-            Computer = new JGEmulator.Computer(100, this);
-            this.memoryDisplayControl1.Memory = Computer.MemoryInstance;
+            Computer = new JGEmulator.Computer(50, this);
+            this.memoryDisplayControl01.Memory = Computer.MemoryInstance;
         }
 
         public void HandleUIMessages(UIMessage message)
@@ -58,7 +58,8 @@ namespace JGEmulatorApp
                             this.byteDisplayControlOUT.Value = Convert.ToByte(message.Message);
                             break;
                         case "INS":
-                            this.byteDisplayControlINS.Value = Convert.ToByte(message.Message);
+                            //this.byteDisplayControlINS.Value = Convert.ToByte(message.Message);
+                            this.instructionRegisterDisplayControlINS.Value = Convert.ToByte(message.Message);
                             break;
                         case "BUS":
                             this.byteDisplayControlBUS.Value = Convert.ToByte(message.Message);
@@ -203,20 +204,53 @@ namespace JGEmulatorApp
                                     break;
                             }
                             break;
+
+                        case "STT":
+                            switch (message.Message)
+                            {
+                                case "None":
+                                    controlSignalDisplayControlCON.FI = false;
+                                    break;
+                                case "Reading":
+                                    this.controlSignalDisplayControlCON.FI = true;
+                                    break;
+                            }
+
+                            break;
                     }
                     break;
                 case UIMessageType.Memory:
                     var parts = message.Message.Split(':');
-                 //   if (parts.Length == 2 && byte.TryParse(parts[0], out byte address) && byte.TryParse(parts[1], out byte value))
+                    //   if (parts.Length == 2 && byte.TryParse(parts[0], out byte address) && byte.TryParse(parts[1], out byte value))
                     //{
-                        memoryDisplayControl1.SetAddressValue(Convert.ToByte( parts[0]), Convert.ToByte(parts[1]));
+                    memoryDisplayControl01.SetAddressValue(Convert.ToByte( parts[0]), Convert.ToByte(parts[1]));
                     //}
+                    break;
+                case UIMessageType.Computer:
+                    switch (message.Message)
+                    {
+                        case "Reset":
+                            this.memoryDisplayControl01.Memory = Computer.MemoryInstance;
+                            break;
+                        case "STOP":
+                            this.halted = true;
+                            this.buttonStop.Enabled = false ;
+                            this.buttonReset.Enabled = true;
+                            halted = false ;
+                            
+                            break;
+                    }
                     break;
             }
         }
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
+            halted = false;
+            buttonStop.Enabled = true;
+            buttonRun.Enabled = false;
+            buttonStep.Enabled = false;
+            buttonReset.Enabled = false;
             Computer.Start();
         }
 
@@ -225,27 +259,26 @@ namespace JGEmulatorApp
             Computer.Step();
         }
 
-
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblINSBusState_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonStop_Click(object sender, EventArgs e)
         {
+
+            buttonStop.Enabled = false;
+            if (!halted)
+            {
+                buttonRun.Enabled = true;
+                buttonStep.Enabled = true;
+                buttonReset.Enabled = true;
+            }
+            buttonReset.Enabled = true;
             Computer.Stop();
         }
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
             Computer.Reset();
+            buttonRun.Enabled = true;
+            buttonStep.Enabled = true;
         }
-    }
+ }
 }
 

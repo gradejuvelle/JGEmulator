@@ -79,7 +79,7 @@ namespace JGEmulatorApp
 
         private void DrawLights(Graphics g)
         {
-            const int lightDiameter = 30;
+            const int lightDiameter = 25;
             int spacing = lightDiameter / 4;
             int x = spacing;
             int y = (Height - lightDiameter) / 2 - 20; // Adjusted to leave space for labels
@@ -87,20 +87,23 @@ namespace JGEmulatorApp
             bool[] signals = { CF, ZF };
             string[] labels = { "CF", "ZF" };
 
-            for (int i = 0; i < 2; i++)
+            using (Font labelFont = new Font("Segoe UI", 14))
             {
-                bool isOn = signals[i];
-                Image lightImage = isOn ? greenLight : grayLight;
+                for (int i = 0; i < 2; i++)
+                {
+                    bool isOn = signals[i];
+                    Image lightImage = isOn ? greenLight : grayLight;
 
-                // Draw the light image
-                g.DrawImage(lightImage, x, y, lightDiameter, lightDiameter);
+                    // Draw the light image
+                    g.DrawImage(lightImage, x, y, lightDiameter, lightDiameter);
 
-                // Draw the label
-                SizeF labelSize = g.MeasureString(labels[i], Font);
-                float labelX = x + (lightDiameter - labelSize.Width) / 2;
-                g.DrawString(labels[i], Font, Brushes.Black, labelX, y + lightDiameter + 5);
+                    // Draw the label
+                    SizeF labelSize = g.MeasureString(labels[i], labelFont);
+                    float labelX = x + (lightDiameter - labelSize.Width) / 2;
+                    g.DrawString(labels[i], labelFont, Brushes.Black, labelX, y + lightDiameter + 5);
 
-                x += lightDiameter + spacing;
+                    x += lightDiameter + spacing;
+                }
             }
         }
 
@@ -111,4 +114,6 @@ namespace JGEmulatorApp
         }
     }
 }
+
+
 

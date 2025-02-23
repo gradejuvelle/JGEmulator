@@ -43,7 +43,6 @@
             lblALUSubtract = new Label();
             byteDisplayControlBRG = new ByteDisplayControl();
             byteDisplayControlARG = new ByteDisplayControl();
-            byteDisplayControlINS = new ByteDisplayControl();
             byteDisplayControlALU = new ByteDisplayControl();
             byteDisplayControlOUT = new ByteDisplayControl();
             byteDisplayControlBUS = new ByteDisplayControl();
@@ -66,7 +65,9 @@
             flagsDisplayControlSTT = new FlagsDisplayControl();
             buttonReset = new Button();
             buttonStop = new Button();
-            memoryDisplayControl1 = new MemoryDisplayControl();
+            instructionRegisterDisplayControlINS = new InstructionRegisterDisplayControl();
+            memoryDisplayControl01 = new MemoryDisplayControl();
+            label13 = new Label();
             SuspendLayout();
             // 
             // byteDisplayControlMEM
@@ -80,7 +81,7 @@
             // buttonRun
             // 
             buttonRun.Font = new Font("Segoe UI", 14F);
-            buttonRun.Location = new Point(550, 500);
+            buttonRun.Location = new Point(186, 30);
             buttonRun.Name = "buttonRun";
             buttonRun.Size = new Size(100, 40);
             buttonRun.TabIndex = 26;
@@ -91,7 +92,7 @@
             // buttonStep
             // 
             buttonStep.Font = new Font("Segoe UI", 14F);
-            buttonStep.Location = new Point(656, 499);
+            buttonStep.Location = new Point(420, 30);
             buttonStep.Name = "buttonStep";
             buttonStep.Size = new Size(100, 40);
             buttonStep.TabIndex = 27;
@@ -138,7 +139,7 @@
             lblINSBusState.Size = new Size(143, 25);
             lblINSBusState.TabIndex = 8;
             lblINSBusState.Text = "Bus State: None";
-            lblINSBusState.Click += lblINSBusState_Click;
+            //lblINSBusState.Click += lblINSBusState_Click;
             // 
             // lblOUTBusState
             // 
@@ -217,14 +218,6 @@
             byteDisplayControlARG.TabIndex = 36;
             byteDisplayControlARG.Value = 0;
             // 
-            // byteDisplayControlINS
-            // 
-            byteDisplayControlINS.Location = new Point(84, 499);
-            byteDisplayControlINS.Name = "byteDisplayControlINS";
-            byteDisplayControlINS.Size = new Size(389, 30);
-            byteDisplayControlINS.TabIndex = 37;
-            byteDisplayControlINS.Value = 0;
-            // 
             // byteDisplayControlALU
             // 
             byteDisplayControlALU.Location = new Point(1003, 438);
@@ -243,7 +236,7 @@
             // 
             // byteDisplayControlBUS
             // 
-            byteDisplayControlBUS.Location = new Point(521, 275);
+            byteDisplayControlBUS.Location = new Point(535, 134);
             byteDisplayControlBUS.Name = "byteDisplayControlBUS";
             byteDisplayControlBUS.Size = new Size(389, 34);
             byteDisplayControlBUS.TabIndex = 40;
@@ -319,7 +312,7 @@
             label2.Size = new Size(319, 37);
             label2.TabIndex = 46;
             label2.Text = "Memory Address Register";
-            label2.Click += label2_Click;
+            //label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -395,7 +388,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 20F);
-            label10.Location = new Point(521, 234);
+            label10.Location = new Point(535, 93);
             label10.Name = "label10";
             label10.Size = new Size(58, 37);
             label10.TabIndex = 54;
@@ -434,19 +427,18 @@
             // buttonReset
             // 
             buttonReset.Font = new Font("Segoe UI", 14F);
-            buttonReset.Location = new Point(762, 499);
+            buttonReset.Location = new Point(535, 30);
             buttonReset.Name = "buttonReset";
             buttonReset.Size = new Size(100, 40);
             buttonReset.TabIndex = 58;
             buttonReset.Text = "Reset";
             buttonReset.UseVisualStyleBackColor = true;
-            buttonReset.Visible = false;
             buttonReset.Click += buttonReset_Click;
             // 
             // buttonStop
             // 
             buttonStop.Font = new Font("Segoe UI", 14F);
-            buttonStop.Location = new Point(550, 541);
+            buttonStop.Location = new Point(301, 30);
             buttonStop.Name = "buttonStop";
             buttonStop.Size = new Size(100, 40);
             buttonStop.TabIndex = 59;
@@ -454,22 +446,43 @@
             buttonStop.UseVisualStyleBackColor = true;
             buttonStop.Click += buttonStop_Click;
             // 
-            // memoryDisplayControl1
+            // instructionRegisterDisplayControlINS
             // 
-            memoryDisplayControl1.Location = new Point(645, 78);
-            memoryDisplayControl1.Memory = null;
-            memoryDisplayControl1.Name = "memoryDisplayControl1";
-            memoryDisplayControl1.Size = new Size(164, 149);
-            memoryDisplayControl1.TabIndex = 60;
-            memoryDisplayControl1.Text = "memoryDisplayControl1";
-            memoryDisplayControl1.Visible = false;
+            instructionRegisterDisplayControlINS.Location = new Point(88, 500);
+            instructionRegisterDisplayControlINS.Name = "instructionRegisterDisplayControlINS";
+            instructionRegisterDisplayControlINS.Size = new Size(389, 30);
+            instructionRegisterDisplayControlINS.TabIndex = 60;
+            instructionRegisterDisplayControlINS.Text = "instructionRegisterDisplayControl1";
+            instructionRegisterDisplayControlINS.Value = 0;
+            // 
+            // memoryDisplayControl01
+            // 
+            memoryDisplayControl01.Location = new Point(593, 239);
+            memoryDisplayControl01.Memory = null;
+            memoryDisplayControl01.Name = "memoryDisplayControl01";
+            memoryDisplayControl01.Size = new Size(219, 511);
+            memoryDisplayControl01.TabIndex = 61;
+            memoryDisplayControl01.Text = "memoryDisplayControl1";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 20F);
+            label13.Location = new Point(593, 199);
+            label13.Name = "label13";
+            label13.Size = new Size(229, 37);
+            label13.TabIndex = 62;
+            label13.Text = "Memory Contents";
+            //label13.Click += label13_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1434, 950);
-            Controls.Add(memoryDisplayControl1);
+            Controls.Add(label13);
+            Controls.Add(memoryDisplayControl01);
+            Controls.Add(instructionRegisterDisplayControlINS);
             Controls.Add(buttonStop);
             Controls.Add(buttonReset);
             Controls.Add(flagsDisplayControlSTT);
@@ -492,7 +505,6 @@
             Controls.Add(byteDisplayControlBUS);
             Controls.Add(byteDisplayControlOUT);
             Controls.Add(byteDisplayControlALU);
-            Controls.Add(byteDisplayControlINS);
             Controls.Add(byteDisplayControlARG);
             Controls.Add(byteDisplayControlBRG);
             Controls.Add(lblALUSubtract);
@@ -531,7 +543,6 @@
         private ByteDisplayControl byteDisplayControlMEM;
         private ByteDisplayControl byteDisplayControlBRG;
         private ByteDisplayControl byteDisplayControlARG;
-        private ByteDisplayControl byteDisplayControlINS;
         private ByteDisplayControl byteDisplayControlALU;
         private ByteDisplayControl byteDisplayControlOUT;
         private ByteDisplayControl byteDisplayControlBUS;
@@ -553,6 +564,8 @@
         private FlagsDisplayControl flagsDisplayControlSTT;
         private Button buttonReset;
         private Button buttonStop;
-        private MemoryDisplayControl memoryDisplayControl1;
+        private InstructionRegisterDisplayControl instructionRegisterDisplayControlINS;
+        private MemoryDisplayControl memoryDisplayControl01;
+        private Label label13;
     }
 }
