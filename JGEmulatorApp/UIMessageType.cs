@@ -7,7 +7,8 @@ namespace JGEmulator
         RegisterFlag,
         RegisterValue,
         BusState,
-        Memory
+        Memory,
+        Computer
 
     }
 }

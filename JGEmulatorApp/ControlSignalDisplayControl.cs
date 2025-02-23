@@ -317,7 +317,7 @@ namespace JGEmulatorApp
 
         private void DrawLights(Graphics g)
         {
-            const int lightDiameter = 30;
+            const int lightDiameter = 25;
             int spacing = lightDiameter / 4;
             int x = spacing;
             int y = (Height - lightDiameter) / 2 - 20; // Adjusted to leave space for labels

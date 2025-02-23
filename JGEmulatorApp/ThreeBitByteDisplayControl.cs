@@ -69,7 +69,7 @@ namespace JGEmulatorApp
 
         private void DrawLights(Graphics g)
         {
-            int lightDiameter = 30;
+            int lightDiameter = 25;
             int spacing = lightDiameter / 4;
             int x = spacing;
             int y = (Height - lightDiameter) / 2;

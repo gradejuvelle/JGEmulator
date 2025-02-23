@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic.Devices;
+﻿//using Microsoft.VisualBasic.Devices;
 using System;
 
 namespace JGEmulator
