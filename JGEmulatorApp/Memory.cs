@@ -20,8 +20,14 @@ namespace JGEmulator
         {
             SelectedValue = _memory[_selectedAddress];
             _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.RegisterValue, SelectedValue.ToString(), "MEM"));
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Memory,_selectedAddress.ToString()+":"+ GetSelectedValue().ToString(), "MEM"));
 
 
+        }
+
+        public byte[] GetMemory()
+        {
+            return _memory;
         }
         public Memory(Computer thiscomputer)
         {

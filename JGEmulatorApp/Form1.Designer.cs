@@ -64,6 +64,9 @@
             label11 = new Label();
             label12 = new Label();
             flagsDisplayControlSTT = new FlagsDisplayControl();
+            buttonReset = new Button();
+            buttonStop = new Button();
+            memoryDisplayControl1 = new MemoryDisplayControl();
             SuspendLayout();
             // 
             // byteDisplayControlMEM
@@ -88,7 +91,7 @@
             // buttonStep
             // 
             buttonStep.Font = new Font("Segoe UI", 14F);
-            buttonStep.Location = new Point(700, 500);
+            buttonStep.Location = new Point(656, 499);
             buttonStep.Name = "buttonStep";
             buttonStep.Size = new Size(100, 40);
             buttonStep.TabIndex = 27;
@@ -428,11 +431,45 @@
             flagsDisplayControlSTT.Text = "flagsDisplayControl1";
             flagsDisplayControlSTT.ZF = false;
             // 
+            // buttonReset
+            // 
+            buttonReset.Font = new Font("Segoe UI", 14F);
+            buttonReset.Location = new Point(762, 499);
+            buttonReset.Name = "buttonReset";
+            buttonReset.Size = new Size(100, 40);
+            buttonReset.TabIndex = 58;
+            buttonReset.Text = "Reset";
+            buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.Click += buttonReset_Click;
+            // 
+            // buttonStop
+            // 
+            buttonStop.Font = new Font("Segoe UI", 14F);
+            buttonStop.Location = new Point(550, 541);
+            buttonStop.Name = "buttonStop";
+            buttonStop.Size = new Size(100, 40);
+            buttonStop.TabIndex = 59;
+            buttonStop.Text = "Stop";
+            buttonStop.UseVisualStyleBackColor = true;
+            buttonStop.Click += buttonStop_Click;
+            // 
+            // memoryDisplayControl1
+            // 
+            memoryDisplayControl1.Location = new Point(645, 78);
+            memoryDisplayControl1.Memory = null;
+            memoryDisplayControl1.Name = "memoryDisplayControl1";
+            memoryDisplayControl1.Size = new Size(164, 149);
+            memoryDisplayControl1.TabIndex = 60;
+            memoryDisplayControl1.Text = "memoryDisplayControl1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1434, 950);
+            Controls.Add(memoryDisplayControl1);
+            Controls.Add(buttonStop);
+            Controls.Add(buttonReset);
             Controls.Add(flagsDisplayControlSTT);
             Controls.Add(label12);
             Controls.Add(label11);
@@ -512,5 +549,8 @@
         private Label label11;
         private Label label12;
         private FlagsDisplayControl flagsDisplayControlSTT;
+        private Button buttonReset;
+        private Button buttonStop;
+        private MemoryDisplayControl memoryDisplayControl1;
     }
 }

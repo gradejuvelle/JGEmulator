@@ -6,7 +6,8 @@ namespace JGEmulator
         Log,
         RegisterFlag,
         RegisterValue,
-        BusState
-    
+        BusState,
+        Memory
+
     }
 }

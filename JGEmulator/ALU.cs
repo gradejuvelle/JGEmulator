@@ -55,22 +55,22 @@ namespace JGEmulator
                 carry = _computer.BRegister.GetValue() <= _computer.ARegister.GetValue();
                 zero = _computer.ARegister.GetValue() == _computer.BRegister.GetValue();
                 result &= 0xFF; // Ensure result fits into 8 bits
-                if (carry)
-                {
-                    StatusRegister.SetCarryFlag();
-                }
-                else
-                {
-                    StatusRegister.ClearCarryFlag();
-                }
-                if (zero)
-                {
-                    StatusRegister.SetZeroFlag();
-                }
-                else
-                {
-                    StatusRegister.ClearZeroFlag();
-                }
+                //if (carry)
+                //{
+                //    StatusRegister.SetCarryFlag();
+                //}
+                //else
+                //{
+                //    StatusRegister.ClearCarryFlag();
+                //}
+                //if (zero)
+                //{
+                //    StatusRegister.SetZeroFlag();
+                //}
+                //else
+                //{
+                //    StatusRegister.ClearZeroFlag();
+                //}
                 _computer.HandleUIMessages(new UIMessage(UIMessageType.Log, $"Executed subtraction: {result}", "ALU"));
             }
             else
@@ -109,11 +109,11 @@ namespace JGEmulator
         {
             Subtract = _state;
             _computer.HandleUIMessages(new UIMessage(UIMessageType.RegisterFlag, Subtract.ToString(), "ALUSubtract"));
-            //if (_state == true)
-            //{
+            if (_state == true)
+            {
 
                 Execute();
-            //}
+            }
         }
     }
 }

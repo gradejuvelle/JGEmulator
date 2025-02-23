@@ -7,7 +7,7 @@ namespace JGEmulator
         private bool ZeroFlag { get; set; }
         private bool CarryFlag { get; set; }
         private Computer _thiscomputer;
-
+        private BusState State;
         public StatusRegister(Computer thiscomputer)
         {
             _thiscomputer = thiscomputer;
@@ -15,7 +15,15 @@ namespace JGEmulator
             CarryFlag = false;
             _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Status Register initialized.", "STT"));
         }
-
+        public BusState GetBusState()
+        {
+            return State;
+        }
+        public void SetBusState(BusState state)
+        {
+            State = state;
+            _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.BusState, State.ToString(), "STT"));
+        }
         public void SetZeroFlag()
         {
             ZeroFlag = true;
