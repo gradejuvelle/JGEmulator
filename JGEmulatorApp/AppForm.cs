@@ -12,12 +12,16 @@ namespace JGEmulatorApp
         public AppForm()
         {
             InitializeComponent();
+            this.AutoScaleMode = AutoScaleMode.Dpi; // Enable DPI scaling
+            this.AutoScaleDimensions = new SizeF(96F, 96F); // Set default DPI settings
+
             Computer = new JGEmulator.Computer(40, this);
             this.memoryDisplayControl01.Memory = Computer.MemoryInstance;
             this.StartPosition = FormStartPosition.CenterScreen; // Center the form
             this.FormBorderStyle = FormBorderStyle.FixedDialog; // Make the form non-resizable
             Computer.Reset();
         }
+
 
         public void HandleUIMessages(UIMessage message)
         {
