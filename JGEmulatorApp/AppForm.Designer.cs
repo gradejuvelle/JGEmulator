@@ -1,6 +1,6 @@
 ﻿namespace JGEmulatorApp
 {
-    partial class Form1
+    partial class AppForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -68,6 +68,9 @@
             instructionRegisterDisplayControlINS = new InstructionRegisterDisplayControl();
             memoryDisplayControl01 = new MemoryDisplayControl();
             label13 = new Label();
+            buttonEditMemory = new Button();
+            txtClockSpeed = new TextBox();
+            label14 = new Label();
             SuspendLayout();
             // 
             // byteDisplayControlMEM
@@ -104,6 +107,7 @@
             // 
             lblARGBusState.AutoSize = true;
             lblARGBusState.Font = new Font("Segoe UI", 14F);
+            lblARGBusState.ForeColor = Color.ForestGreen;
             lblARGBusState.Location = new Point(1006, 332);
             lblARGBusState.Name = "lblARGBusState";
             lblARGBusState.Size = new Size(143, 25);
@@ -114,6 +118,7 @@
             // 
             lblMARBusState.AutoSize = true;
             lblMARBusState.Font = new Font("Segoe UI", 14F);
+            lblMARBusState.ForeColor = Color.ForestGreen;
             lblMARBusState.Location = new Point(88, 230);
             lblMARBusState.Name = "lblMARBusState";
             lblMARBusState.Size = new Size(143, 25);
@@ -124,6 +129,7 @@
             // 
             lblBRGBusState.AutoSize = true;
             lblBRGBusState.Font = new Font("Segoe UI", 14F);
+            lblBRGBusState.ForeColor = Color.ForestGreen;
             lblBRGBusState.Location = new Point(1006, 696);
             lblBRGBusState.Name = "lblBRGBusState";
             lblBRGBusState.Size = new Size(143, 25);
@@ -134,17 +140,18 @@
             // 
             lblINSBusState.AutoSize = true;
             lblINSBusState.Font = new Font("Segoe UI", 14F);
+            lblINSBusState.ForeColor = Color.ForestGreen;
             lblINSBusState.Location = new Point(88, 532);
             lblINSBusState.Name = "lblINSBusState";
             lblINSBusState.Size = new Size(143, 25);
             lblINSBusState.TabIndex = 8;
             lblINSBusState.Text = "Bus State: None";
-            //lblINSBusState.Click += lblINSBusState_Click;
             // 
             // lblOUTBusState
             // 
             lblOUTBusState.AutoSize = true;
             lblOUTBusState.Font = new Font("Segoe UI", 14F);
+            lblOUTBusState.ForeColor = Color.ForestGreen;
             lblOUTBusState.Location = new Point(1003, 827);
             lblOUTBusState.Name = "lblOUTBusState";
             lblOUTBusState.Size = new Size(143, 25);
@@ -155,6 +162,7 @@
             // 
             lblALUBusState.AutoSize = true;
             lblALUBusState.Font = new Font("Segoe UI", 14F);
+            lblALUBusState.ForeColor = Color.ForestGreen;
             lblALUBusState.Location = new Point(1003, 471);
             lblALUBusState.Name = "lblALUBusState";
             lblALUBusState.Size = new Size(143, 25);
@@ -165,6 +173,7 @@
             // 
             lblPRGBusState.AutoSize = true;
             lblPRGBusState.Font = new Font("Segoe UI", 14F);
+            lblPRGBusState.ForeColor = Color.ForestGreen;
             lblPRGBusState.Location = new Point(1003, 143);
             lblPRGBusState.Name = "lblPRGBusState";
             lblPRGBusState.Size = new Size(143, 25);
@@ -175,6 +184,7 @@
             // 
             lblMEMBusState.AutoSize = true;
             lblMEMBusState.Font = new Font("Segoe UI", 14F);
+            lblMEMBusState.ForeColor = Color.ForestGreen;
             lblMEMBusState.Location = new Point(84, 380);
             lblMEMBusState.Name = "lblMEMBusState";
             lblMEMBusState.Size = new Size(143, 25);
@@ -236,7 +246,7 @@
             // 
             // byteDisplayControlBUS
             // 
-            byteDisplayControlBUS.Location = new Point(535, 134);
+            byteDisplayControlBUS.Location = new Point(577, 198);
             byteDisplayControlBUS.Name = "byteDisplayControlBUS";
             byteDisplayControlBUS.Size = new Size(389, 34);
             byteDisplayControlBUS.TabIndex = 40;
@@ -312,7 +322,6 @@
             label2.Size = new Size(319, 37);
             label2.TabIndex = 46;
             label2.Text = "Memory Address Register";
-            //label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -388,7 +397,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 20F);
-            label10.Location = new Point(535, 93);
+            label10.Location = new Point(577, 157);
             label10.Name = "label10";
             label10.Size = new Size(58, 37);
             label10.TabIndex = 54;
@@ -457,10 +466,10 @@
             // 
             // memoryDisplayControl01
             // 
-            memoryDisplayControl01.Location = new Point(593, 239);
+            memoryDisplayControl01.Location = new Point(696, 303);
             memoryDisplayControl01.Memory = null;
             memoryDisplayControl01.Name = "memoryDisplayControl01";
-            memoryDisplayControl01.Size = new Size(219, 511);
+            memoryDisplayControl01.Size = new Size(158, 511);
             memoryDisplayControl01.TabIndex = 61;
             memoryDisplayControl01.Text = "memoryDisplayControl1";
             // 
@@ -468,18 +477,51 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 20F);
-            label13.Location = new Point(593, 199);
+            label13.Location = new Point(635, 263);
             label13.Name = "label13";
             label13.Size = new Size(229, 37);
             label13.TabIndex = 62;
             label13.Text = "Memory Contents";
-            //label13.Click += label13_Click;
             // 
-            // Form1
+            // buttonEditMemory
+            // 
+            buttonEditMemory.Font = new Font("Segoe UI", 14F);
+            buttonEditMemory.Location = new Point(860, 265);
+            buttonEditMemory.Name = "buttonEditMemory";
+            buttonEditMemory.Size = new Size(100, 40);
+            buttonEditMemory.TabIndex = 63;
+            buttonEditMemory.Text = "Edit";
+            buttonEditMemory.UseVisualStyleBackColor = true;
+            buttonEditMemory.Click += buttonEditMemory_Click_1;
+            // 
+            // txtClockSpeed
+            // 
+            txtClockSpeed.Font = new Font("Segoe UI", 14F);
+            txtClockSpeed.Location = new Point(535, 79);
+            txtClockSpeed.Name = "txtClockSpeed";
+            txtClockSpeed.Size = new Size(100, 32);
+            txtClockSpeed.TabIndex = 64;
+            txtClockSpeed.Text = "10";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 14F);
+            label14.Location = new Point(311, 82);
+            label14.Name = "label14";
+            label14.Size = new Size(218, 25);
+            label14.TabIndex = 65;
+            label14.Text = "Clock Speed in Hz (1-25)";
+            //label14.Click += this.label14_Click;
+            // 
+            // AppForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1434, 950);
+            Controls.Add(label14);
+            Controls.Add(txtClockSpeed);
+            Controls.Add(buttonEditMemory);
             Controls.Add(label13);
             Controls.Add(memoryDisplayControl01);
             Controls.Add(instructionRegisterDisplayControlINS);
@@ -520,14 +562,14 @@
             Controls.Add(lblBRGBusState);
             Controls.Add(lblARGBusState);
             Controls.Add(byteDisplayControlMEM);
-            Name = "Form1";
+            Name = "AppForm";
             Text = "BENIAC";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Button buttonRun;
+        public Button buttonRun;
         private Button buttonStep;
         private Label lblARGBusState;
         private Label lblMARBusState;
@@ -567,5 +609,8 @@
         private InstructionRegisterDisplayControl instructionRegisterDisplayControlINS;
         private MemoryDisplayControl memoryDisplayControl01;
         private Label label13;
+        private Button buttonEditMemory;
+        private TextBox txtClockSpeed;
+        private Label label14;
     }
 }

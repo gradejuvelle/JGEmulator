@@ -90,18 +90,30 @@ namespace JGEmulator
             _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Computer, "Reset", "MEM"));
         }
 
-        private void LoadMemory(string program)
+
+
+        public void LoadMemory(string program)
         {
             switch (program)
             {
                 case "Empty":
-                    _memory[0] = 0b00010110; // LDA 6
-                    _memory[1] = 0b11110000; // HLT
-                    _memory[2] = 0b00000000; // 
-                    _memory[3] = 0b00000000; // 
-                    _memory[4] = 0b00000000; // 
-                    _memory[5] = 0b00000000; // 
-                    _memory[6] = 0b10000000; // 128 in binary
+                    _memory[0] = 0b00000000; // LDA 6
+                    _memory[1] = 0b00000000; // HLT
+                    _memory[2] = 0b00000000; //  0 in binary
+                    _memory[3] = 0b00000000; //  0 in binary
+                    _memory[4] = 0b00000000; //  0 in binary
+                    _memory[5] = 0b00000000; //  0 in binary
+                    _memory[6] = 0b00000000; // 0 in binary
+                    _memory[7] = 0b00000000; // 0 in binary
+                    _memory[8] = 0b00000000; // 0 in binary
+                    _memory[9] = 0b00000000; // 0 in binary
+                    _memory[10] = 0b00000000; // 0 in binary
+                    _memory[11] = 0b00000000; // 0 in binary
+                    _memory[12] = 0b00000000; // 0 in binary
+                    _memory[13] = 0b00000000; // 0 in binary
+                    _memory[14] = 0b00000000; // 0 in binary
+                    _memory[15] = 0b00000000; // 0 in binary
+                    
                     break;
                 case "Multiply":
                     _memory[0] = 0b00011110; // lda 14
@@ -139,13 +151,6 @@ namespace JGEmulator
                     _memory[14] = 0b00000000; // 0
                     _memory[15] = 0b00000000; // 0
                     break;
-                case "Test4":
-                    _memory[0] = 0b00010110; // lda 6
-                    _memory[1] = 0b00110101; // sub 5
-                    _memory[2] = 0b11100000; // out
-                    _memory[3] = 0b11110000; // hlt 
-                    _memory[4] = 0b00000000; //
-                    break;
 
             }
             //        for (int i = 0; i < _memory.Length; i++)
@@ -153,6 +158,20 @@ namespace JGEmulator
             //    _memory[i] = _resetmemory[i];
             //}
         }
+
+        public void UpdateMemory(byte[] data)
+        {
+            if (data.Length != _memory.Length)
+            {
+                throw new ArgumentException("Data length must match memory length.");
+            }
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                _memory[i] = data[i];
+            }
+        }
+
         public Memory(Computer thiscomputer)
         {
             _thiscomputer = thiscomputer;

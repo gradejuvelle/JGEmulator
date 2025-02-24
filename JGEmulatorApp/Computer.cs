@@ -17,8 +17,8 @@ namespace JGEmulator
         public ALU ALUInstance { get; set; }
         public ControlUnit ControlUnitInstance { get; set; }
 
-        public JGEmulatorApp.Form1 form;
-        public Computer(int clockSpeed,JGEmulatorApp.Form1 _form)
+        public JGEmulatorApp.AppForm form;
+        public Computer(int clockSpeed,JGEmulatorApp.AppForm _form)
         {
             form = _form;
             ClockInstance = new Clock(clockSpeed, this);
@@ -50,7 +50,7 @@ namespace JGEmulator
             StatusRegister.Reset();
             ALUInstance.Reset();
             this.ControlUnitInstance._instructionCounter.Reset();
-            this.MemoryInstance.Reset();
+            //this.MemoryInstance.Reset();
 
             ControlUnitInstance.ProcessControlSignalsTock();
             HandleUIMessages(new UIMessage(UIMessageType.Log, "Computer reset and ready.", "COM"));
