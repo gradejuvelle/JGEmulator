@@ -128,7 +128,7 @@
 
         private void comboBoxPrograms_SelectedIndexChanged(object sender, EventArgs e)
         {
-            buttonLoad.Enabled = comboBoxPrograms.SelectedItem.ToString() != "Custom";
+            //buttonLoad.Enabled = comboBoxPrograms.SelectedItem.ToString() != "Custom";
         }
 
         private void buttonLoad_Click(object sender, EventArgs e)
