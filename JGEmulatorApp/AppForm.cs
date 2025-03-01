@@ -8,16 +8,23 @@ namespace JGEmulatorApp
     {
         private JGEmulator.Computer Computer;
         private bool halted = false;
+        private bool firstRun = true;
+
 
         public AppForm()
         {
             InitializeComponent();
+            this.AutoScaleMode = AutoScaleMode.Dpi; // Enable DPI scaling
+            this.AutoScaleDimensions = new SizeF(96F, 96F); // Set default DPI settings
+
             Computer = new JGEmulator.Computer(40, this);
             this.memoryDisplayControl01.Memory = Computer.MemoryInstance;
             this.StartPosition = FormStartPosition.CenterScreen; // Center the form
             this.FormBorderStyle = FormBorderStyle.FixedDialog; // Make the form non-resizable
             Computer.Reset();
+
         }
+
 
         public void HandleUIMessages(UIMessage message)
         {
@@ -284,6 +291,7 @@ namespace JGEmulatorApp
             Computer.SetSpeed((int)((1.0 / Convert.ToInt32(txtClockSpeed.Text)) * 1000));
 
             Computer.Start();
+            firstRun = false;
         }
 
         private void buttonStep_Click(object sender, EventArgs e)
@@ -310,16 +318,23 @@ namespace JGEmulatorApp
         private void buttonReset_Click(object sender, EventArgs e)
         {
             Computer.Reset();
+            if (!firstRun)
+            {
+                Computer.MemoryInstance.UpdateMemory(Computer.LastProgram);
+            }
+
+
             buttonRun.Enabled = true;
             buttonStep.Enabled = true;
             buttonEditMemory.Enabled = true;
             txtClockSpeed.Enabled = true;
+
             this.controlSignalDisplayControlCON.HLT = false;
         }
 
         private void buttonEditMemory_Click_1(object sender, EventArgs e)
         {
-            EditMemoryForm editMemoryForm = new EditMemoryForm(Computer.MemoryInstance, Computer);
+            EditMemoryForm editMemoryForm = new EditMemoryForm(Computer);
             editMemoryForm.ShowDialog();
         }
 

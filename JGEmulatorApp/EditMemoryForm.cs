@@ -10,15 +10,16 @@ namespace JGEmulatorApp
         private Computer _computer;
         private byte[] _displaybytes;
 
-        public EditMemoryForm(Memory memory, Computer computer)
+        public EditMemoryForm(Computer computer)
         {
             InitializeComponent();
-            _memory = memory;
+
             _computer = computer;
-            LoadMemory();
+            _memory = _computer.MemoryInstance;
+            LoadMemoryToEditor();
         }
 
-        private void LoadMemory()
+        private void LoadMemoryToEditor()
         {
             byte[] memory = _memory.GetMemory();
             dataGridViewMemory.Rows.Clear(); // Clear existing rows
@@ -30,7 +31,7 @@ namespace JGEmulatorApp
             Invalidate();
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void RunFromEditor(object sender, EventArgs e)
         {
             _displaybytes = new byte[16];
             for (int i = 0; i < 16; i++)
@@ -42,8 +43,17 @@ namespace JGEmulatorApp
                 }
             }
             _computer.MemoryInstance.UpdateMemory(_displaybytes);
+            _computer.LastProgram = _displaybytes;
+            if (comboBoxPrograms.SelectedItem != null)
+            {
+                _computer.selectedProgram = comboBoxPrograms.SelectedItem.ToString();
+            }
+            else
+            {
+
+            }    
             _computer.Reset();
-            LoadMemory();
+            //LoadMemoryToEditor();
             this.Close();
         }
 
