@@ -84,7 +84,7 @@ namespace JGEmulator
         {
             SetSelectedAddress(0);
             SetBusState(BusState.None);
-            LoadMemory("Multiply");
+            LoadMemory(_thiscomputer.selectedProgram);
             _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Log, "Address reset.", "MEM"));
 
             _thiscomputer.HandleUIMessages(new UIMessage(UIMessageType.Computer, "Reset", "MEM"));

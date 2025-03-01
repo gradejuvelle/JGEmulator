@@ -16,10 +16,14 @@ namespace JGEmulator
         public StatusRegister StatusRegister { get; set; }
         public ALU ALUInstance { get; set; }
         public ControlUnit ControlUnitInstance { get; set; }
+         private bool FirstBoot { get; set; }
+        public byte[] LastProgram { get; set; }
+        public string selectedProgram  {get;set; }
 
         public JGEmulatorApp.AppForm form;
         public Computer(int clockSpeed,JGEmulatorApp.AppForm _form)
         {
+            FirstBoot = true;
             form = _form;
             ClockInstance = new Clock(clockSpeed, this);
             ClockInstance.OnTick += HandleTick;
@@ -37,6 +41,8 @@ namespace JGEmulator
             ControlUnitInstance = new ControlUnit(this);
             ControlUnitInstance.ProcessControlSignalsTock();
             HandleUIMessages(new UIMessage(UIMessageType.Log, "Computer created and ready.", "COM"));
+            selectedProgram = "Mutiply";
+            FirstBoot = false;
         }
 
         public void Reset()
@@ -50,7 +56,7 @@ namespace JGEmulator
             StatusRegister.Reset();
             ALUInstance.Reset();
             this.ControlUnitInstance._instructionCounter.Reset();
-            //this.MemoryInstance.Reset();
+
 
             ControlUnitInstance.ProcessControlSignalsTock();
             HandleUIMessages(new UIMessage(UIMessageType.Log, "Computer reset and ready.", "COM"));
