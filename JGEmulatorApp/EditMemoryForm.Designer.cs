@@ -71,7 +71,7 @@
             buttonSave.TabIndex = 1;
             buttonSave.Text = "Run";
             buttonSave.UseVisualStyleBackColor = true;
-            buttonSave.Click += buttonSave_Click;
+            buttonSave.Click += RunFromEditor;
             // 
             // buttonCancel
             // 
@@ -105,7 +105,7 @@
             buttonLoad.TabIndex = 4;
             buttonLoad.Text = "Load Editor";
             buttonLoad.UseVisualStyleBackColor = true;
-            buttonLoad.Click += buttonLoad_Click;
+            buttonLoad.Click += buttonLoadEditor_Click;
             // 
             // EditMemoryForm
             // 
@@ -131,11 +131,11 @@
             buttonLoad.Enabled = comboBoxPrograms.SelectedItem.ToString() != "Custom";
         }
 
-        private void buttonLoad_Click(object sender, EventArgs e)
+        private void buttonLoadEditor_Click(object sender, EventArgs e)
         {
-            string selectedProgram = comboBoxPrograms.SelectedItem.ToString();
-            _memory.LoadMemory(selectedProgram);
-            LoadMemory();
+            _computer.selectedProgram = comboBoxPrograms.SelectedItem.ToString();
+            _memory.LoadMemory(_computer.selectedProgram);
+            LoadMemoryToEditor();
         }
 
         private Label label1;
