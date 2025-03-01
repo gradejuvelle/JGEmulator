@@ -71,11 +71,12 @@
             buttonEditMemory = new Button();
             txtClockSpeed = new TextBox();
             label14 = new Label();
+            label15 = new Label();
             SuspendLayout();
             // 
             // byteDisplayControlMEM
             // 
-            byteDisplayControlMEM.Location = new Point(84, 347);
+            byteDisplayControlMEM.Location = new Point(68, 439);
             byteDisplayControlMEM.Name = "byteDisplayControlMEM";
             byteDisplayControlMEM.Size = new Size(389, 30);
             byteDisplayControlMEM.TabIndex = 34;
@@ -108,7 +109,7 @@
             lblARGBusState.AutoSize = true;
             lblARGBusState.Font = new Font("Segoe UI", 14F);
             lblARGBusState.ForeColor = Color.ForestGreen;
-            lblARGBusState.Location = new Point(1006, 332);
+            lblARGBusState.Location = new Point(846, 375);
             lblARGBusState.Name = "lblARGBusState";
             lblARGBusState.Size = new Size(143, 25);
             lblARGBusState.TabIndex = 2;
@@ -119,7 +120,7 @@
             lblMARBusState.AutoSize = true;
             lblMARBusState.Font = new Font("Segoe UI", 14F);
             lblMARBusState.ForeColor = Color.ForestGreen;
-            lblMARBusState.Location = new Point(88, 230);
+            lblMARBusState.Location = new Point(68, 377);
             lblMARBusState.Name = "lblMARBusState";
             lblMARBusState.Size = new Size(143, 25);
             lblMARBusState.TabIndex = 20;
@@ -130,18 +131,19 @@
             lblBRGBusState.AutoSize = true;
             lblBRGBusState.Font = new Font("Segoe UI", 14F);
             lblBRGBusState.ForeColor = Color.ForestGreen;
-            lblBRGBusState.Location = new Point(1006, 696);
+            lblBRGBusState.Location = new Point(846, 624);
             lblBRGBusState.Name = "lblBRGBusState";
             lblBRGBusState.Size = new Size(143, 25);
             lblBRGBusState.TabIndex = 5;
             lblBRGBusState.Text = "Bus State: None";
+            lblBRGBusState.Click += lblBRGBusState_Click;
             // 
             // lblINSBusState
             // 
             lblINSBusState.AutoSize = true;
             lblINSBusState.Font = new Font("Segoe UI", 14F);
             lblINSBusState.ForeColor = Color.ForestGreen;
-            lblINSBusState.Location = new Point(88, 532);
+            lblINSBusState.Location = new Point(68, 624);
             lblINSBusState.Name = "lblINSBusState";
             lblINSBusState.Size = new Size(143, 25);
             lblINSBusState.TabIndex = 8;
@@ -152,7 +154,7 @@
             lblOUTBusState.AutoSize = true;
             lblOUTBusState.Font = new Font("Segoe UI", 14F);
             lblOUTBusState.ForeColor = Color.ForestGreen;
-            lblOUTBusState.Location = new Point(1003, 827);
+            lblOUTBusState.Location = new Point(846, 759);
             lblOUTBusState.Name = "lblOUTBusState";
             lblOUTBusState.Size = new Size(143, 25);
             lblOUTBusState.TabIndex = 11;
@@ -163,7 +165,7 @@
             lblALUBusState.AutoSize = true;
             lblALUBusState.Font = new Font("Segoe UI", 14F);
             lblALUBusState.ForeColor = Color.ForestGreen;
-            lblALUBusState.Location = new Point(1003, 471);
+            lblALUBusState.Location = new Point(846, 500);
             lblALUBusState.Name = "lblALUBusState";
             lblALUBusState.Size = new Size(143, 25);
             lblALUBusState.TabIndex = 14;
@@ -174,7 +176,7 @@
             lblPRGBusState.AutoSize = true;
             lblPRGBusState.Font = new Font("Segoe UI", 14F);
             lblPRGBusState.ForeColor = Color.ForestGreen;
-            lblPRGBusState.Location = new Point(1003, 143);
+            lblPRGBusState.Location = new Point(839, 229);
             lblPRGBusState.Name = "lblPRGBusState";
             lblPRGBusState.Size = new Size(143, 25);
             lblPRGBusState.TabIndex = 17;
@@ -185,7 +187,7 @@
             lblMEMBusState.AutoSize = true;
             lblMEMBusState.Font = new Font("Segoe UI", 14F);
             lblMEMBusState.ForeColor = Color.ForestGreen;
-            lblMEMBusState.Location = new Point(84, 380);
+            lblMEMBusState.Location = new Point(68, 472);
             lblMEMBusState.Name = "lblMEMBusState";
             lblMEMBusState.Size = new Size(143, 25);
             lblMEMBusState.TabIndex = 23;
@@ -195,7 +197,8 @@
             // 
             lblPRGEnable.AutoSize = true;
             lblPRGEnable.Font = new Font("Segoe UI", 14F);
-            lblPRGEnable.Location = new Point(1003, 167);
+            lblPRGEnable.ForeColor = Color.ForestGreen;
+            lblPRGEnable.Location = new Point(843, 229);
             lblPRGEnable.Name = "lblPRGEnable";
             lblPRGEnable.Size = new Size(119, 25);
             lblPRGEnable.TabIndex = 30;
@@ -205,15 +208,16 @@
             // 
             lblALUSubtract.AutoSize = true;
             lblALUSubtract.Font = new Font("Segoe UI", 14F);
-            lblALUSubtract.Location = new Point(1164, 508);
+            lblALUSubtract.ForeColor = Color.ForestGreen;
+            lblALUSubtract.Location = new Point(1014, 500);
             lblALUSubtract.Name = "lblALUSubtract";
             lblALUSubtract.Size = new Size(124, 25);
             lblALUSubtract.TabIndex = 33;
-            lblALUSubtract.Text = "Subract: false";
+            lblALUSubtract.Text = "Subtract: false";
             // 
             // byteDisplayControlBRG
             // 
-            byteDisplayControlBRG.Location = new Point(1003, 663);
+            byteDisplayControlBRG.Location = new Point(843, 591);
             byteDisplayControlBRG.Name = "byteDisplayControlBRG";
             byteDisplayControlBRG.Size = new Size(389, 30);
             byteDisplayControlBRG.TabIndex = 35;
@@ -222,7 +226,7 @@
             // 
             // byteDisplayControlARG
             // 
-            byteDisplayControlARG.Location = new Point(1006, 298);
+            byteDisplayControlARG.Location = new Point(843, 342);
             byteDisplayControlARG.Name = "byteDisplayControlARG";
             byteDisplayControlARG.Size = new Size(389, 30);
             byteDisplayControlARG.TabIndex = 36;
@@ -230,7 +234,7 @@
             // 
             // byteDisplayControlALU
             // 
-            byteDisplayControlALU.Location = new Point(1003, 438);
+            byteDisplayControlALU.Location = new Point(843, 467);
             byteDisplayControlALU.Name = "byteDisplayControlALU";
             byteDisplayControlALU.Size = new Size(389, 30);
             byteDisplayControlALU.TabIndex = 38;
@@ -238,7 +242,7 @@
             // 
             // byteDisplayControlOUT
             // 
-            byteDisplayControlOUT.Location = new Point(1003, 794);
+            byteDisplayControlOUT.Location = new Point(839, 726);
             byteDisplayControlOUT.Name = "byteDisplayControlOUT";
             byteDisplayControlOUT.Size = new Size(389, 30);
             byteDisplayControlOUT.TabIndex = 39;
@@ -246,7 +250,7 @@
             // 
             // byteDisplayControlBUS
             // 
-            byteDisplayControlBUS.Location = new Point(577, 198);
+            byteDisplayControlBUS.Location = new Point(452, 197);
             byteDisplayControlBUS.Name = "byteDisplayControlBUS";
             byteDisplayControlBUS.Size = new Size(389, 34);
             byteDisplayControlBUS.TabIndex = 40;
@@ -254,7 +258,7 @@
             // 
             // fourBitByteDisplayControlPRG
             // 
-            fourBitByteDisplayControlPRG.Location = new Point(1006, 110);
+            fourBitByteDisplayControlPRG.Location = new Point(843, 196);
             fourBitByteDisplayControlPRG.Name = "fourBitByteDisplayControlPRG";
             fourBitByteDisplayControlPRG.Size = new Size(331, 30);
             fourBitByteDisplayControlPRG.TabIndex = 41;
@@ -263,7 +267,7 @@
             // 
             // fourBitByteDisplayControlMAR
             // 
-            fourBitByteDisplayControlMAR.Location = new Point(84, 197);
+            fourBitByteDisplayControlMAR.Location = new Point(68, 344);
             fourBitByteDisplayControlMAR.Name = "fourBitByteDisplayControlMAR";
             fourBitByteDisplayControlMAR.Size = new Size(331, 30);
             fourBitByteDisplayControlMAR.TabIndex = 42;
@@ -272,12 +276,13 @@
             // 
             // threeBitByteDisplayControlINC
             // 
-            threeBitByteDisplayControlINC.Location = new Point(88, 650);
+            threeBitByteDisplayControlINC.Location = new Point(68, 703);
             threeBitByteDisplayControlINC.Name = "threeBitByteDisplayControlINC";
             threeBitByteDisplayControlINC.Size = new Size(198, 30);
             threeBitByteDisplayControlINC.TabIndex = 43;
             threeBitByteDisplayControlINC.Text = "threeBitByteDisplayControl1";
             threeBitByteDisplayControlINC.Value = 0;
+            threeBitByteDisplayControlINC.Click += threeBitByteDisplayControlINC_Click;
             // 
             // controlSignalDisplayControlCON
             // 
@@ -292,13 +297,13 @@
             controlSignalDisplayControlCON.II = false;
             controlSignalDisplayControlCON.IO = false;
             controlSignalDisplayControlCON.J = false;
-            controlSignalDisplayControlCON.Location = new Point(84, 772);
+            controlSignalDisplayControlCON.Location = new Point(753, 52);
             controlSignalDisplayControlCON.MI = false;
             controlSignalDisplayControlCON.Name = "controlSignalDisplayControlCON";
             controlSignalDisplayControlCON.OI = false;
             controlSignalDisplayControlCON.RI = false;
             controlSignalDisplayControlCON.RO = false;
-            controlSignalDisplayControlCON.Size = new Size(600, 68);
+            controlSignalDisplayControlCON.Size = new Size(527, 68);
             controlSignalDisplayControlCON.SU = false;
             controlSignalDisplayControlCON.TabIndex = 44;
             controlSignalDisplayControlCON.Text = "controlSignalDisplayControl1";
@@ -307,7 +312,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 20F);
-            label1.Location = new Point(1003, 754);
+            label1.Location = new Point(839, 686);
             label1.Name = "label1";
             label1.Size = new Size(203, 37);
             label1.TabIndex = 45;
@@ -317,7 +322,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 20F);
-            label2.Location = new Point(82, 156);
+            label2.Location = new Point(68, 303);
             label2.Name = "label2";
             label2.Size = new Size(319, 37);
             label2.TabIndex = 46;
@@ -327,7 +332,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 20F);
-            label3.Location = new Point(84, 307);
+            label3.Location = new Point(68, 402);
             label3.Name = "label3";
             label3.Size = new Size(116, 37);
             label3.TabIndex = 47;
@@ -337,7 +342,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 20F);
-            label4.Location = new Point(84, 459);
+            label4.Location = new Point(68, 551);
             label4.Name = "label4";
             label4.Size = new Size(244, 37);
             label4.TabIndex = 48;
@@ -347,7 +352,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 20F);
-            label5.Location = new Point(88, 610);
+            label5.Location = new Point(68, 663);
             label5.Name = "label5";
             label5.Size = new Size(244, 37);
             label5.TabIndex = 49;
@@ -357,7 +362,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 20F);
-            label6.Location = new Point(1003, 623);
+            label6.Location = new Point(843, 551);
             label6.Name = "label6";
             label6.Size = new Size(134, 37);
             label6.TabIndex = 50;
@@ -367,7 +372,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 20F);
-            label7.Location = new Point(1006, 398);
+            label7.Location = new Point(843, 432);
             label7.Name = "label7";
             label7.Size = new Size(65, 37);
             label7.TabIndex = 51;
@@ -377,7 +382,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 20F);
-            label8.Location = new Point(1003, 252);
+            label8.Location = new Point(843, 302);
             label8.Name = "label8";
             label8.Size = new Size(136, 37);
             label8.TabIndex = 52;
@@ -387,7 +392,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 20F);
-            label9.Location = new Point(1003, 70);
+            label9.Location = new Point(843, 156);
             label9.Name = "label9";
             label9.Size = new Size(221, 37);
             label9.TabIndex = 53;
@@ -397,7 +402,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 20F);
-            label10.Location = new Point(577, 157);
+            label10.Location = new Point(545, 156);
             label10.Name = "label10";
             label10.Size = new Size(58, 37);
             label10.TabIndex = 54;
@@ -407,7 +412,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 20F);
-            label11.Location = new Point(82, 732);
+            label11.Location = new Point(923, 12);
             label11.Name = "label11";
             label11.Size = new Size(178, 37);
             label11.TabIndex = 55;
@@ -426,7 +431,7 @@
             // flagsDisplayControlSTT
             // 
             flagsDisplayControlSTT.CF = false;
-            flagsDisplayControlSTT.Location = new Point(1006, 499);
+            flagsDisplayControlSTT.Location = new Point(1179, 465);
             flagsDisplayControlSTT.Name = "flagsDisplayControlSTT";
             flagsDisplayControlSTT.Size = new Size(101, 82);
             flagsDisplayControlSTT.TabIndex = 57;
@@ -457,7 +462,7 @@
             // 
             // instructionRegisterDisplayControlINS
             // 
-            instructionRegisterDisplayControlINS.Location = new Point(88, 500);
+            instructionRegisterDisplayControlINS.Location = new Point(68, 591);
             instructionRegisterDisplayControlINS.Name = "instructionRegisterDisplayControlINS";
             instructionRegisterDisplayControlINS.Size = new Size(389, 30);
             instructionRegisterDisplayControlINS.TabIndex = 60;
@@ -466,10 +471,11 @@
             // 
             // memoryDisplayControl01
             // 
-            memoryDisplayControl01.Location = new Point(696, 303);
+            memoryDisplayControl01.BackColor = SystemColors.Control;
+            memoryDisplayControl01.Location = new Point(524, 342);
             memoryDisplayControl01.Memory = null;
             memoryDisplayControl01.Name = "memoryDisplayControl01";
-            memoryDisplayControl01.Size = new Size(158, 511);
+            memoryDisplayControl01.Size = new Size(158, 420);
             memoryDisplayControl01.TabIndex = 61;
             memoryDisplayControl01.Text = "memoryDisplayControl1";
             // 
@@ -477,7 +483,7 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 20F);
-            label13.Location = new Point(635, 263);
+            label13.Location = new Point(480, 302);
             label13.Name = "label13";
             label13.Size = new Size(229, 37);
             label13.TabIndex = 62;
@@ -486,7 +492,7 @@
             // buttonEditMemory
             // 
             buttonEditMemory.Font = new Font("Segoe UI", 14F);
-            buttonEditMemory.Location = new Point(860, 265);
+            buttonEditMemory.Location = new Point(545, 759);
             buttonEditMemory.Name = "buttonEditMemory";
             buttonEditMemory.Size = new Size(100, 40);
             buttonEditMemory.TabIndex = 63;
@@ -512,13 +518,23 @@
             label14.Size = new Size(218, 25);
             label14.TabIndex = 65;
             label14.Text = "Clock Speed in Hz (1-25)";
-            //label14.Click += this.label14_Click;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 20F);
+            label15.Location = new Point(1179, 432);
+            label15.Name = "label15";
+            label15.Size = new Size(78, 37);
+            label15.TabIndex = 66;
+            label15.Text = "Flags";
             // 
             // AppForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1434, 950);
+            ClientSize = new Size(1296, 840);
+            Controls.Add(label15);
             Controls.Add(label14);
             Controls.Add(txtClockSpeed);
             Controls.Add(buttonEditMemory);
@@ -612,5 +628,6 @@
         private Button buttonEditMemory;
         private TextBox txtClockSpeed;
         private Label label14;
+        private Label label15;
     }
 }

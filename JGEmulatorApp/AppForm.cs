@@ -44,6 +44,14 @@ namespace JGEmulatorApp
                         case "PRGEnable":
                             lblPRGEnable.Text = "Program Counter Enable: " + message.Message;
                             this.controlSignalDisplayControlCON.CE = Convert.ToBoolean(message.Message);
+                            if (Convert.ToBoolean(message.Message))
+                            {
+                                lblPRGEnable.Visible = true;
+                            }
+                            else
+                            {
+                                lblPRGEnable.Visible = false;
+                            }
                             break;
                         case "STTZero":
                             flagsDisplayControlSTT.ZF = Convert.ToBoolean(message.Message);
@@ -54,6 +62,14 @@ namespace JGEmulatorApp
                         case "ALUSubtract":
                             lblALUSubtract.Text = "Subtract: " + message.Message;
                             this.controlSignalDisplayControlCON.SU = Convert.ToBoolean(message.Message);
+                            if (Convert.ToBoolean(message.Message))
+                            {
+                                lblALUSubtract.Visible = true;
+                            }
+                            else
+                            {
+                                lblALUSubtract.Visible = false;
+                            }
                             break;
                     }
                     break;
@@ -358,13 +374,23 @@ namespace JGEmulatorApp
                 {
                     // Re-enable the Run button after a successful change
                     //buttonRun.Enabled = true;
-                    Computer.SetSpeed((1/   clockSpeed)*1000);
+                    Computer.SetSpeed((1 / clockSpeed) * 1000);
                 }
                 else
                 {
                     MessageBox.Show("Please enter a value between 1 and 25.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void threeBitByteDisplayControlINC_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblBRGBusState_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
