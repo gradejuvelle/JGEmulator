@@ -4,7 +4,7 @@ Welcome to my Breadboard Computer Emulator project! This project is a personal e
 
 ## Overview
 
-![BENIAC](./images/BENIAC02.png)
+![BENIAC](./images/BENIAC03.png)
 
 This project is a work in progress and aims to replicate the functionality of Ben Eater's breadboard computer in C#. The goal is to have fun and build a virtual computer that is more easily modified than Ben's breadboard version.
 
@@ -23,7 +23,10 @@ For detailed tutorials and explanations, check out Ben Eater's YouTube playlist 
 
 [Ben Eater's Breadboard Computer Playlist](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU)
 
-## Progress
+## Warning
+
+Not yet compatible with DPI scaled monitors...
+
 ## Progress
 
 - [x] Build core logic
@@ -32,7 +35,7 @@ For detailed tutorials and explanations, check out Ben Eater's YouTube playlist 
 - [x] Create UI to view memory
 - [x] Create UI to edit memory
 - [ ] Create UI to view logs
-- [ ] 
+- [ ] Fix DPI Scaling
 Stay tuned for updates as the project progresses!
 
 ## Contributions
