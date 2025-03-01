@@ -88,7 +88,7 @@
             // 
             comboBoxPrograms.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxPrograms.Font = new Font("Segoe UI", 14F);
-            comboBoxPrograms.Items.AddRange(new object[] { "Empty", "Multiply", "Fibonacci" });
+            comboBoxPrograms.Items.AddRange(new object[] { "Empty", "Multiply", "Fibonacci","Countdown" });
             comboBoxPrograms.Location = new Point(28, 471);
             comboBoxPrograms.Name = "comboBoxPrograms";
             comboBoxPrograms.Size = new Size(150, 33);

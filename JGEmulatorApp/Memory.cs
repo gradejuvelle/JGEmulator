@@ -151,6 +151,24 @@ namespace JGEmulator
                     _memory[14] = 0b00000000; // 0
                     _memory[15] = 0b00000000; // 0
                     break;
+                case "Countdown":
+                    _memory[0] = 0b00011111; // lda 15
+                    _memory[1] = 0b11100000; // out
+                    _memory[2] = 0b00111110; // sub 14
+                    _memory[3] = 0b11100000; // out
+                    _memory[4] = 0b10000000; // jz
+                    _memory[5] = 0b01100001; // jmp 2
+                    _memory[6] = 0b11110000; // hlt
+                    _memory[7] = 0b00000000; // 0
+                    _memory[8] = 0b00000000; // 0
+                    _memory[9] = 0b00000000; // 0
+                    _memory[10] = 0b00000000; // 0
+                    _memory[11] = 0b00000000; // 0
+                    _memory[12] = 0b00000000; // 0
+                    _memory[13] = 0b00000000; // 0
+                    _memory[14] = 0b00000001; // 0
+                    _memory[15] = 0b000001010; // 0
+                    break;
 
             }
             //        for (int i = 0; i < _memory.Length; i++)
